@@ -1,0 +1,17 @@
+{
+  "name": "mahfaza messi",
+  "short_name": "mahfaza messi",
+  "start_url": "./?key=Messous1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2830/2830284.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
