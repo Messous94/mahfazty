@@ -4,133 +4,363 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <meta name="theme-color" content="#0f172a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="محفظتي" />
-  <title>محفظتي v7 - إدارة المصاريف والبواقي</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>محفظتي</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #f1f5f9;
-      --surface: #ffffff;
-      --surface-alt: #f8fafc;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --primary: #4f46e5;
-      --success: #10b981;
-      --success-soft: rgba(16, 185, 129, 0.12);
-      --danger: #ef4444;
-      --danger-soft: rgba(239, 68, 68, 0.12);
-      --warning: #f59e0b;
-      --warning-soft: rgba(245, 158, 11, 0.14);
-      --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
-      --radius: 18px;
-      --nav-height: 68px;
+    :root{--bg:#f1f5f9;--surface:#fff;--surface-alt:#f8fafc;--text:#0f172a;--text-muted:#64748b;--border:#e2e8f0;--primary:#4f46e5;--success:#10b981;--success-soft:rgba(16,185,129,.12);--danger:#ef4444;--danger-soft:rgba(239,68,68,.12);--warning:#f59e0b;--warning-soft:rgba(245,158,11,.14);--shadow:0 4px 20px -2px rgba(15,23,42,.06);--radius:18px;--nav-height:68px}
+    body.dark{--bg:#0b1120;--surface:#1e293b;--surface-alt:#0f172a;--text:#f8fafc;--text-muted:#94a3b8;--border:#334155;--primary:#6366f1;--shadow:0 4px 20px -2px rgba(0,0,0,.35)}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
+    body{background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:calc(var(--nav-height) + 28px)}
+    .app-header{position:sticky;top:0;z-index:40;background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-title{font-size:17px;font-weight:800;line-height:1.1}
+    .brand-sub{font-size:11px;color:var(--text-muted)}
+    .header-actions{display:flex;align-items:center;gap:6px}
+    .sync-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);cursor:pointer}
+    .sync-dot{width:8px;height:8px;border-radius:50%;background:var(--warning)}
+    .sync-dot.online{background:var(--success);box-shadow:0 0 8px var(--success)}
+    .sync-dot.error{background:var(--danger)}
+    .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px}
+    .month-bar{max-width:1100px;margin:12px auto 0;padding:0 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .month-switcher{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px 8px;flex:1;justify-content:space-between;box-shadow:var(--shadow)}
+    .month-switcher select{background:transparent;border:none;color:var(--text);font-size:15px;font-weight:800;text-align:center;outline:none;cursor:pointer}
+    .month-nav-btn{width:34px;height:34px;border-radius:10px;border:none;background:var(--surface-alt);color:var(--text);font-weight:800;cursor:pointer}
+    .new-month-btn{padding:10px 14px;border-radius:14px;border:none;background:var(--primary);color:#fff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+    .container{max-width:1100px;margin:14px auto;padding:0 14px}
+    .view-section{display:none}.view-section.active{display:block}
+    @media(min-width:900px){body{padding-bottom:32px}.bottom-nav,.fab-btn{display:none!important}.desktop-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.view-section{display:block!important}.span-2{grid-column:span 2}}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .card-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
+    .hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .metric-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .metric-box.cash{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border:none;grid-column:span 2}
+    .metric-label{font-size:12px;opacity:.8;font-weight:600;margin-bottom:4px}
+    .metric-value{font-size:28px;font-weight:800;letter-spacing:-.5px}
+    .metric-box:not(.cash) .metric-value{font-size:21px}
+    .metric-sub{font-size:11px;margin-top:4px;opacity:.75}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-full{grid-column:span 2}
+    label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:5px}
+    input,select{width:100%;height:46px;padding:0 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-alt);color:var(--text);font-size:16px;font-weight:600;outline:none}
+    .btn{height:46px;padding:0 16px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+    .btn-primary{background:var(--primary);color:#fff;width:100%}.btn-ghost{background:var(--surface-alt);color:var(--text);border:1px solid var(--border)}
+    .stepper{display:flex;align-items:center;gap:8px;background:var(--surface-alt);border:1px solid var(--border);border-radius:12px;padding:4px;height:46px}
+    .stepper button{width:38px;height:36px;border-radius:9px;border:none;background:var(--surface);color:var(--text);font-size:18px;font-weight:800;cursor:pointer}
+    .stepper span{flex:1;text-align:center;font-weight:800;font-size:16px}
+    .item-list{display:flex;flex-direction:column;gap:10px}
+    .list-card{background:var(--surface-alt);border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .list-info{flex:1;min-width:0}.list-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .list-meta{font-size:11px;color:var(--text-muted);margin-top:2px}.list-amount{font-size:15px;font-weight:800;white-space:nowrap}
+    .amt-expense{color:var(--danger)}.amt-income{color:var(--success)}
+    .badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:700}
+    .badge-paid{background:var(--success-soft);color:var(--success)}.badge-unpaid{background:var(--warning-soft);color:var(--warning)}
+    .mini-actions{display:flex;gap:4px}.mini-btn{padding:6px 9px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;font-weight:700;cursor:pointer}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-height);background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+    .nav-item{flex:1;height:100%;border:none;background:transparent;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;cursor:pointer}
+    .nav-item .nav-icon{font-size:19px;line-height:1}.nav-item.active{color:var(--primary)}
+    .fab-btn{position:fixed;bottom:calc(var(--nav-height) + 14px);left:16px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#06b6d4);color:#fff;border:none;font-size:28px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(79,70,229,.4);cursor:pointer;z-index:45}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(3px);display:none;align-items:flex-end;justify-content:center;z-index:100}.modal-backdrop.open{display:flex}
+    @media(min-width:640px){.modal-backdrop{align-items:center}.sheet-card{border-radius:22px!important;max-width:460px}}
+    .sheet-card{width:100%;background:var(--surface);border-radius:24px 24px 0 0;padding:20px 16px 26px;max-height:90vh;overflow-y:auto}
+    .sheet-handle{width:40px;height:4px;background:var(--border);border-radius:99px;margin:0 auto 14px}
+    .toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;z-index:200;display:none}
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">م</div>
+      <div><div class="brand-title">محفظتي</div><div class="brand-sub">الكاش، الراتب، والالتزامات</div></div>
+    </div>
+    <div class="header-actions">
+      <button class="sync-pill" onclick="openModal('syncModal')"><span class="sync-dot" id="syncDot"></span><span id="syncLabel">جاري الربط...</span></button>
+      <button class="icon-btn" onclick="openModal('settingsModal')">⚙️</button>
+    </div>
+  </header>
+
+  <div class="month-bar">
+    <div class="month-switcher">
+      <button class="month-nav-btn" onclick="stepMonth(-1)">❮</button>
+      <select id="monthSelect" onchange="switchMonth(this.value)"></select>
+      <button class="month-nav-btn" onclick="stepMonth(1)">❯</button>
+    </div>
+    <button class="new-month-btn" onclick="openNewMonthModal()">+ شهر جديد</button>
+  </div>
+
+  <main class="container desktop-grid">
+    <section id="view-home" class="view-section active span-2">
+      <div class="hero-cards">
+        <div class="metric-box cash">
+          <div class="metric-label">💵 الكاش الفعلي المتاح في جيبك الآن</div>
+          <div class="metric-value" id="cashInHand">0 ج.م</div>
+          <div class="metric-sub">رصيد أول المدة + سلف + بونص - مصاريف - التزامات مسددة</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">🛡️ الحد الآمن للاستلاف</div>
+          <div class="metric-value" style="color:var(--primary)" id="safeBorrowLimit">0 ج.م</div>
+          <div class="metric-sub">صافي مستحق آخر الشهر</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">📉 إجمالي مصاريف الشهر</div>
+          <div class="metric-value" style="color:var(--danger)" id="totalExpenses">0 ج.م</div>
+          <div class="metric-sub" id="unpaidObligationsNote">متبقي التزامات: 0 ج.م</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚡ تسجيل حركة سريعة</div></div>
+        <form onsubmit="addTransaction(event,'inline')">
+          <div class="form-grid">
+            <div><label>النوع</label><select id="inlineType"><option value="expense">💸 مصروف يومي (-)</option><option value="advance">🏢 سلفة من الشغل (+)</option><option value="bonus">🎁 بونص / دخل إضافي (+)</option></select></div>
+            <div><label>المبلغ (ج.م)</label><input type="number" id="inlineAmount" step="any" min="0.5" placeholder="0" required /></div>
+            <div><label>البيان</label><input type="text" id="inlineTitle" placeholder="غداء، بنزين، سلفة..." required /></div>
+            <div><label>التاريخ</label><input type="date" id="inlineDate" required /></div>
+            <div class="form-full"><button type="submit" class="btn btn-primary">حفظ ومزامنة</button></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="view-salary" class="view-section">
+      <div class="card">
+        <div class="card-header"><div class="card-title">💼 الراتب والغياب</div></div>
+        <div class="form-grid">
+          <div><label>الراتب الأساسي</label><input type="number" id="baseSalaryInput" oninput="updateSalaryConfig()" /></div>
+          <div><label>كاش أول المدة</label><input type="number" id="openingCashInput" oninput="updateSalaryConfig()" /></div>
+          <div class="form-full">
+            <label>أيام الغياب والخصم</label>
+            <div class="stepper"><button type="button" onclick="changeAbsence(-0.5)">-</button><span id="absenceDaysDisplay">0 يوم</span><button type="button" onclick="changeAbsence(0.5)">+</button></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:12px;border-radius:12px;background:var(--surface-alt);font-size:13px;display:flex;justify-content:space-between">
+          <span>خصم الغياب: <strong id="absenceDeductionText" style="color:var(--danger)">0 ج.م</strong></span>
+          <span>صافي الراتب: <strong id="netSalaryText" style="color:var(--success)">0 ج.م</strong></span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏢 سلف الشهر</div><span class="badge badge-unpaid" id="totalAdvancesBadge">0 ج.م</span></div>
+        <div class="item-list" id="advancesList"></div>
+      </div>
+    </section>
+
+    <section id="view-obligations" class="view-section">
+      <div class="card">
+        <div class="card-header"><div class="card-title">📌 الالتزامات الثابتة</div></div>
+        <form onsubmit="addObligation(event)" style="margin-bottom:14px">
+          <div class="form-grid">
+            <div><input type="text" id="obTitle" placeholder="اسم الالتزام" required /></div>
+            <div><input type="number" id="obAmount" step="any" placeholder="المبلغ" required /></div>
+            <div><input type="number" id="obDueDay" min="1" max="31" placeholder="يوم الاستحقاق (27)" /></div>
+            <div><button type="submit" class="btn btn-primary">+ إضافة</button></div>
+          </div>
+        </form>
+        <div class="item-list" id="obligationsList"></div>
+      </div>
+    </section>
+
+    <section id="view-history" class="view-section span-2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">📜 سجل الحركات</div><input type="date" id="filterDateInput" onchange="renderAll()" style="width:auto;height:36px;font-size:13px" /></div>
+        <div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto">
+          <button class="mini-btn" onclick="setTypeFilter('all')">الكل</button>
+          <button class="mini-btn" onclick="setTypeFilter('expense')">المصاريف</button>
+          <button class="mini-btn" onclick="setTypeFilter('advance')">السلف</button>
+          <button class="mini-btn" onclick="setTypeFilter('bonus')">البونص</button>
+          <button class="mini-btn" onclick="document.getElementById('filterDateInput').value='';renderAll()">مسح التاريخ</button>
+        </div>
+        <div class="item-list" id="transactionsList"></div>
+      </div>
+    </section>
+  </main>
+
+  <button class="fab-btn" onclick="openModal('quickAddModal')">+</button>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home',this)"><span class="nav-icon">🏠</span><span>الرئيسية</span></button>
+    <button class="nav-item" data-tab="salary" onclick="switchTab('salary',this)"><span class="nav-icon">💼</span><span>الراتب والسلف</span></button>
+    <button class="nav-item" data-tab="obligations" onclick="switchTab('obligations',this)"><span class="nav-icon">📌</span><span>التزاماتي</span></button>
+    <button class="nav-item" data-tab="history" onclick="switchTab('history',this)"><span class="nav-icon">📜</span><span>السجل</span></button>
+  </nav>
+
+  <div class="modal-backdrop" id="quickAddModal" onclick="if(event.target.id==='quickAddModal')closeModal('quickAddModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom:14px">⚡ حركة جديدة</div>
+      <form onsubmit="addTransaction(event,'modal')">
+        <div class="form-grid">
+          <div class="form-full"><label>النوع</label><select id="modalType"><option value="expense">💸 مصروف (-)</option><option value="advance">🏢 سلفة (+)</option><option value="bonus">🎁 بونص (+)</option></select></div>
+          <div><label>المبلغ</label><input type="number" id="modalAmount" step="any" min="0.5" required /></div>
+          <div><label>التاريخ</label><input type="date" id="modalDate" required /></div>
+          <div class="form-full"><label>البيان</label><input type="text" id="modalTitle" required /></div>
+          <div class="form-full" style="display:flex;gap:8px;margin-top:6px"><button type="submit" class="btn btn-primary">حفظ</button><button type="button" class="btn btn-ghost" onclick="closeModal('quickAddModal')">إلغاء</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="syncModal" onclick="if(event.target.id==='syncModal')closeModal('syncModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom:10px">☁️ ربط السحابة</div>
+      <div class="form-grid">
+        <div class="form-full"><label>رابط Firebase</label><input type="url" id="firebaseUrlInput" value="https://mahfazty-19681-default-rtdb.firebaseio.com" /></div>
+        <div class="form-full"><label>رمز المحفظة السري</label><input type="text" id="walletKeyInput" placeholder="اكتب رمز محفظتك" /></div>
+        <div class="form-full" style="display:flex;gap:8px;margin-top:6px"><button type="button" class="btn btn-primary" onclick="saveSyncSettings()">ربط وسحب البيانات</button><button type="button" class="btn btn-ghost" onclick="closeModal('syncModal')">إغلاق</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="settingsModal" onclick="if(event.target.id==='settingsModal')closeModal('settingsModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom:14px">⚙️ الإعدادات</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-ghost" onclick="toggleDarkMode()">🌓 الوضع الليلي / النهاري</button>
+        <button class="btn btn-ghost" onclick="pullFromCloud(false);closeModal('settingsModal')">🔄 تحديث من السحابة الآن</button>
+        <button class="btn btn-ghost" onclick="exportBackup()">📥 نسخة احتياطية JSON</button>
+        <button class="btn btn-ghost" onclick="closeModal('settingsModal')">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="editTxModal" onclick="if(event.target.id==='editTxModal')closeModal('editTxModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom:12px">✏️ تعديل</div>
+      <input type="hidden" id="editTxId" /><input type="hidden" id="editTxSource" />
+      <div class="form-grid">
+        <div class="form-full"><label>البيان</label><input type="text" id="editTxTitle" /></div>
+        <div><label>المبلغ</label><input type="number" id="editTxAmount" step="any" /></div>
+        <div><label>التاريخ</label><input type="date" id="editTxDate" /></div>
+        <div class="form-full" style="display:flex;gap:8px;margin-top:6px"><button type="button" class="btn btn-primary" onclick="saveEditedTx()">حفظ</button><button type="button" class="btn btn-ghost" onclick="closeModal('editTxModal')">إلغاء</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY='mahfazty_v8_data',SYNC_CFG_KEY='mahfazty_v8_sync';
+    let typeFilter='all';
+    const urlKey=new URLSearchParams(location.search).get('key');
+    const oldCfg=JSON.parse(localStorage.getItem('mahfazty_v7_sync')||localStorage.getItem('mahfazty_sync_cfg')||'{}');
+    let syncConfig=JSON.parse(localStorage.getItem(SYNC_CFG_KEY))||{url:oldCfg.url||'https://mahfazty-19681-default-rtdb.firebaseio.com',key:urlKey||oldCfg.key||''};
+    if(urlKey&&urlKey!==syncConfig.key){syncConfig.key=urlKey;localStorage.setItem(SYNC_CFG_KEY,JSON.stringify(syncConfig))}
+    const curYm=new Date().toISOString().slice(0,7);
+    let appState=JSON.parse(localStorage.getItem(STORAGE_KEY))||{activeMonth:curYm,months:{[curYm]:{monthlySalary:0,openingBalance:0,deductionDays:0,salaryReceived:false,fixedCommitments:[],borrowings:[],transactions:[]}}};
+
+    const toArr=v=>!v?[]:Array.isArray(v)?v.filter(Boolean):typeof v==='object'?Object.entries(v).map(([k,x])=>(x&&typeof x==='object'&&!x.id&&(x.id=k),x)).filter(Boolean):[];
+    const normMonth=m=>({monthlySalary:Number(m?.monthlySalary??m?.baseSalary??0),openingBalance:Number(m?.openingBalance??m?.openingCash??0),deductionDays:Number(m?.deductionDays??m?.absenceDays??0),salaryReceived:Boolean(m?.salaryReceived),fixedCommitments:toArr(m?.fixedCommitments),borrowings:toArr(m?.borrowings),transactions:toArr(m?.transactions)});
+
+    function getMonthData(){
+      if(!appState.months)appState.months={};
+      const keys=Object.keys(appState.months).sort();
+      if(!appState.activeMonth||!appState.months[appState.activeMonth])appState.activeMonth=keys.includes(curYm)?curYm:(keys[keys.length-1]||curYm);
+      appState.months[appState.activeMonth]=normMonth(appState.months[appState.activeMonth]);
+      return appState.months[appState.activeMonth];
     }
 
-    body.dark {
-      --bg: #0b1120;
-      --surface: #1e293b;
-      --surface-alt: #0f172a;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: #334155;
-      --primary: #6366f1;
-      --success-soft: rgba(16, 185, 129, 0.18);
-      --danger-soft: rgba(239, 68, 68, 0.18);
-      --warning-soft: rgba(245, 158, 11, 0.2);
-      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+    function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._tt);window._tt=setTimeout(()=>t.style.display='none',2400)}
+    function switchTab(tab,el){document.querySelectorAll('.view-section').forEach(s=>s.classList.remove('active'));document.getElementById('view-'+tab).classList.add('active');document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+    function openModal(id){if(id==='syncModal'){document.getElementById('firebaseUrlInput').value=syncConfig.url;document.getElementById('walletKeyInput').value=syncConfig.key}if(id==='quickAddModal')document.getElementById('modalDate').value=new Date().toISOString().slice(0,10);document.getElementById(id).classList.add('open')}
+    function closeModal(id){document.getElementById(id).classList.remove('open')}
+    function setSyncStatus(s,t){document.getElementById('syncDot').className='sync-dot '+s;document.getElementById('syncLabel').textContent=t}
+    const getEndpoint=()=>`${syncConfig.url.replace(/\/+$/,'')}/wallets/${encodeURIComponent(syncConfig.key.trim())}.json?_t=${Date.now()}`;
+
+    async function saveState(push=true){
+      appState.updatedAt=Date.now();localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));renderAll();
+      if(push&&syncConfig.url&&syncConfig.key){
+        try{setSyncStatus('','جاري الحفظ...');const r=await fetch(getEndpoint(),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(appState)});setSyncStatus(r.ok?'online':'error',r.ok?'متصل بالسحابة':'خطأ صلاحيات')}
+        catch(e){setSyncStatus('error','أوفلاين')}
+      }
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: calc(var(--nav-height) + 28px); transition: background 0.2s, color 0.2s; }
-
-    .app-header { position: sticky; top: 0; z-index: 40; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .brand { display: flex; align-items: center; gap: 10px; }
-    .brand-icon { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #06b6d4); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 18px; }
-    .brand-title { font-size: 17px; font-weight: 800; line-height: 1.1; }
-    .brand-sub { font-size: 11px; color: var(--text-muted); }
-    .header-actions { display: flex; align-items: center; gap: 6px; }
-
-    .sync-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 700; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); cursor: pointer; }
-    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); }
-    .sync-dot.online { background: var(--success); box-shadow: 0 0 8px var(--success); }
-    .sync-dot.error { background: var(--danger); }
-
-    .icon-btn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
-
-    .month-bar { max-width: 1100px; margin: 12px auto 0; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .month-switcher { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 4px 8px; flex: 1; justify-content: space-between; box-shadow: var(--shadow); }
-    .month-switcher select { background: transparent; border: none; color: var(--text); font-size: 15px; font-weight: 800; text-align: center; outline: none; cursor: pointer; }
-    .month-nav-btn { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--surface-alt); color: var(--text); font-weight: 800; cursor: pointer; }
-    .new-month-btn { padding: 10px 14px; border-radius: 14px; border: none; background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-
-    .container { max-width: 1100px; margin: 14px auto; padding: 0 14px; }
-    .view-section { display: none; }
-    .view-section.active { display: block; }
-
-    @media (min-width: 900px) {
-      body { padding-bottom: 32px; }
-      .bottom-nav, .fab-btn { display: none !important; }
-      .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
-      .view-section { display: block !important; }
-      .span-2 { grid-column: span 2; }
+    async function pullFromCloud(silent=false){
+      if(!syncConfig.url||!syncConfig.key){setSyncStatus('','اضغط لربط السحابة');return}
+      try{
+        const r=await fetch(getEndpoint(),{cache:'no-store'});if(!r.ok){setSyncStatus('error','خطأ اتصال');return}
+        const rem=await r.json();
+        if(rem&&rem.months){const prev=appState.activeMonth;appState=rem;if(prev&&appState.months[prev])appState.activeMonth=prev;localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));renderAll();if(!silent)showToast('تم تحديث البيانات ✅')}
+        else if(!silent)showToast('الرمز السري غير موجود ⚠️');
+        setSyncStatus('online','متصل بالسحابة');
+      }catch(e){setSyncStatus('error','أوفلاين')}
     }
 
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow); }
-    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .card-title { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    async function saveSyncSettings(){
+      syncConfig.url=document.getElementById('firebaseUrlInput').value.trim();syncConfig.key=document.getElementById('walletKeyInput').value.trim();
+      localStorage.setItem(SYNC_CFG_KEY,JSON.stringify(syncConfig));
+      if(syncConfig.key)history.replaceState({},'',`${location.pathname}?key=${encodeURIComponent(syncConfig.key)}`);
+      closeModal('syncModal');await pullFromCloud(false);
+    }
 
-    .hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .metric-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
-    .metric-box.cash { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; border: none; grid-column: span 2; }
-    .metric-label { font-size: 12px; opacity: 0.8; font-weight: 600; margin-bottom: 4px; }
-    .metric-value { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
-    .metric-box:not(.cash) .metric-value { font-size: 21px; }
-    .metric-sub { font-size: 11px; margin-top: 4px; opacity: 0.75; }
+    function fmtMonth(ym){const[y,m]=ym.split('-');return['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][parseInt(m,10)-1]+' '+y}
+    function switchMonth(ym){appState.activeMonth=ym;localStorage.setItem(STORAGE_KEY,JSON.stringify(appState));renderAll()}
+    function stepMonth(d){const k=Object.keys(appState.months).sort(),i=k.indexOf(appState.activeMonth);if(i+d>=0&&i+d<k.length)switchMonth(k[i+d])}
+    function openNewMonthModal(){
+      const k=Object.keys(appState.months).sort(),last=k[k.length-1];let[y,m]=last.split('-').map(Number);m++;if(m>12){m=1;y++}
+      const next=`${y}-${String(m).padStart(2,'0')}`,p=getMonthData();
+      appState.months[next]={monthlySalary:p.monthlySalary||0,openingBalance:0,deductionDays:0,salaryReceived:false,fixedCommitments:p.fixedCommitments.map(o=>({id:'fc_'+Date.now()+Math.floor(Math.random()*999),name:o.name||'التزام',expectedAmount:Number(o.expectedAmount??0),dueDay:o.dueDay||27,category:o.category||'installments',paidAmount:0,paid:false})),borrowings:[],transactions:[]};
+      appState.activeMonth=next;saveState(true);showToast('تم فتح '+fmtMonth(next));
+    }
 
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .form-full { grid-column: span 2; }
-    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; }
-    input, select { width: 100%; height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); font-size: 16px; font-weight: 600; outline: none; }
-    input:focus, select:focus { border-color: var(--primary); }
+    function updateSalaryConfig(){const m=getMonthData();m.monthlySalary=parseFloat(document.getElementById('baseSalaryInput').value)||0;m.openingBalance=parseFloat(document.getElementById('openingCashInput').value)||0;saveState(true)}
+    function changeAbsence(d){const m=getMonthData();m.deductionDays=Math.max(0,(m.deductionDays||0)+d);saveState(true)}
+    function addObligation(e){e.preventDefault();const m=getMonthData(),name=document.getElementById('obTitle').value.trim(),expectedAmount=parseFloat(document.getElementById('obAmount').value)||0,dueDay=parseInt(document.getElementById('obDueDay').value)||27;if(!name||expectedAmount<=0)return;m.fixedCommitments.push({id:'fc_'+Date.now(),name,expectedAmount,dueDay,category:'installments',paidAmount:0,paid:false});document.getElementById('obTitle').value='';document.getElementById('obAmount').value='';document.getElementById('obDueDay').value='';saveState(true);showToast('تمت الإضافة 📌')}
+    function toggleObligationPaid(id){const m=getMonthData(),ob=m.fixedCommitments.find(o=>String(o.id)===String(id));if(!ob)return;const exp=Number(ob.expectedAmount??0);if(!ob.paid){const v=prompt(`المبلغ المسدد لـ "${ob.name}"؟`,exp);if(v===null)return;ob.paidAmount=parseFloat(v)||exp;ob.paid=true}else{ob.paid=false;ob.paidAmount=0}saveState(true)}
+    function deleteObligation(id){const m=getMonthData();m.fixedCommitments=m.fixedCommitments.filter(o=>String(o.id)!==String(id));saveState(true)}
 
-    .btn { height: 46px; padding: 0 16px; border-radius: 12px; border: none; font-size: 14px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
-    .btn-primary { background: var(--primary); color: #fff; width: 100%; }
-    .btn-success { background: var(--success); color: #fff; }
-    .btn-ghost { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
+    function addTransaction(e,src){
+      e.preventDefault();const p=src==='modal'?'modal':'inline',type=document.getElementById(p+'Type').value,amount=parseFloat(document.getElementById(p+'Amount').value)||0,text=document.getElementById(p+'Title').value.trim(),date=document.getElementById(p+'Date').value;if(!text||amount<=0)return;
+      const m=getMonthData();
+      if(type==='advance')m.borrowings.unshift({id:'brw_'+Date.now(),source:'من الشغل',note:text,amount,date});
+      else m.transactions.unshift({id:'tx_'+Date.now(),type,category:'other',desc:text,amount,date});
+      document.getElementById(p+'Amount').value='';document.getElementById(p+'Title').value='';if(src==='modal')closeModal('quickAddModal');saveState(true);showToast('تم الحفظ ✅');
+    }
 
-    .stepper { display: flex; align-items: center; gap: 8px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 12px; padding: 4px; height: 46px; }
-    .stepper button { width: 38px; height: 36px; border-radius: 9px; border: none; background: var(--surface); color: var(--text); font-size: 18px; font-weight: 800; cursor: pointer; }
-    .stepper span { flex: 1; text-align: center; font-weight: 800; font-size: 16px; }
+    function deleteItem(id,list){const m=getMonthData();m[list]=m[list].filter(t=>String(t.id)!==String(id));saveState(true);showToast('تم الحذف')}
+    function openEditTx(id,list){const m=getMonthData(),it=m[list].find(t=>String(t.id)===String(id));if(!it)return;document.getElementById('editTxId').value=it.id;document.getElementById('editTxSource').value=list;document.getElementById('editTxTitle').value=list==='borrowings'?(it.note||it.source||''):(it.desc||'');document.getElementById('editTxAmount').value=it.amount;document.getElementById('editTxDate').value=it.date||'';openModal('editTxModal')}
+    function saveEditedTx(){const id=document.getElementById('editTxId').value,list=document.getElementById('editTxSource').value,m=getMonthData(),it=m[list].find(t=>String(t.id)===String(id));if(it){const v=document.getElementById('editTxTitle').value.trim();if(list==='borrowings')it.note=v;else it.desc=v;it.amount=parseFloat(document.getElementById('editTxAmount').value)||it.amount;it.date=document.getElementById('editTxDate').value;saveState(true);showToast('تم التعديل ✏️')}closeModal('editTxModal')}
+    function setTypeFilter(t){typeFilter=t;renderAll()}
+    const fmt=n=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:1})+' ج.م';
 
-    .item-list { display: flex; flex-direction: column; gap: 10px; }
-    .list-card { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 14px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .list-info { flex: 1; min-width: 0; }
-    .list-title { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .list-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-    .list-amount { font-size: 15px; font-weight: 800; white-space: nowrap; }
-    .amt-expense { color: var(--danger); }
-    .amt-income { color: var(--success); }
+    function renderAll(){
+      const sel=document.getElementById('monthSelect'),keys=Object.keys(appState.months||{}).sort(),m=getMonthData();
+      sel.innerHTML=keys.map(k=>`<option value="${k}" ${k===appState.activeMonth?'selected':''}>${fmtMonth(k)}</option>`).join('');
+      const sal=Number(m.monthlySalary)||0,open=Number(m.openingBalance)||0,days=Number(m.deductionDays)||0,ded=(sal/30)*days,net=Math.max(0,sal-ded);
+      let adv=0,bon=0,exp=0;
+      m.borrowings.forEach(b=>adv+=Number(b.amount||0));
+      m.transactions.forEach(t=>{const a=Number(t.amount||0);if(t.type==='advance')adv+=a;else if(t.type==='bonus')bon+=a;else exp+=a});
+      let paidOb=0,unpaidOb=0;
+      m.fixedCommitments.forEach(o=>{const e=Number(o.expectedAmount??0);if(o.paid)paidOb+=Number(o.paidAmount||e);else unpaidOb+=e});
+      document.getElementById('cashInHand').textContent=fmt(open+adv+bon-exp-paidOb);
+      document.getElementById('safeBorrowLimit').textContent=fmt(net-adv-unpaidOb);
+      document.getElementById('totalExpenses').textContent=fmt(exp+paidOb);
+      document.getElementById('unpaidObligationsNote').textContent=`متبقي التزامات: ${fmt(unpaidOb)}`;
+      if(document.activeElement.id!=='baseSalaryInput')document.getElementById('baseSalaryInput').value=sal||'';
+      if(document.activeElement.id!=='openingCashInput')document.getElementById('openingCashInput').value=open||'';
+      document.getElementById('absenceDaysDisplay').textContent=`${days} يوم`;
+      document.getElementById('absenceDeductionText').textContent=fmt(ded);
+      document.getElementById('netSalaryText').textContent=fmt(net);
+      document.getElementById('totalAdvancesBadge').textContent=`إجمالي السلف: ${fmt(adv)}`;
 
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; }
-    .badge-paid { background: var(--success-soft); color: var(--success); }
-    .badge-unpaid { background: var(--warning-soft); color: var(--warning); }
+      const allAdv=[...m.borrowings.map(b=>({...b,_s:'borrowings',_l:b.note?`${b.source||'سلفة'} (${b.note})`:(b.source||'سلفة')})),...m.transactions.filter(t=>t.type==='advance').map(t=>({...t,_s:'transactions',_l:t.desc||'سلفة'}))];
+      document.getElementById('advancesList').innerHTML=allAdv.length?allAdv.map(t=>`<div class="list-card"><div class="list-info"><div class="list-title">${t._l}</div><div class="list-meta">${t.date||''}</div></div><div class="list-amount amt-income">+${fmt(t.amount)}</div><div class="mini-actions"><button class="mini-btn" onclick="openEditTx('${t.id}','${t._s}')">✏️</button><button class="mini-btn" onclick="deleteItem('${t.id}','${t._s}')">🗑️</button></div></div>`).join(''):'<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:12px">لا توجد سلف</div>';
 
-    .mini-actions { display: flex; gap: 4px; }
-    .mini-btn { padding: 6px 9px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 12px; font-weight: 700; cursor: pointer; }
+      document.getElementById('obligationsList').innerHTML=m.fixedCommitments.length?m.fixedCommitments.map(o=>{const p=Boolean(o.paid),e=Number(o.expectedAmount??0);return`<div class="list-card"><div class="list-info"><div class="list-title">${o.name||'التزام'}</div><div class="list-meta"><span class="badge ${p?'badge-paid':'badge-unpaid'}">${p?'مسدد: '+fmt(o.paidAmount||e):'غير مسدد'}</span>${o.dueDay?' • يوم '+o.dueDay:''}</div></div><div class="list-amount">${fmt(e)}</div><div class="mini-actions"><button class="mini-btn" onclick="toggleObligationPaid('${o.id}')">${p?'تراجع':'سداد ✓'}</button><button class="mini-btn" onclick="deleteObligation('${o.id}')">🗑️</button></div></div>`}).join(''):'<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:12px">لا توجد التزامات</div>';
 
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--surface); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 50; padding-bottom: env(safe-area-inset-bottom); }
-    .nav-item { flex: 1; height: 100%; border: none; background: transparent; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 700; cursor: pointer; }
-    .nav-item .nav-icon { font-size: 19px; line-height: 1; }
-    .nav-item.active { color: var(--primary); }
+      const fd=document.getElementById('filterDateInput').value;
+      const log=[...m.transactions.map(t=>({...t,_s:'transactions',_l:t.desc||(t.type==='bonus'?'بونص':'مصروف'),_t:t.type==='advance'?'advance':(t.type==='bonus'?'bonus':'expense')})),...m.borrowings.map(b=>({...b,_s:'borrowings',_l:b.note?`${b.source||'سلفة'} (${b.note})`:(b.source||'سلفة'),_t:'advance'}))].filter(t=>(typeFilter==='all'||t._t===typeFilter)&&(!fd||t.date===fd));
+      document.getElementById('transactionsList').innerHTML=log.length?log.map(t=>{const pos=t._t==='advance'||t._t==='bonus',tag=t._t==='advance'?'سلفة':(t._t==='bonus'?'بونص':'مصروف');return`<div class="list-card"><div class="list-info"><div class="list-title">${t._l}</div><div class="list-meta">${t.date||''} • ${tag}</div></div><div class="list-amount ${pos?'amt-income':'amt-expense'}">${pos?'+':'-'}${fmt(t.amount)}</div><div class="mini-actions"><button class="mini-btn" onclick="openEditTx('${t.id}','${t._s}')">✏️</button><button class="mini-btn" onclick="deleteItem('${t.id}','${t._s}')">🗑️</button></div></div>`}).join(''):'<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:16px">لا توجد حركات</div>';
+    }
 
-    .fab-btn { position: fixed; bottom: calc(var(--nav-height) + 14px); left: 16px; width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #06b6d4); color: #fff; border: none; font-size: 28px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4); cursor: pointer; z-index: 45; }
-
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px); display: none; align-items: flex-end; justify-content: center; z-index: 100;
+    function toggleDarkMode(){document.body.classList.toggle('dark');localStorage.setItem('mahfazty_dark',document.body.classList.contains('dark')?'1':'0')}
+    function exportBackup(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(appState,null,2)],{type:'application/json'}));a.download=`mahfazty-${new Date().toISOString().slice(0,10)}.json`;a.click()}
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')pullFromCloud(true)});
+    if(localStorage.getItem('mahfazty_dark')==='1')document.body.classList.add('dark');
+    document.getElementById('inlineDate').value=new Date().toISOString().slice(0,10);
+    renderAll();pullFromCloud(true);setInterval(()=>pullFromCloud(true),10000);
+  </script>
+</body>
+</html>
