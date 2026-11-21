@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="محفظتي" />
+  <title>محفظتي - إدارة المصاريف والبواقي والشهور</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-soft: rgba(79, 70, 229, 0.1);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, 0.12);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.12);
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.14);
+      --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --radius: 18px;
+      --nav-height: 68px;
+    }
+
+    body.dark {
+      --bg: #0b1120;
+      --surface: #1e293b;
+      --surface-alt: #0f172a;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #6366f1;
+      --primary-hover: #818cf8;
+      --primary-soft: rgba(99, 102, 241, 0.16);
+      --success-soft: rgba(16, 185, 129, 0.18);
+      --danger-soft: rgba(239, 68, 68, 0.18);
+      --warning-soft: rgba(245, 158, 11, 0.2);
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: calc(var(--nav-height) + 28px);
+      transition: background 0.25s, color 0.25s;
+    }
+
+    /* Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sync-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--warning);
+    }
+    .sync-dot.online { background: var(--success); box-shadow: 0 0 8px var(--success); }
+    .sync-dot.error { background: var(--danger); }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* Month Bar */
+    .month-bar {
+      max-width: 1100px;
+      margin: 12px auto 0;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .month-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 4px 8px;
+      flex: 1;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .month-switcher select {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .month-nav-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: none;
+      background: var(--surface-alt);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .new-month-btn {
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    /* Container & Views */
+    .container {
+      max-width: 1100px;
+      margin: 14px auto;
+      padding: 0 14px;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Desktop shows all sections in a clean grid */
+    @media (min-width: 900px) {
+      body { padding-bottom: 32px; }
+      .bottom-nav, .fab-btn { display: none !important; }
+      .desktop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      .view-section { display: block !important; }
+      .span-2 { grid-column: span 2; }
+    }
+
+    /* Cards & Metrics */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-box.cash {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff;
+      border: none;
+      grid-column: span 2;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      opacity: 0.8;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .metric-box:not(.cash) .metric-value {
+      font-size: 21px;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.75;
+    }
+
+    /* Forms & Touch Controls */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .form-full { grid-column: span 2; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      height: 46px;
+      padding: 0 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      font-size: 16px; /* Prevents iOS/Android auto-zoom */
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--primary); color: #fff; width: 100%; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: var(--danger-soft); color: var(--danger); }
+    .btn-ghost { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
+
+    /* Stepper for Absence Days */
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      height: 46px;
+    }
+    .stepper button {
+      width: 38px;
+      height: 36px;
+      border-radius: 9px;
+      border: none;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .stepper span {
+      flex: 1;
+      text-align: center;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    /* Lists (Obligations, Advances, Transactions) */
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .list-info { flex: 1; min-width: 0; }
+    .list-title {
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .list-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .list-amount {
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .amt-expense { color: var(--danger); }
+    .amt-income { color: var(--success); }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-paid { background: var(--success-soft); color: var(--success); }
+    .badge-unpaid { background: var(--warning-soft); color: var(--warning); }
+
+    .mini-actions {
+      display: flex;
+      gap: 4px;
+    }
+    .mini-btn {
+      padding: 6px 9px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Bottom Navigation Bar (Mobile) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 50;
+      padding-bottom: env(safe-area-inset-bottom);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+    }
+
+    .nav-item {
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-item .nav-icon { font-size: 19px; line-height: 1; }
+    .nav-item.active { color: var(--primary); }
+
+    /* Floating Action Button */
+    .fab-btn {
+      position: fixed;
+      bottom: calc(var(--nav-height) + 14px);
+      left: 16px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      color: #fff;
+      border: none;
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      cursor: pointer;
+      z-index: 45;
+    }
+
+    /* Modals & Bottom Sheets */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    @media (min-width: 640px) {
+      .modal-backdrop { align-items: center; }
+      .sheet-card { border-radius: 22px !important; max-width: 460px; }
+    }
+
+    .sheet-card {
+      width: 100%;
+      background: var(--surface);
+      border-radius: 24px 24px 0 0;
+      padding: 20px 16px 26px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.22s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      margin: 0 auto 14px;
+    }
+
+    .toast {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 200;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">م</div>
+      <div>
+        <div class="brand-title">محفظتي</div>
+        <div class="brand-sub">الكاش، الراتب، والالتزامات</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="sync-pill" onclick="openModal('syncModal')" title="حالة المزامنة السحابية">
+        <span class="sync-dot" id="syncDot"></span>
+        <span id="syncLabel">جاري الربط...</span>
+      </button>
+      <button class="icon-btn" onclick="openModal('settingsModal')" title="الإعدادات والأدوات">⚙️</button>
+    </div>
+  </header>
+
+  <!-- Month Selector Bar -->
+  <div class="month-bar">
+    <div class="month-switcher">
+      <button class="month-nav-btn" onclick="stepMonth(-1)">❮</button>
+      <select id="monthSelect" onchange="switchMonth(this.value)"></select>
+      <button class="month-nav-btn" onclick="stepMonth(1)">❯</button>
+    </div>
+    <button class="new-month-btn" onclick="openNewMonthModal()">+ شهر جديد</button>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container desktop-grid">
+
+    <!-- TAB 1: HOME (Overview + Quick Add) -->
+    <section id="view-home" class="view-section active span-2">
+      <div class="hero-cards">
+        <div class="metric-box cash">
+          <div class="metric-label">💵 الكاش الفعلي المتاح في جيبك الآن</div>
+          <div class="metric-value" id="cashInHand">0 ج.م</div>
+          <div class="metric-sub" id="cashBreakdown">رصيد أول المدة + سلف + بونص - مصاريف - التزامات مسددة</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">🛡️ الحد الآمن للاستلاف</div>
+          <div class="metric-value" style="color: var(--primary);" id="safeBorrowLimit">0 ج.م</div>
+          <div class="metric-sub">صافي مستحق آخر الشهر</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">📉 إجمالي مصاريف الشهر</div>
+          <div class="metric-value" style="color: var(--danger);" id="totalExpenses">0 ج.م</div>
+          <div class="metric-sub" id="unpaidObligationsNote">متبقي التزامات: 0 ج.م</div>
+        </div>
+      </div>
+
+      <!-- Quick Add Form (Always accessible on Home) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚡ تسجيل حركة سريعة</div>
+        </div>
+        <form onsubmit="addTransaction(event, 'inline')">
+          <div class="form-grid">
+            <div>
+              <label>النوع</label>
+              <select id="inlineType">
+                <option value="expense">💸 مصروف يومي (-)</option>
+                <option value="advance">🏢 سلفة من الشغل (+)</option>
+                <option value="bonus">🎁 بونص / دخل إضافي (+)</option>
+              </select>
+            </div>
+            <div>
+              <label>المبلغ (ج.م)</label>
+              <input type="number" id="inlineAmount" step="any" min="0.5" placeholder="0" required />
+            </div>
+            <div>
+              <label>البيان / الوصف</label>
+              <input type="text" id="inlineTitle" placeholder="مثال: غداء، بنزين، سلفة..." required />
+            </div>
+            <div>
+              <label>التاريخ</label>
+              <input type="date" id="inlineDate" required />
+            </div>
+            <div class="form-full">
+              <button type="submit" class="btn btn-primary">حفظ الحركة ومزامنتها</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB 2: SALARY & ADVANCES -->
+    <section id="view-salary" class="view-section">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💼 حاسبة الراتب والغياب</div>
+        </div>
+        <div class="form-grid">
+          <div>
+            <label>الراتب الأساسي (ج.م)</label>
+            <input type="number" id="baseSalaryInput" oninput="updateSalaryConfig()" placeholder="0" />
+          </div>
+          <div>
+            <label>رصيد كاش أول المدة</label>
+            <input type="number" id="openingCashInput" oninput="updateSalaryConfig()" placeholder="0" />
+          </div>
+          <div class="form-full">
+            <label>أيام الغياب والخصم (اليوم = الراتب ÷ 30)</label>
+            <div class="stepper">
+              <button type="button" onclick="changeAbsence(-0.5)">-</button>
+              <span id="absenceDaysDisplay">0 يوم</span>
+              <button type="button" onclick="changeAbsence(0.5)">+</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--surface-alt); font-size: 13px; display: flex; justify-content: space-between;">
+          <span>خصم الغياب: <strong id="absenceDeductionText" style="color: var(--danger);">0 ج.م</strong></span>
+          <span>صافي الراتب: <strong id="netSalaryText" style="color: var(--success);">0 ج.م</strong></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🏢 سحوبات / سلف الشهر</div>
+          <span class="badge badge-unpaid" id="totalAdvancesBadge">0 ج.م</span>
+        </div>
+        <div class="item-list" id="advancesList"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: FIXED OBLIGATIONS -->
+    <section id="view-obligations" class="view-section">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📌 الالتزامات الشهرية الثابتة</div>
+        </div>
+        <form onsubmit="addObligation(event)" style="margin-bottom: 14px;">
+          <div class="form-grid">
+            <div>
+              <input type="text" id="obTitle" placeholder="اسم الالتزام (إيجار، نت...)" required />
+            </div>
+            <div>
+              <input type="number" id="obAmount" step="any" placeholder="المبلغ المتوقع" required />
+            </div>
+            <div class="form-full">
+              <button type="submit" class="btn btn-primary">+ إضافة التزام ثابت</button>
+            </div>
+          </div>
+        </form>
+        <div class="item-list" id="obligationsList"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: HISTORY LOG -->
+    <section id="view-history" class="view-section span-2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📜 سجل حركات الشهر</div>
+          <input type="date" id="filterDateInput" onchange="renderAll()" style="width: auto; height: 36px; font-size: 13px;" title="تصفية باليوم" />
+        </div>
+        <div style="display:flex; gap:6px; margin-bottom:12px; overflow-x:auto;">
+          <button class="mini-btn" onclick="setTypeFilter('all')" id="f-all">الكل</button>
+          <button class="mini-btn" onclick="setTypeFilter('expense')" id="f-expense">المصاريف</button>
+          <button class="mini-btn" onclick="setTypeFilter('advance')" id="f-advance">السلف</button>
+          <button class="mini-btn" onclick="setTypeFilter('bonus')" id="f-bonus">البونص</button>
+          <button class="mini-btn" onclick="document.getElementById('filterDateInput').value=''; renderAll();">مسح التاريخ</button>
+        </div>
+        <div class="item-list" id="transactionsList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Quick Add Button (Mobile) -->
+  <button class="fab-btn" onclick="openModal('quickAddModal')" title="إضافة حركة سريعة">+</button>
+
+  <!-- Bottom Navigation Bar (Mobile) -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home', this)">
+      <span class="nav-icon">🏠</span>
+      <span>الرئيسية</span>
+    </button>
+    <button class="nav-item" data-tab="salary" onclick="switchTab('salary', this)">
+      <span class="nav-icon">💼</span>
+      <span>الراتب والسلف</span>
+    </button>
+    <button class="nav-item" data-tab="obligations" onclick="switchTab('obligations', this)">
+      <span class="nav-icon">📌</span>
+      <span>التزاماتي</span>
+    </button>
+    <button class="nav-item" data-tab="history" onclick="switchTab('history', this)">
+      <span class="nav-icon">📜</span>
+      <span>السجل</span>
+    </button>
+  </nav>
+
+  <!-- Quick Add Bottom Sheet Modal -->
+  <div class="modal-backdrop" id="quickAddModal" onclick="closeBackdrop(event, 'quickAddModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom: 14px;">⚡ تسجيل حركة جديدة</div>
+      <form onsubmit="addTransaction(event, 'modal')">
+        <div class="form-grid">
+          <div class="form-full">
+            <label>نوع الحركة</label>
+            <select id="modalType">
+              <option value="expense">💸 مصروف يومي (-)</option>
+              <option value="advance">🏢 سلفة من الشغل (+)</option>
+              <option value="bonus">🎁 بونص / دخل إضافي (+)</option>
+            </select>
+          </div>
+          <div>
+            <label>المبلغ (ج.م)</label>
+            <input type="number" id="modalAmount" step="any" min="0.5" placeholder="0" required />
+          </div>
+          <div>
+            <label>التاريخ</label>
+            <input type="date" id="modalDate" required />
+          </div>
+          <div class="form-full">
+            <label>البيان</label>
+            <input type="text" id="modalTitle" placeholder="اكتب تفاصيل الحركة..." required />
+          </div>
+          <div class="form-full" style="display:flex; gap:8px; margin-top:6px;">
+            <button type="submit" class="btn btn-primary">حفظ</button>
+            <button type="button" class="btn btn-ghost" onclick="closeModal('quickAddModal')">إلغاء</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cloud Sync Modal -->
+  <div class="modal-backdrop" id="syncModal" onclick="closeBackdrop(event, 'syncModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom: 10px;">☁️ إعدادات المزامنة السحابية (Firebase)</div>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+        اكتب نفس <strong>رمز المحفظة السري</strong> على اللابتوب والموبايل لمزامنة بياناتك لحظياً.
+      </p>
+      <div class="form-grid">
+        <div class="form-full">
+          <label>رابط قاعدة بيانات Firebase</label>
+          <input type="url" id="firebaseUrlInput" value="https://mahfazty-19681-default-rtdb.firebaseio.com" />
+        </div>
+        <div class="form-full">
+          <label>رمز المحفظة السري (Secret Key)</label>
+          <input type="text" id="walletKeyInput" placeholder="مثال: mohamed_2026_x99" />
+        </div>
+        <div class="form-full" style="display:flex; gap:8px; margin-top:6px;">
+          <button type="button" class="btn btn-primary" onclick="saveSyncSettings()">حفظ ومزامنة الآن</button>
+          <button type="button" class="btn btn-success" onclick="forcePushToCloud()">رفع بياناتي للسحابة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings & Tools Modal -->
+  <div class="modal-backdrop" id="settingsModal" onclick="closeBackdrop(event, 'settingsModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom: 14px;">⚙️ الإعدادات والنسخ الاحتياطي</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn btn-ghost" onclick="toggleDarkMode()">🌓 تبديل الوضع الليلي / النهاري</button>
+        <button class="btn btn-ghost" onclick="exportBackup()">📥 تنزيل نسخة احتياطية (JSON)</button>
+        <button class="btn btn-ghost" onclick="copyGoogleSitesCode()">📋 نسخ الكود لـ Google Sites</button>
+        <button class="btn btn-ghost" onclick="closeModal('settingsModal')">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Transaction Modal -->
+  <div class="modal-backdrop" id="editTxModal" onclick="closeBackdrop(event, 'editTxModal')">
+    <div class="sheet-card">
+      <div class="sheet-handle"></div>
+      <div class="card-title" style="margin-bottom: 12px;">✏️ تعديل الحركة</div>
+      <input type="hidden" id="editTxId" />
+      <div class="form-grid">
+        <div class="form-full">
+          <label>البيان</label>
+          <input type="text" id="editTxTitle" />
+        </div>
+        <div>
+          <label>المبلغ</label>
+          <input type="number" id="editTxAmount" step="any" />
+        </div>
+        <div>
+          <label>التاريخ</label>
+          <input type="date" id="editTxDate" />
+        </div>
+        <div class="form-full" style="display:flex; gap:8px; margin-top:6px;">
+          <button type="button" class="btn btn-primary" onclick="saveEditedTx()">حفظ التعديل</button>
+          <button type="button" class="btn btn-ghost" onclick="closeModal('editTxModal')">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Dynamic PWA Manifest Injection for Mobile Installation
+    (function injectPWA() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><rect width="512" height="512" rx="115" fill="url(#g)"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="260" font-weight="bold">م</text></svg>`;
+      const iconUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(iconSvg)));
+      const manifest = {
+        name: "محفظتي - إدارة المصاريف والراتب",
+        short_name: "محفظتي",
+        start_url: ".",
+        display: "standalone",
+        background_color: "#0f172a",
+        theme_color: "#4f46e5",
+        icons: [{ src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }]
+      };
+      const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(blob);
+      document.head.appendChild(link);
+    })();
+
+    // App State
+    const STORAGE_KEY = 'mahfazty_v3_data';
+    const SYNC_CFG_KEY = 'mahfazty_sync_cfg';
+    let typeFilter = 'all';
+
+    let syncConfig = JSON.parse(localStorage.getItem(SYNC_CFG_KEY)) || {
+      url: 'https://mahfazty-19681-default-rtdb.firebaseio.com',
+      key: 'mohamed_main'
+    };
+
+    const currentMonthKey = new Date().toISOString().slice(0, 7);
+
+    let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+      activeMonth: currentMonthKey,
+      months: {
+        [currentMonthKey]: {
+          baseSalary: 0,
+          openingCash: 0,
+          absenceDays: 0,
+          obligations: [],
+          transactions: []
+        }
+      }
+    };
+
+    function getMonthData() {
+      if (!appState.months[appState.activeMonth]) {
+        appState.months[appState.activeMonth] = {
+          baseSalary: 0,
+          openingCash: 0,
+          absenceDays: 0,
+          obligations: [],
+          transactions: []
+        };
+      }
+      return appState.months[appState.activeMonth];
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { t.style.display = 'none'; }, 2400);
+    }
+
+    // Mobile Tab Navigation
+    function switchTab(tabName, btnEl) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      document.getElementById('view-' + tabName).classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openModal(id) {
+      if (id === 'syncModal') {
+        document.getElementById('firebaseUrlInput').value = syncConfig.url;
+        document.getElementById('walletKeyInput').value = syncConfig.key;
+      }
+      if (id === 'quickAddModal') {
+        document.getElementById('modalDate').value = new Date().toISOString().slice(0, 10);
+      }
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function closeBackdrop(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+
+    // Cloud Sync (Firebase REST API)
+    function setSyncStatus(state, text) {
+      const dot = document.getElementById('syncDot');
+      const label = document.getElementById('syncLabel');
+      dot.className = 'sync-dot ' + state;
+      label.textContent = text;
+    }
+
+    function getEndpoint() {
+      const cleanUrl = syncConfig.url.replace(/\/+$/, '');
+      const cleanKey = (syncConfig.key || 'mohamed_main').replace(/[^a-zA-Z0-9_-]/g, '_');
+      return `${cleanUrl}/wallets/${cleanKey}.json`;
+    }
+
+    async function saveState(pushCloud = true) {
+      appState.updatedAt = Date.now();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      renderAll();
+      if (pushCloud && syncConfig.url) {
+        try {
+          setSyncStatus('', 'جاري الحفظ...');
+          const res = await fetch(getEndpoint(), {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(appState)
+          });
+          if (res.ok) setSyncStatus('online', 'متصل بالسحابة');
+          else setSyncStatus('error', 'خطأ صلاحيات');
+        } catch (err) {
+          setSyncStatus('error', 'أوفلاين');
+        }
+      }
+    }
+
+    async function pullFromCloud(silent = false) {
+      if (!syncConfig.url) return;
+      try {
+        const res = await fetch(getEndpoint());
+        if (!res.ok) {
+          setSyncStatus('error', 'خطأ اتصال');
+          return;
+        }
+        const remote = await res.json();
+        if (remote && remote.months) {
+          appState = remote;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+          renderAll();
+          if (!silent) showToast('تم تحديث البيانات من السحابة ✅');
+        } else {
+          await saveState(true);
+        }
+        setSyncStatus('online', 'متصل بالسحابة');
+      } catch (e) {
+        setSyncStatus('error', 'أوفلاين');
+      }
+    }
+
+    async function saveSyncSettings() {
+      syncConfig.url = document.getElementById('firebaseUrlInput').value.trim();
+      syncConfig.key = document.getElementById('walletKeyInput').value.trim() || 'mohamed_main';
+      localStorage.setItem(SYNC_CFG_KEY, JSON.stringify(syncConfig));
+      closeModal('syncModal');
+      await pullFromCloud(false);
+    }
+
+    async function forcePushToCloud() {
+      syncConfig.url = document.getElementById('firebaseUrlInput').value.trim();
+      syncConfig.key = document.getElementById('walletKeyInput').value.trim() || 'mohamed_main';
+      localStorage.setItem(SYNC_CFG_KEY, JSON.stringify(syncConfig));
+      closeModal('syncModal');
+      await saveState(true);
+      showToast('تم رفع بياناتك للسحابة بنجاح ☁️');
+    }
+
+    // Months Management
+    function formatMonthArabic(ym) {
+      const [y, m] = ym.split('-');
+      const names = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+      return `${names[parseInt(m, 10) - 1]} ${y}`;
+    }
+
+    function switchMonth(ym) {
+      appState.activeMonth = ym;
+      saveState(true);
+    }
+
+    function stepMonth(delta) {
+      const keys = Object.keys(appState.months).sort();
+      const idx = keys.indexOf(appState.activeMonth);
+      if (idx + delta >= 0 && idx + delta < keys.length) {
+        switchMonth(keys[idx + delta]);
+      }
+    }
+
+    function openNewMonthModal() {
+      const keys = Object.keys(appState.months).sort();
+      const last = keys[keys.length - 1];
+      let [y, m] = last.split('-').map(Number);
+      m++;
+      if (m > 12) { m = 1; y++; }
+      const nextYm = `${y}-${String(m).padStart(2, '0')}`;
+      const prevData = getMonthData();
+      appState.months[nextYm] = {
+        baseSalary: prevData.baseSalary || 0,
+        openingCash: 0,
+        absenceDays: 0,
+        obligations: (prevData.obligations || []).map(o => ({
+          id: Date.now() + Math.random(),
+          title: o.title,
+          expected: o.expected,
+          paidAmount: 0,
+          paid: false
+        })),
+        transactions: []
+      };
+      appState.activeMonth = nextYm;
+      saveState(true);
+      showToast(`تم فتح شهر ${formatMonthArabic(nextYm)} ✨`);
+    }
+
+    // Salary & Absence
+    function updateSalaryConfig() {
+      const m = getMonthData();
+      m.baseSalary = parseFloat(document.getElementById('baseSalaryInput').value) || 0;
+      m.openingCash = parseFloat(document.getElementById('openingCashInput').value) || 0;
+      saveState(true);
+    }
+
+    function changeAbsence(delta) {
+      const m = getMonthData();
+      m.absenceDays = Math.max(0, (m.absenceDays || 0) + delta);
+      saveState(true);
+    }
+
+    // Obligations
+    function addObligation(e) {
+      e.preventDefault();
+      const m = getMonthData();
+      const title = document.getElementById('obTitle').value.trim();
+      const expected = parseFloat(document.getElementById('obAmount').value) || 0;
+      if (!title || expected <= 0) return;
+      m.obligations.push({
+        id: Date.now(),
+        title,
+        expected,
+        paidAmount: 0,
+        paid: false
+      });
+      document.getElementById('obTitle').value = '';
+      document.getElementById('obAmount').value = '';
+      saveState(true);
+      showToast('تمت إضافة الالتزام 📌');
+    }
+
+    function toggleObligationPaid(id) {
+      const m = getMonthData();
+      const ob = m.obligations.find(o => o.id === id);
+      if (!ob) return;
+      if (!ob.paid) {
+        const val = prompt(`كم المبلغ الفعلي المسدد لـ "${ob.title}"؟`, ob.expected);
+        if (val === null) return;
+        ob.paidAmount = parseFloat(val) || ob.expected;
+        ob.paid = true;
+      } else {
+        ob.paid = false;
+        ob.paidAmount = 0;
+      }
+      saveState(true);
+    }
+
+    function deleteObligation(id) {
+      const m = getMonthData();
+      m.obligations = m.obligations.filter(o => o.id !== id);
+      saveState(true);
+    }
+
+    // Transactions
+    function addTransaction(e, source) {
+      e.preventDefault();
+      const prefix = source === 'modal' ? 'modal' : 'inline';
+      const type = document.getElementById(prefix + 'Type').value;
+      const amount = parseFloat(document.getElementById(prefix + 'Amount').value) || 0;
+      const title = document.getElementById(prefix + 'Title').value.trim();
+      const date = document.getElementById(prefix + 'Date').value;
+      if (!title || amount <= 0) return;
+
+      const m = getMonthData();
+      m.transactions.unshift({
+        id: Date.now(),
+        type,
+        amount,
+        title,
+        date
+      });
+
+      document.getElementById(prefix + 'Amount').value = '';
+      document.getElementById(prefix + 'Title').value = '';
+      if (source === 'modal') closeModal('quickAddModal');
+      saveState(true);
+      showToast('تم تسجيل الحركة بنجاح ✅');
+    }
+
+    function deleteTransaction(id) {
+      const m = getMonthData();
+      m.transactions = m.transactions.filter(t => t.id !== id);
+      saveState(true);
+      showToast('تم الحذف');
+    }
+
+    function openEditTx(id) {
+      const m = getMonthData();
+      const tx = m.transactions.find(t => t.id === id);
+      if (!tx) return;
+      document.getElementById('editTxId').value = tx.id;
+      document.getElementById('editTxTitle').value = tx.title;
+      document.getElementById('editTxAmount').value = tx.amount;
+      document.getElementById('editTxDate').value = tx.date;
+      openModal('editTxModal');
+    }
+
+    function saveEditedTx() {
+      const id = Number(document.getElementById('editTxId').value);
+      const m = getMonthData();
+      const tx = m.transactions.find(t => t.id === id);
+      if (tx) {
+        tx.title = document.getElementById('editTxTitle').value.trim();
+        tx.amount = parseFloat(document.getElementById('editTxAmount').value) || tx.amount;
+        tx.date = document.getElementById('editTxDate').value;
+        saveState(true);
+        showToast('تم حفظ التعديل ✏️');
+      }
+      closeModal('editTxModal');
+    }
+
+    function setTypeFilter(t) {
+      typeFilter = t;
+      renderAll();
+    }
+
+    // Core Financial Engine & Rendering
+    function fmt(n) {
+      return Number(n || 0).toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' ج.م';
+    }
+
+    function renderAll() {
+      // Populate Month Dropdown
+      const select = document.getElementById('monthSelect');
+      const keys = Object.keys(appState.months).sort();
+      select.innerHTML = keys.map(k => `<option value="${k}" ${k === appState.activeMonth ? 'selected' : ''}>${formatMonthArabic(k)}</option>`).join('');
+
+      const m = getMonthData();
+      const baseSalary = Number(m.baseSalary) || 0;
+      const openingCash = Number(m.openingCash) || 0;
+      const absenceDays = Number(m.absenceDays) || 0;
+      const absenceDeduction = (baseSalary / 30) * absenceDays;
+      const netSalary = Math.max(0, baseSalary - absenceDeduction);
+
+      let advances = 0, bonuses = 0, dailyExpenses = 0;
+      (m.transactions || []).forEach(t => {
+        if (t.type === 'advance') advances += Number(t.amount);
+        else if (t.type === 'bonus') bonuses += Number(t.amount);
+        else dailyExpenses += Number(t.amount);
+      });
+
+      let paidObligations = 0, unpaidObligations = 0;
+      (m.obligations || []).forEach(o => {
+        if (o.paid) paidObligations += Number(o.paidAmount || o.expected);
+        else unpaidObligations += Number(o.expected);
+      });
+
+      // 1. Cash in Hand = Opening + Advances + Bonuses - Daily Expenses - Paid Obligations
+      const cashInHand = openingCash + advances + bonuses - dailyExpenses - paidObligations;
+
+      // 2. Safe Borrow Limit = Net Salary - Advances - Unpaid Obligations
+      const safeBorrowLimit = netSalary - advances - unpaidObligations;
+
+      document.getElementById('cashInHand').textContent = fmt(cashInHand);
+      document.getElementById('safeBorrowLimit').textContent = fmt(safeBorrowLimit);
+      document.getElementById('totalExpenses').textContent = fmt(dailyExpenses + paidObligations);
+      document.getElementById('unpaidObligationsNote').textContent = `متبقي التزامات: ${fmt(unpaidObligations)}`;
+
+      // Salary Inputs
+      if (document.activeElement.id !== 'baseSalaryInput') {
+        document.getElementById('baseSalaryInput').value = baseSalary || '';
+      }
+      if (document.activeElement.id !== 'openingCashInput') {
+        document.getElementById('openingCashInput').value = openingCash || '';
+      }
+      document.getElementById('absenceDaysDisplay').textContent = `${absenceDays} يوم`;
+      document.getElementById('absenceDeductionText').textContent = fmt(absenceDeduction);
+      document.getElementById('netSalaryText').textContent = fmt(netSalary);
+      document.getElementById('totalAdvancesBadge').textContent = `إجمالي السلف: ${fmt(advances)}`;
+
+      // Render Advances List
+      const advList = document.getElementById('advancesList');
+      const advItems = (m.transactions || []).filter(t => t.type === 'advance');
+      advList.innerHTML = advItems.length ? advItems.map(t => `
+        <div class="list-card">
+          <div class="list-info">
+            <div class="list-title">${t.title}</div>
+            <div class="list-meta">${t.date}</div>
+          </div>
+          <div class="list-amount amt-income">+${fmt(t.amount)}</div>
+          <div class="mini-actions">
+            <button class="mini-btn" onclick="openEditTx(${t.id})">✏️</button>
+            <button class="mini-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+          </div>
+        </div>
+      `).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:12px;">لا توجد سلف مسجلة هذا الشهر</div>';
+
+      // Render Obligations List
+      const obList = document.getElementById('obligationsList');
+      obList.innerHTML = (m.obligations || []).length ? m.obligations.map(o => `
+        <div class="list-card">
+          <div class="list-info">
+            <div class="list-title">${o.title}</div>
+            <div class="list-meta">
+              <span class="badge ${o.paid ? 'badge-paid' : 'badge-unpaid'}">${o.paid ? 'مسدد: ' + fmt(o.paidAmount) : 'غير مسدد'}</span>
+            </div>
+          </div>
+          <div class="list-amount">${fmt(o.expected)}</div>
+          <div class="mini-actions">
+            <button class="mini-btn" onclick="toggleObligationPaid(${o.id})">${o.paid ? 'تراجع' : 'سداد ✓'}</button>
+            <button class="mini-btn" onclick="deleteObligation(${o.id})">🗑️</button>
+          </div>
+        </div>
+      `).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:12px;">أضف التزاماتك الثابتة مثل الإيجار والكهرباء</div>';
+
+      // Render Transactions Log
+      const filterDate = document.getElementById('filterDateInput').value;
+      const filteredTx = (m.transactions || []).filter(t => {
+        if (typeFilter !== 'all' && t.type !== typeFilter) return false;
+        if (filterDate && t.date !== filterDate) return false;
+        return true;
+      });
+
+      const txList = document.getElementById('transactionsList');
+      txList.innerHTML = filteredTx.length ? filteredTx.map(t => {
+        const isPos = t.type === 'advance' || t.type === 'bonus';
+        const tag = t.type === 'advance' ? 'سلفة' : (t.type === 'bonus' ? 'بونص' : 'مصروف');
+        return `
+          <div class="list-card">
+            <div class="list-info">
+              <div class="list-title">${t.title}</div>
+              <div class="list-meta">${t.date} • ${tag}</div>
+            </div>
+            <div class="list-amount ${isPos ? 'amt-income' : 'amt-expense'}">${isPos ? '+' : '-'}${fmt(t.amount)}</div>
+            <div class="mini-actions">
+              <button class="mini-btn" onclick="openEditTx(${t.id})">✏️</button>
+              <button class="mini-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+            </div>
+          </div>
+        `;
+      }).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:16px;">لا توجد حركات مطابقة</div>';
+    }
+
+    // Settings Helpers
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('mahfazty_dark', document.body.classList.contains('dark') ? '1' : '0');
+    }
+
+    function exportBackup() {
+      const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `mahfazty-backup-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+    }
+
+    function copyGoogleSitesCode() {
+      navigator.clipboard.writeText(document.documentElement.outerHTML).then(() => {
+        showToast('تم نسخ الكود الكامل 📋');
+      });
+    }
+
+    // Init
+    if (localStorage.getItem('mahfazty_dark') === '1') document.body.classList.add('dark');
+    document.getElementById('inlineDate').value = new Date().toISOString().slice(0, 10);
+    renderAll();
+    pullFromCloud(true);
+    setInterval(() => pullFromCloud(true), 15000);
+  </script>
+</body>
+</html>
