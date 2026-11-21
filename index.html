@@ -49,544 +49,102 @@
       --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Cairo', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: calc(var(--nav-height) + 28px); transition: background 0.25s, color 0.25s; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding-bottom: calc(var(--nav-height) + 28px);
-      transition: background 0.25s, color 0.25s;
-    }
+    .app-header { position: sticky; top: 0; z-index: 40; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #06b6d4); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 18px; flex-shrink: 0; }
+    .brand-title { font-size: 17px; font-weight: 800; line-height: 1.1; }
+    .brand-sub { font-size: 11px; color: var(--text-muted); }
+    .header-actions { display: flex; align-items: center; gap: 6px; }
 
-    /* Header */
-    .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #4f46e5, #06b6d4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 800;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .brand-title {
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .sync-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 11px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      background: var(--surface-alt);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .sync-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--warning);
-    }
+    .sync-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 700; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); cursor: pointer; }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); }
     .sync-dot.online { background: var(--success); box-shadow: 0 0 8px var(--success); }
     .sync-dot.error { background: var(--danger); }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface-alt);
-      color: var(--text);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-    }
+    .icon-btn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
 
-    /* Month Bar */
-    .month-bar {
-      max-width: 1100px;
-      margin: 12px auto 0;
-      padding: 0 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
+    .month-bar { max-width: 1100px; margin: 12px auto 0; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .month-switcher { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 4px 8px; flex: 1; justify-content: space-between; box-shadow: var(--shadow); }
+    .month-switcher select { background: transparent; border: none; color: var(--text); font-size: 15px; font-weight: 800; text-align: center; outline: none; cursor: pointer; }
+    .month-nav-btn { width: 34px; height: 34px; border-radius: 10px; border: none; background: var(--surface-alt); color: var(--text); font-weight: 800; cursor: pointer; }
+    .new-month-btn { padding: 10px 14px; border-radius: 14px; border: none; background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); }
 
-    .month-switcher {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 4px 8px;
-      flex: 1;
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-    }
+    .container { max-width: 1100px; margin: 14px auto; padding: 0 14px; }
+    .view-section { display: none; animation: fadeIn 0.2s ease; }
+    .view-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-    .month-switcher select {
-      background: transparent;
-      border: none;
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 800;
-      text-align: center;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .month-nav-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      border: none;
-      background: var(--surface-alt);
-      color: var(--text);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .new-month-btn {
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-    }
-
-    /* Container & Views */
-    .container {
-      max-width: 1100px;
-      margin: 14px auto;
-      padding: 0 14px;
-    }
-
-    .view-section {
-      display: none;
-      animation: fadeIn 0.2s ease;
-    }
-    .view-section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Desktop shows all sections in a clean grid */
     @media (min-width: 900px) {
       body { padding-bottom: 32px; }
       .bottom-nav, .fab-btn { display: none !important; }
-      .desktop-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-        align-items: start;
-      }
+      .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
       .view-section { display: block !important; }
       .span-2 { grid-column: span 2; }
     }
 
-    /* Cards & Metrics */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow);
-    }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow); }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-title { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
+    .hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .metric-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+    .metric-box.cash { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; border: none; grid-column: span 2; }
+    .metric-label { font-size: 12px; opacity: 0.8; font-weight: 600; margin-bottom: 4px; }
+    .metric-value { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+    .metric-box:not(.cash) .metric-value { font-size: 21px; }
+    .metric-sub { font-size: 11px; margin-top: 4px; opacity: 0.75; }
 
-    .card-title {
-      font-size: 16px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .metric-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .metric-box.cash {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #fff;
-      border: none;
-      grid-column: span 2;
-    }
-
-    .metric-label {
-      font-size: 12px;
-      opacity: 0.8;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .metric-box:not(.cash) .metric-value {
-      font-size: 21px;
-    }
-
-    .metric-sub {
-      font-size: 11px;
-      margin-top: 4px;
-      opacity: 0.75;
-    }
-
-    /* Forms & Touch Controls */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .form-full { grid-column: span 2; }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; }
+    input, select { width: 100%; height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); font-size: 16px; font-weight: 600; outline: none; }
+    input:focus, select:focus { border-color: var(--primary); }
 
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-    }
-
-    input, select {
-      width: 100%;
-      height: 46px;
-      padding: 0 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface-alt);
-      color: var(--text);
-      font-size: 16px; /* Prevents iOS/Android auto-zoom */
-      font-weight: 600;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--primary);
-    }
-
-    .btn {
-      height: 46px;
-      padding: 0 16px;
-      border-radius: 12px;
-      border: none;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: transform 0.1s, opacity 0.2s;
-    }
-    .btn:active { transform: scale(0.98); }
+    .btn { height: 46px; padding: 0 16px; border-radius: 12px; border: none; font-size: 14px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
     .btn-primary { background: var(--primary); color: #fff; width: 100%; }
     .btn-success { background: var(--success); color: #fff; }
-    .btn-danger { background: var(--danger-soft); color: var(--danger); }
     .btn-ghost { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
 
-    /* Stepper for Absence Days */
-    .stepper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 4px;
-      height: 46px;
-    }
-    .stepper button {
-      width: 38px;
-      height: 36px;
-      border-radius: 9px;
-      border: none;
-      background: var(--surface);
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .stepper span {
-      flex: 1;
-      text-align: center;
-      font-weight: 800;
-      font-size: 16px;
-    }
+    .stepper { display: flex; align-items: center; gap: 8px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 12px; padding: 4px; height: 46px; }
+    .stepper button { width: 38px; height: 36px; border-radius: 9px; border: none; background: var(--surface); color: var(--text); font-size: 18px; font-weight: 800; cursor: pointer; }
+    .stepper span { flex: 1; text-align: center; font-weight: 800; font-size: 16px; }
 
-    /* Lists (Obligations, Advances, Transactions) */
-    .item-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .list-card {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
+    .item-list { display: flex; flex-direction: column; gap: 10px; }
+    .list-card { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 14px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .list-info { flex: 1; min-width: 0; }
-    .list-title {
-      font-size: 14px;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .list-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .list-amount {
-      font-size: 15px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
+    .list-title { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .list-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .list-amount { font-size: 15px; font-weight: 800; white-space: nowrap; }
     .amt-expense { color: var(--danger); }
     .amt-income { color: var(--success); }
 
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 8px;
-      font-size: 11px;
-      font-weight: 700;
-    }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; }
     .badge-paid { background: var(--success-soft); color: var(--success); }
     .badge-unpaid { background: var(--warning-soft); color: var(--warning); }
 
-    .mini-actions {
-      display: flex;
-      gap: 4px;
-    }
-    .mini-btn {
-      padding: 6px 9px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .mini-actions { display: flex; gap: 4px; }
+    .mini-btn { padding: 6px 9px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 12px; font-weight: 700; cursor: pointer; }
 
-    /* Bottom Navigation Bar (Mobile) */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 50;
-      padding-bottom: env(safe-area-inset-bottom);
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-    }
-
-    .nav-item {
-      flex: 1;
-      height: 100%;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--surface); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 50; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
+    .nav-item { flex: 1; height: 100%; border: none; background: transparent; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 700; cursor: pointer; }
     .nav-item .nav-icon { font-size: 19px; line-height: 1; }
     .nav-item.active { color: var(--primary); }
 
-    /* Floating Action Button */
-    .fab-btn {
-      position: fixed;
-      bottom: calc(var(--nav-height) + 14px);
-      left: 16px;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #4f46e5, #06b6d4);
-      color: #fff;
-      border: none;
-      font-size: 28px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
-      cursor: pointer;
-      z-index: 45;
-    }
+    .fab-btn { position: fixed; bottom: calc(var(--nav-height) + 14px); left: 16px; width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #06b6d4); color: #fff; border: none; font-size: 28px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4); cursor: pointer; z-index: 45; }
 
-    /* Modals & Bottom Sheets */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(3px);
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      z-index: 100;
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px); display: none; align-items: flex-end; justify-content: center; z-index: 100; }
     .modal-backdrop.open { display: flex; }
-
-    @media (min-width: 640px) {
-      .modal-backdrop { align-items: center; }
-      .sheet-card { border-radius: 22px !important; max-width: 460px; }
-    }
-
-    .sheet-card {
-      width: 100%;
-      background: var(--surface);
-      border-radius: 24px 24px 0 0;
-      padding: 20px 16px 26px;
-      max-height: 90vh;
-      overflow-y: auto;
-      animation: slideUp 0.22s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    .sheet-handle {
-      width: 40px;
-      height: 4px;
-      background: var(--border);
-      border-radius: 99px;
-      margin: 0 auto 14px;
-    }
-
-    .toast {
-      position: fixed;
-      top: 68px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0f172a;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      z-index: 200;
-      display: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    }
+    @media (min-width: 640px) { .modal-backdrop { align-items: center; } .sheet-card { border-radius: 22px !important; max-width: 460px; } }
+    .sheet-card { width: 100%; background: var(--surface); border-radius: 24px 24px 0 0; padding: 20px 16px 26px; max-height: 90vh; overflow-y: auto; }
+    .sheet-handle { width: 40px; height: 4px; background: var(--border); border-radius: 99px; margin: 0 auto 14px; }
+    .toast { position: fixed; top: 68px; left: 50%; transform: translateX(-50%); background: #0f172a; color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; z-index: 200; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
   </style>
 </head>
 <body>
 
-  <!-- Top Header -->
   <header class="app-header">
     <div class="brand">
       <div class="brand-icon">م</div>
@@ -596,15 +154,14 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="sync-pill" onclick="openModal('syncModal')" title="حالة المزامنة السحابية">
+      <button class="sync-pill" onclick="openModal('syncModal')">
         <span class="sync-dot" id="syncDot"></span>
         <span id="syncLabel">جاري الربط...</span>
       </button>
-      <button class="icon-btn" onclick="openModal('settingsModal')" title="الإعدادات والأدوات">⚙️</button>
+      <button class="icon-btn" onclick="openModal('settingsModal')">⚙️</button>
     </div>
   </header>
 
-  <!-- Month Selector Bar -->
   <div class="month-bar">
     <div class="month-switcher">
       <button class="month-nav-btn" onclick="stepMonth(-1)">❮</button>
@@ -614,10 +171,8 @@
     <button class="new-month-btn" onclick="openNewMonthModal()">+ شهر جديد</button>
   </div>
 
-  <!-- Main Content -->
   <main class="container desktop-grid">
-
-    <!-- TAB 1: HOME (Overview + Quick Add) -->
+    <!-- TAB 1: HOME -->
     <section id="view-home" class="view-section active span-2">
       <div class="hero-cards">
         <div class="metric-box cash">
@@ -637,7 +192,6 @@
         </div>
       </div>
 
-      <!-- Quick Add Form (Always accessible on Home) -->
       <div class="card">
         <div class="card-header">
           <div class="card-title">⚡ تسجيل حركة سريعة</div>
@@ -739,45 +293,38 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">📜 سجل حركات الشهر</div>
-          <input type="date" id="filterDateInput" onchange="renderAll()" style="width: auto; height: 36px; font-size: 13px;" title="تصفية باليوم" />
+          <input type="date" id="filterDateInput" onchange="renderAll()" style="width: auto; height: 36px; font-size: 13px;" />
         </div>
         <div style="display:flex; gap:6px; margin-bottom:12px; overflow-x:auto;">
-          <button class="mini-btn" onclick="setTypeFilter('all')" id="f-all">الكل</button>
-          <button class="mini-btn" onclick="setTypeFilter('expense')" id="f-expense">المصاريف</button>
-          <button class="mini-btn" onclick="setTypeFilter('advance')" id="f-advance">السلف</button>
-          <button class="mini-btn" onclick="setTypeFilter('bonus')" id="f-bonus">البونص</button>
+          <button class="mini-btn" onclick="setTypeFilter('all')">الكل</button>
+          <button class="mini-btn" onclick="setTypeFilter('expense')">المصاريف</button>
+          <button class="mini-btn" onclick="setTypeFilter('advance')">السلف</button>
+          <button class="mini-btn" onclick="setTypeFilter('bonus')">البونص</button>
           <button class="mini-btn" onclick="document.getElementById('filterDateInput').value=''; renderAll();">مسح التاريخ</button>
         </div>
         <div class="item-list" id="transactionsList"></div>
       </div>
     </section>
-
   </main>
 
-  <!-- Floating Quick Add Button (Mobile) -->
-  <button class="fab-btn" onclick="openModal('quickAddModal')" title="إضافة حركة سريعة">+</button>
+  <button class="fab-btn" onclick="openModal('quickAddModal')">+</button>
 
-  <!-- Bottom Navigation Bar (Mobile) -->
   <nav class="bottom-nav">
     <button class="nav-item active" data-tab="home" onclick="switchTab('home', this)">
-      <span class="nav-icon">🏠</span>
-      <span>الرئيسية</span>
+      <span class="nav-icon">🏠</span><span>الرئيسية</span>
     </button>
     <button class="nav-item" data-tab="salary" onclick="switchTab('salary', this)">
-      <span class="nav-icon">💼</span>
-      <span>الراتب والسلف</span>
+      <span class="nav-icon">💼</span><span>الراتب والسلف</span>
     </button>
     <button class="nav-item" data-tab="obligations" onclick="switchTab('obligations', this)">
-      <span class="nav-icon">📌</span>
-      <span>التزاماتي</span>
+      <span class="nav-icon">📌</span><span>التزاماتي</span>
     </button>
     <button class="nav-item" data-tab="history" onclick="switchTab('history', this)">
-      <span class="nav-icon">📜</span>
-      <span>السجل</span>
+      <span class="nav-icon">📜</span><span>السجل</span>
     </button>
   </nav>
 
-  <!-- Quick Add Bottom Sheet Modal -->
+  <!-- Quick Add Modal -->
   <div class="modal-backdrop" id="quickAddModal" onclick="closeBackdrop(event, 'quickAddModal')">
     <div class="sheet-card">
       <div class="sheet-handle"></div>
@@ -819,7 +366,7 @@
       <div class="sheet-handle"></div>
       <div class="card-title" style="margin-bottom: 10px;">☁️ إعدادات المزامنة السحابية (Firebase)</div>
       <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
-        اكتب نفس <strong>رمز المحفظة السري</strong> على اللابتوب والموبايل لمزامنة بياناتك لحظياً.
+        اكتب نفس <strong>رمز المحفظة السري</strong> الموجود في Firebase لمزامنة بياناتك لحظياً.
       </p>
       <div class="form-grid">
         <div class="form-full">
@@ -828,17 +375,17 @@
         </div>
         <div class="form-full">
           <label>رمز المحفظة السري (Secret Key)</label>
-          <input type="text" id="walletKeyInput" placeholder="مثال: mohamed_2026_x99" />
+          <input type="text" id="walletKeyInput" placeholder="اكتب رمز محفظتك" />
         </div>
         <div class="form-full" style="display:flex; gap:8px; margin-top:6px;">
-          <button type="button" class="btn btn-primary" onclick="saveSyncSettings()">حفظ ومزامنة الآن</button>
-          <button type="button" class="btn btn-success" onclick="forcePushToCloud()">رفع بياناتي للسحابة</button>
+          <button type="button" class="btn btn-primary" onclick="saveSyncSettings()">سحب ومزامنة من السحابة</button>
+          <button type="button" class="btn btn-success" onclick="forcePushToCloud()">رفع للسحابة</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Settings & Tools Modal -->
+  <!-- Settings Modal -->
   <div class="modal-backdrop" id="settingsModal" onclick="closeBackdrop(event, 'settingsModal')">
     <div class="sheet-card">
       <div class="sheet-handle"></div>
@@ -846,18 +393,18 @@
       <div style="display:flex; flex-direction:column; gap:10px;">
         <button class="btn btn-ghost" onclick="toggleDarkMode()">🌓 تبديل الوضع الليلي / النهاري</button>
         <button class="btn btn-ghost" onclick="exportBackup()">📥 تنزيل نسخة احتياطية (JSON)</button>
-        <button class="btn btn-ghost" onclick="copyGoogleSitesCode()">📋 نسخ الكود لـ Google Sites</button>
         <button class="btn btn-ghost" onclick="closeModal('settingsModal')">إغلاق</button>
       </div>
     </div>
   </div>
 
-  <!-- Edit Transaction Modal -->
+  <!-- Edit Modal -->
   <div class="modal-backdrop" id="editTxModal" onclick="closeBackdrop(event, 'editTxModal')">
     <div class="sheet-card">
       <div class="sheet-handle"></div>
       <div class="card-title" style="margin-bottom: 12px;">✏️ تعديل الحركة</div>
       <input type="hidden" id="editTxId" />
+      <input type="hidden" id="editTxSource" />
       <div class="form-grid">
         <div class="form-full">
           <label>البيان</label>
@@ -882,34 +429,13 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // Dynamic PWA Manifest Injection for Mobile Installation
-    (function injectPWA() {
-      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><rect width="512" height="512" rx="115" fill="url(#g)"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="260" font-weight="bold">م</text></svg>`;
-      const iconUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(iconSvg)));
-      const manifest = {
-        name: "محفظتي - إدارة المصاريف والراتب",
-        short_name: "محفظتي",
-        start_url: ".",
-        display: "standalone",
-        background_color: "#0f172a",
-        theme_color: "#4f46e5",
-        icons: [{ src: iconUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }]
-      };
-      const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-      const link = document.createElement('link');
-      link.rel = 'manifest';
-      link.href = URL.createObjectURL(blob);
-      document.head.appendChild(link);
-    })();
-
-    // App State
-    const STORAGE_KEY = 'mahfazty_v3_data';
+    const STORAGE_KEY = 'mahfazty_v4_compat';
     const SYNC_CFG_KEY = 'mahfazty_sync_cfg';
     let typeFilter = 'all';
 
     let syncConfig = JSON.parse(localStorage.getItem(SYNC_CFG_KEY)) || {
       url: 'https://mahfazty-19681-default-rtdb.firebaseio.com',
-      key: 'mohamed_main'
+      key: ''
     };
 
     const currentMonthKey = new Date().toISOString().slice(0, 7);
@@ -918,24 +444,52 @@
       activeMonth: currentMonthKey,
       months: {
         [currentMonthKey]: {
-          baseSalary: 0,
-          openingCash: 0,
-          absenceDays: 0,
-          obligations: [],
+          monthlySalary: 0,
+          openingBalance: 0,
+          deductionDays: 0,
+          fixedCommitments: [],
+          borrowings: [],
           transactions: []
         }
       }
     };
 
+    // Helper: Firebase often stores arrays as objects with numeric keys; normalize cleanly
+    function toArray(val) {
+      if (!val) return [];
+      if (Array.isArray(val)) return val.filter(Boolean);
+      if (typeof val === 'object') {
+        return Object.entries(val).map(([k, v]) => {
+          if (v && typeof v === 'object' && !v.id) v.id = k;
+          return v;
+        }).filter(Boolean);
+      }
+      return [];
+    }
+
+    function normalizeMonth(m) {
+      if (!m) m = {};
+      return {
+        monthlySalary: Number(m.monthlySalary ?? m.baseSalary ?? 0),
+        openingBalance: Number(m.openingBalance ?? m.openingCash ?? 0),
+        deductionDays: Number(m.deductionDays ?? m.absenceDays ?? 0),
+        salaryReceived: Boolean(m.salaryReceived),
+        fixedCommitments: toArray(m.fixedCommitments || m.obligations),
+        borrowings: toArray(m.borrowings),
+        transactions: toArray(m.transactions)
+      };
+    }
+
     function getMonthData() {
+      if (!appState.months) appState.months = {};
+      const keys = Object.keys(appState.months).sort();
+      if (!appState.activeMonth || !appState.months[appState.activeMonth]) {
+        appState.activeMonth = keys.includes(currentMonthKey) ? currentMonthKey : (keys[keys.length - 1] || currentMonthKey);
+      }
       if (!appState.months[appState.activeMonth]) {
-        appState.months[appState.activeMonth] = {
-          baseSalary: 0,
-          openingCash: 0,
-          absenceDays: 0,
-          obligations: [],
-          transactions: []
-        };
+        appState.months[appState.activeMonth] = normalizeMonth({});
+      } else {
+        appState.months[appState.activeMonth] = normalizeMonth(appState.months[appState.activeMonth]);
       }
       return appState.months[appState.activeMonth];
     }
@@ -948,7 +502,6 @@
       window._toastTimer = setTimeout(() => { t.style.display = 'none'; }, 2400);
     }
 
-    // Mobile Tab Navigation
     function switchTab(tabName, btnEl) {
       document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
       document.getElementById('view-' + tabName).classList.add('active');
@@ -968,33 +521,25 @@
       document.getElementById(id).classList.add('open');
     }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
-    }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function closeBackdrop(e, id) { if (e.target.id === id) closeModal(id); }
 
-    function closeBackdrop(e, id) {
-      if (e.target.id === id) closeModal(id);
-    }
-
-    // Cloud Sync (Firebase REST API)
     function setSyncStatus(state, text) {
-      const dot = document.getElementById('syncDot');
-      const label = document.getElementById('syncLabel');
-      dot.className = 'sync-dot ' + state;
-      label.textContent = text;
+      document.getElementById('syncDot').className = 'sync-dot ' + state;
+      document.getElementById('syncLabel').textContent = text;
     }
 
     function getEndpoint() {
       const cleanUrl = syncConfig.url.replace(/\/+$/, '');
-      const cleanKey = (syncConfig.key || 'mohamed_main').replace(/[^a-zA-Z0-9_-]/g, '_');
-      return `${cleanUrl}/wallets/${cleanKey}.json`;
+      const cleanKey = syncConfig.key.trim();
+      return `${cleanUrl}/wallets/${encodeURIComponent(cleanKey)}.json`;
     }
 
     async function saveState(pushCloud = true) {
       appState.updatedAt = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
       renderAll();
-      if (pushCloud && syncConfig.url) {
+      if (pushCloud && syncConfig.url && syncConfig.key) {
         try {
           setSyncStatus('', 'جاري الحفظ...');
           const res = await fetch(getEndpoint(), {
@@ -1011,21 +556,25 @@
     }
 
     async function pullFromCloud(silent = false) {
-      if (!syncConfig.url) return;
+      if (!syncConfig.url || !syncConfig.key) {
+        setSyncStatus('', 'أدخل الرمز السري');
+        return;
+      }
       try {
         const res = await fetch(getEndpoint());
-        if (!res.ok) {
-          setSyncStatus('error', 'خطأ اتصال');
-          return;
-        }
+        if (!res.ok) { setSyncStatus('error', 'خطأ اتصال'); return; }
         const remote = await res.json();
         if (remote && remote.months) {
+          const prevActive = appState.activeMonth;
           appState = remote;
+          if (prevActive && appState.months[prevActive]) {
+            appState.activeMonth = prevActive;
+          }
           localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
           renderAll();
-          if (!silent) showToast('تم تحديث البيانات من السحابة ✅');
-        } else {
-          await saveState(true);
+          if (!silent) showToast('تم جلب بياناتك بنجاح ✅');
+        } else if (!silent) {
+          showToast('الرمز السري غير موجود في السحابة ⚠️');
         }
         setSyncStatus('online', 'متصل بالسحابة');
       } catch (e) {
@@ -1035,7 +584,7 @@
 
     async function saveSyncSettings() {
       syncConfig.url = document.getElementById('firebaseUrlInput').value.trim();
-      syncConfig.key = document.getElementById('walletKeyInput').value.trim() || 'mohamed_main';
+      syncConfig.key = document.getElementById('walletKeyInput').value.trim();
       localStorage.setItem(SYNC_CFG_KEY, JSON.stringify(syncConfig));
       closeModal('syncModal');
       await pullFromCloud(false);
@@ -1043,14 +592,13 @@
 
     async function forcePushToCloud() {
       syncConfig.url = document.getElementById('firebaseUrlInput').value.trim();
-      syncConfig.key = document.getElementById('walletKeyInput').value.trim() || 'mohamed_main';
+      syncConfig.key = document.getElementById('walletKeyInput').value.trim();
       localStorage.setItem(SYNC_CFG_KEY, JSON.stringify(syncConfig));
       closeModal('syncModal');
       await saveState(true);
-      showToast('تم رفع بياناتك للسحابة بنجاح ☁️');
+      showToast('تم رفع بياناتك للسحابة ☁️');
     }
 
-    // Months Management
     function formatMonthArabic(ym) {
       const [y, m] = ym.split('-');
       const names = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
@@ -1059,15 +607,14 @@
 
     function switchMonth(ym) {
       appState.activeMonth = ym;
-      saveState(true);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      renderAll();
     }
 
     function stepMonth(delta) {
       const keys = Object.keys(appState.months).sort();
       const idx = keys.indexOf(appState.activeMonth);
-      if (idx + delta >= 0 && idx + delta < keys.length) {
-        switchMonth(keys[idx + delta]);
-      }
+      if (idx + delta >= 0 && idx + delta < keys.length) switchMonth(keys[idx + delta]);
     }
 
     function openNewMonthModal() {
@@ -1079,16 +626,18 @@
       const nextYm = `${y}-${String(m).padStart(2, '0')}`;
       const prevData = getMonthData();
       appState.months[nextYm] = {
-        baseSalary: prevData.baseSalary || 0,
-        openingCash: 0,
-        absenceDays: 0,
-        obligations: (prevData.obligations || []).map(o => ({
+        monthlySalary: prevData.monthlySalary || 0,
+        openingBalance: 0,
+        deductionDays: 0,
+        salaryReceived: false,
+        fixedCommitments: prevData.fixedCommitments.map(o => ({
           id: Date.now() + Math.random(),
-          title: o.title,
-          expected: o.expected,
+          title: o.title || o.name,
+          amount: Number(o.amount ?? o.expected ?? 0),
           paidAmount: 0,
           paid: false
         })),
+        borrowings: [],
         transactions: []
       };
       appState.activeMonth = nextYm;
@@ -1096,34 +645,26 @@
       showToast(`تم فتح شهر ${formatMonthArabic(nextYm)} ✨`);
     }
 
-    // Salary & Absence
     function updateSalaryConfig() {
       const m = getMonthData();
-      m.baseSalary = parseFloat(document.getElementById('baseSalaryInput').value) || 0;
-      m.openingCash = parseFloat(document.getElementById('openingCashInput').value) || 0;
+      m.monthlySalary = parseFloat(document.getElementById('baseSalaryInput').value) || 0;
+      m.openingBalance = parseFloat(document.getElementById('openingCashInput').value) || 0;
       saveState(true);
     }
 
     function changeAbsence(delta) {
       const m = getMonthData();
-      m.absenceDays = Math.max(0, (m.absenceDays || 0) + delta);
+      m.deductionDays = Math.max(0, (m.deductionDays || 0) + delta);
       saveState(true);
     }
 
-    // Obligations
     function addObligation(e) {
       e.preventDefault();
       const m = getMonthData();
       const title = document.getElementById('obTitle').value.trim();
-      const expected = parseFloat(document.getElementById('obAmount').value) || 0;
-      if (!title || expected <= 0) return;
-      m.obligations.push({
-        id: Date.now(),
-        title,
-        expected,
-        paidAmount: 0,
-        paid: false
-      });
+      const amount = parseFloat(document.getElementById('obAmount').value) || 0;
+      if (!title || amount <= 0) return;
+      m.fixedCommitments.push({ id: Date.now(), title, amount, paidAmount: 0, paid: false });
       document.getElementById('obTitle').value = '';
       document.getElementById('obAmount').value = '';
       saveState(true);
@@ -1132,12 +673,13 @@
 
     function toggleObligationPaid(id) {
       const m = getMonthData();
-      const ob = m.obligations.find(o => o.id === id);
+      const ob = m.fixedCommitments.find(o => String(o.id) === String(id));
       if (!ob) return;
+      const expected = Number(ob.amount ?? ob.expected ?? 0);
       if (!ob.paid) {
-        const val = prompt(`كم المبلغ الفعلي المسدد لـ "${ob.title}"؟`, ob.expected);
+        const val = prompt(`كم المبلغ الفعلي المسدد لـ "${ob.title || ob.name}"؟`, expected);
         if (val === null) return;
-        ob.paidAmount = parseFloat(val) || ob.expected;
+        ob.paidAmount = parseFloat(val) || expected;
         ob.paid = true;
       } else {
         ob.paid = false;
@@ -1148,11 +690,10 @@
 
     function deleteObligation(id) {
       const m = getMonthData();
-      m.obligations = m.obligations.filter(o => o.id !== id);
+      m.fixedCommitments = m.fixedCommitments.filter(o => String(o.id) !== String(id));
       saveState(true);
     }
 
-    // Transactions
     function addTransaction(e, source) {
       e.preventDefault();
       const prefix = source === 'modal' ? 'modal' : 'inline';
@@ -1163,93 +704,90 @@
       if (!title || amount <= 0) return;
 
       const m = getMonthData();
-      m.transactions.unshift({
-        id: Date.now(),
-        type,
-        amount,
-        title,
-        date
-      });
+      if (type === 'advance') {
+        m.borrowings.unshift({ id: Date.now(), title, amount, date });
+      } else {
+        m.transactions.unshift({ id: Date.now(), type, amount, title, date });
+      }
 
       document.getElementById(prefix + 'Amount').value = '';
       document.getElementById(prefix + 'Title').value = '';
       if (source === 'modal') closeModal('quickAddModal');
       saveState(true);
-      showToast('تم تسجيل الحركة بنجاح ✅');
+      showToast('تم تسجيل الحركة ومزامنتها ✅');
     }
 
-    function deleteTransaction(id) {
+    function deleteItem(id, listName) {
       const m = getMonthData();
-      m.transactions = m.transactions.filter(t => t.id !== id);
+      m[listName] = m[listName].filter(t => String(t.id) !== String(id));
       saveState(true);
       showToast('تم الحذف');
     }
 
-    function openEditTx(id) {
+    function openEditTx(id, listName) {
       const m = getMonthData();
-      const tx = m.transactions.find(t => t.id === id);
-      if (!tx) return;
-      document.getElementById('editTxId').value = tx.id;
-      document.getElementById('editTxTitle').value = tx.title;
-      document.getElementById('editTxAmount').value = tx.amount;
-      document.getElementById('editTxDate').value = tx.date;
+      const item = m[listName].find(t => String(t.id) === String(id));
+      if (!item) return;
+      document.getElementById('editTxId').value = item.id;
+      document.getElementById('editTxSource').value = listName;
+      document.getElementById('editTxTitle').value = item.title || item.description || item.name || '';
+      document.getElementById('editTxAmount').value = item.amount;
+      document.getElementById('editTxDate').value = item.date || '';
       openModal('editTxModal');
     }
 
     function saveEditedTx() {
-      const id = Number(document.getElementById('editTxId').value);
+      const id = document.getElementById('editTxId').value;
+      const listName = document.getElementById('editTxSource').value;
       const m = getMonthData();
-      const tx = m.transactions.find(t => t.id === id);
-      if (tx) {
-        tx.title = document.getElementById('editTxTitle').value.trim();
-        tx.amount = parseFloat(document.getElementById('editTxAmount').value) || tx.amount;
-        tx.date = document.getElementById('editTxDate').value;
+      const item = m[listName].find(t => String(t.id) === String(id));
+      if (item) {
+        item.title = document.getElementById('editTxTitle').value.trim();
+        item.amount = parseFloat(document.getElementById('editTxAmount').value) || item.amount;
+        item.date = document.getElementById('editTxDate').value;
         saveState(true);
         showToast('تم حفظ التعديل ✏️');
       }
       closeModal('editTxModal');
     }
 
-    function setTypeFilter(t) {
-      typeFilter = t;
-      renderAll();
-    }
-
-    // Core Financial Engine & Rendering
-    function fmt(n) {
-      return Number(n || 0).toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' ج.م';
-    }
+    function setTypeFilter(t) { typeFilter = t; renderAll(); }
+    function fmt(n) { return Number(n || 0).toLocaleString('en-US', { maximumFractionDigits: 1 }) + ' ج.م'; }
 
     function renderAll() {
-      // Populate Month Dropdown
       const select = document.getElementById('monthSelect');
-      const keys = Object.keys(appState.months).sort();
+      const keys = Object.keys(appState.months || {}).sort();
+      const m = getMonthData();
+
       select.innerHTML = keys.map(k => `<option value="${k}" ${k === appState.activeMonth ? 'selected' : ''}>${formatMonthArabic(k)}</option>`).join('');
 
-      const m = getMonthData();
-      const baseSalary = Number(m.baseSalary) || 0;
-      const openingCash = Number(m.openingCash) || 0;
-      const absenceDays = Number(m.absenceDays) || 0;
+      const baseSalary = Number(m.monthlySalary) || 0;
+      const openingCash = Number(m.openingBalance) || 0;
+      const absenceDays = Number(m.deductionDays) || 0;
       const absenceDeduction = (baseSalary / 30) * absenceDays;
       const netSalary = Math.max(0, baseSalary - absenceDeduction);
 
       let advances = 0, bonuses = 0, dailyExpenses = 0;
-      (m.transactions || []).forEach(t => {
-        if (t.type === 'advance') advances += Number(t.amount);
-        else if (t.type === 'bonus') bonuses += Number(t.amount);
-        else dailyExpenses += Number(t.amount);
+
+      // Sum borrowings array
+      m.borrowings.forEach(b => { advances += Number(b.amount || 0); });
+
+      // Sum transactions array
+      m.transactions.forEach(t => {
+        const amt = Number(t.amount || 0);
+        if (t.type === 'advance' || t.type === 'borrowing') advances += amt;
+        else if (t.type === 'bonus' || t.type === 'income') bonuses += amt;
+        else dailyExpenses += amt;
       });
 
       let paidObligations = 0, unpaidObligations = 0;
-      (m.obligations || []).forEach(o => {
-        if (o.paid) paidObligations += Number(o.paidAmount || o.expected);
-        else unpaidObligations += Number(o.expected);
+      m.fixedCommitments.forEach(o => {
+        const exp = Number(o.amount ?? o.expected ?? 0);
+        if (o.paid || o.isPaid) paidObligations += Number(o.paidAmount || exp);
+        else unpaidObligations += exp;
       });
 
-      // 1. Cash in Hand = Opening + Advances + Bonuses - Daily Expenses - Paid Obligations
       const cashInHand = openingCash + advances + bonuses - dailyExpenses - paidObligations;
-
-      // 2. Safe Borrow Limit = Net Salary - Advances - Unpaid Obligations
       const safeBorrowLimit = netSalary - advances - unpaidObligations;
 
       document.getElementById('cashInHand').textContent = fmt(cashInHand);
@@ -1257,82 +795,84 @@
       document.getElementById('totalExpenses').textContent = fmt(dailyExpenses + paidObligations);
       document.getElementById('unpaidObligationsNote').textContent = `متبقي التزامات: ${fmt(unpaidObligations)}`;
 
-      // Salary Inputs
-      if (document.activeElement.id !== 'baseSalaryInput') {
-        document.getElementById('baseSalaryInput').value = baseSalary || '';
-      }
-      if (document.activeElement.id !== 'openingCashInput') {
-        document.getElementById('openingCashInput').value = openingCash || '';
-      }
+      if (document.activeElement.id !== 'baseSalaryInput') document.getElementById('baseSalaryInput').value = baseSalary || '';
+      if (document.activeElement.id !== 'openingCashInput') document.getElementById('openingCashInput').value = openingCash || '';
       document.getElementById('absenceDaysDisplay').textContent = `${absenceDays} يوم`;
       document.getElementById('absenceDeductionText').textContent = fmt(absenceDeduction);
       document.getElementById('netSalaryText').textContent = fmt(netSalary);
       document.getElementById('totalAdvancesBadge').textContent = `إجمالي السلف: ${fmt(advances)}`;
 
-      // Render Advances List
-      const advList = document.getElementById('advancesList');
-      const advItems = (m.transactions || []).filter(t => t.type === 'advance');
-      advList.innerHTML = advItems.length ? advItems.map(t => `
+      // Combine borrowings + advance transactions for Salary tab
+      const allAdvances = [
+        ...m.borrowings.map(b => ({ ...b, _src: 'borrowings' })),
+        ...m.transactions.filter(t => t.type === 'advance' || t.type === 'borrowing').map(t => ({ ...t, _src: 'transactions' }))
+      ];
+
+      document.getElementById('advancesList').innerHTML = allAdvances.length ? allAdvances.map(t => `
         <div class="list-card">
           <div class="list-info">
-            <div class="list-title">${t.title}</div>
-            <div class="list-meta">${t.date}</div>
+            <div class="list-title">${t.title || t.description || t.name || 'سلفة'}</div>
+            <div class="list-meta">${t.date || ''}</div>
           </div>
           <div class="list-amount amt-income">+${fmt(t.amount)}</div>
           <div class="mini-actions">
-            <button class="mini-btn" onclick="openEditTx(${t.id})">✏️</button>
-            <button class="mini-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+            <button class="mini-btn" onclick="openEditTx('${t.id}', '${t._src}')">✏️</button>
+            <button class="mini-btn" onclick="deleteItem('${t.id}', '${t._src}')">🗑️</button>
           </div>
         </div>
       `).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:12px;">لا توجد سلف مسجلة هذا الشهر</div>';
 
-      // Render Obligations List
-      const obList = document.getElementById('obligationsList');
-      obList.innerHTML = (m.obligations || []).length ? m.obligations.map(o => `
-        <div class="list-card">
-          <div class="list-info">
-            <div class="list-title">${o.title}</div>
-            <div class="list-meta">
-              <span class="badge ${o.paid ? 'badge-paid' : 'badge-unpaid'}">${o.paid ? 'مسدد: ' + fmt(o.paidAmount) : 'غير مسدد'}</span>
+      // Obligations list
+      document.getElementById('obligationsList').innerHTML = m.fixedCommitments.length ? m.fixedCommitments.map(o => {
+        const isPaid = Boolean(o.paid || o.isPaid);
+        const exp = Number(o.amount ?? o.expected ?? 0);
+        return `
+          <div class="list-card">
+            <div class="list-info">
+              <div class="list-title">${o.title || o.name || 'التزام'}</div>
+              <div class="list-meta">
+                <span class="badge ${isPaid ? 'badge-paid' : 'badge-unpaid'}">${isPaid ? 'مسدد: ' + fmt(o.paidAmount || exp) : 'غير مسدد'}</span>
+              </div>
+            </div>
+            <div class="list-amount">${fmt(exp)}</div>
+            <div class="mini-actions">
+              <button class="mini-btn" onclick="toggleObligationPaid('${o.id}')">${isPaid ? 'تراجع' : 'سداد ✓'}</button>
+              <button class="mini-btn" onclick="deleteObligation('${o.id}')">🗑️</button>
             </div>
           </div>
-          <div class="list-amount">${fmt(o.expected)}</div>
-          <div class="mini-actions">
-            <button class="mini-btn" onclick="toggleObligationPaid(${o.id})">${o.paid ? 'تراجع' : 'سداد ✓'}</button>
-            <button class="mini-btn" onclick="deleteObligation(${o.id})">🗑️</button>
-          </div>
-        </div>
-      `).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:12px;">أضف التزاماتك الثابتة مثل الإيجار والكهرباء</div>';
+        `;
+      }).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:12px;">لا توجد التزامات ثابتة</div>';
 
-      // Render Transactions Log
+      // Combined History Log
       const filterDate = document.getElementById('filterDateInput').value;
-      const filteredTx = (m.transactions || []).filter(t => {
-        if (typeFilter !== 'all' && t.type !== typeFilter) return false;
+      const unifiedLog = [
+        ...m.transactions.map(t => ({ ...t, _src: 'transactions', _normType: (t.type === 'advance' || t.type === 'borrowing') ? 'advance' : ((t.type === 'bonus' || t.type === 'income') ? 'bonus' : 'expense') })),
+        ...m.borrowings.map(b => ({ ...b, _src: 'borrowings', _normType: 'advance' }))
+      ].filter(t => {
+        if (typeFilter !== 'all' && t._normType !== typeFilter) return false;
         if (filterDate && t.date !== filterDate) return false;
         return true;
       });
 
-      const txList = document.getElementById('transactionsList');
-      txList.innerHTML = filteredTx.length ? filteredTx.map(t => {
-        const isPos = t.type === 'advance' || t.type === 'bonus';
-        const tag = t.type === 'advance' ? 'سلفة' : (t.type === 'bonus' ? 'بونص' : 'مصروف');
+      document.getElementById('transactionsList').innerHTML = unifiedLog.length ? unifiedLog.map(t => {
+        const isPos = t._normType === 'advance' || t._normType === 'bonus';
+        const tag = t._normType === 'advance' ? 'سلفة' : (t._normType === 'bonus' ? 'بونص' : 'مصروف');
         return `
           <div class="list-card">
             <div class="list-info">
-              <div class="list-title">${t.title}</div>
-              <div class="list-meta">${t.date} • ${tag}</div>
+              <div class="list-title">${t.title || t.description || t.name || tag}</div>
+              <div class="list-meta">${t.date || ''} • ${tag}</div>
             </div>
             <div class="list-amount ${isPos ? 'amt-income' : 'amt-expense'}">${isPos ? '+' : '-'}${fmt(t.amount)}</div>
             <div class="mini-actions">
-              <button class="mini-btn" onclick="openEditTx(${t.id})">✏️</button>
-              <button class="mini-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+              <button class="mini-btn" onclick="openEditTx('${t.id}', '${t._src}')">✏️</button>
+              <button class="mini-btn" onclick="deleteItem('${t.id}', '${t._src}')">🗑️</button>
             </div>
           </div>
         `;
       }).join('') : '<div style="text-align:center; color:var(--text-muted); font-size:13px; padding:16px;">لا توجد حركات مطابقة</div>';
     }
 
-    // Settings Helpers
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
       localStorage.setItem('mahfazty_dark', document.body.classList.contains('dark') ? '1' : '0');
@@ -1346,13 +886,6 @@
       a.click();
     }
 
-    function copyGoogleSitesCode() {
-      navigator.clipboard.writeText(document.documentElement.outerHTML).then(() => {
-        showToast('تم نسخ الكود الكامل 📋');
-      });
-    }
-
-    // Init
     if (localStorage.getItem('mahfazty_dark') === '1') document.body.classList.add('dark');
     document.getElementById('inlineDate').value = new Date().toISOString().slice(0, 10);
     renderAll();
