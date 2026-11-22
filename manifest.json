@@ -1,15 +1,18 @@
 {
-  "id": "/mahfazty/mahfaza-messi-v5",
-  "name": "mahfaza messi",
-  "short_name": "mahfaza messi",
-  "start_url": "./?key=Messous1&v=5",
+  "id": "/mahfazty/mahfazet-messi",
+  "name": "mahfazet messi",
+  "short_name": "mahfazet messi",
+  "description": "إدارة الراتب والسلف والالتزامات والمصاريف مع مزامنة Firebase",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "wallet.png?v=5",
+      "src": "wallet.png?v=8",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
