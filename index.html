@@ -449,6 +449,89 @@ html.dark #appMain #homeFlowStats span,html.dark #appMain #homeOpeningCard span{
 html.dark #appMain #homeFlowStats #cashFlowNetDisplay{color:#D9CFF0!important}
 html.dark #appMain #homeRecentSection .recent-title,html.dark #appMain .home-preview-head,html.dark #appMain .more-list-text strong{color:#F5F0FF!important}
 html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!important}
+<style>
+/* COMFORT UI v1 — accessible, spacious light-first money management */
+:root{--c-bg:#F7F8FA;--c-surface:#FFFFFF;--c-text:#263243;--c-muted:#64748B;--c-line:#E6EAF0;--c-accent:#7764A6;--c-accent-pale:#F1EDFA;--c-green:#18795D;--c-red:#C34E5A;--c-shadow:0 2px 12px rgba(40,50,70,.035);color-scheme:light}
+html,body,body.bg-slate-50{background:var(--c-bg)!important;color:var(--c-text)!important}
+body,button,input,select,textarea{font-family:'Cairo',sans-serif!important}
+body{font-weight:400!important;line-height:1.7!important}
+header.sticky{background:rgba(255,255,255,.97)!important;border-color:var(--c-line)!important;box-shadow:none!important}
+header h1{color:var(--c-text)!important;font-weight:700!important}
+header p{color:var(--c-muted)!important}
+header [class*="bg-gradient"]{background:var(--c-accent-pale)!important;color:var(--c-accent)!important;box-shadow:none!important}
+#appMain section.bg-white,#appMain section .bg-white{border-color:var(--c-line)!important;box-shadow:var(--c-shadow)!important}
+#appMain label,#appMain p{line-height:1.8}
+#appMain input,#appMain select,#appMain textarea{background:#fff!important;color:var(--c-text)!important;border:1px solid #DAE1E9!important;min-height:44px;box-shadow:none!important}
+#appMain input:focus-visible,#appMain select:focus-visible,#appMain button:focus-visible{outline:2px solid #A694CC!important;outline-offset:2px}
+#appMain .text-indigo-600,#appMain .text-indigo-700,#appMain .text-teal-700{color:var(--c-accent)!important}
+#appMain .bg-indigo-600,#appMain .bg-teal-700,#appMain button[type=submit].bg-teal-700{background:var(--c-accent)!important;color:#fff!important}
+#appMain .font-black{font-weight:700!important}
+#appMain .font-extrabold{font-weight:650!important}
+#appMain [class*="shadow-lg"],#appMain [class*="shadow-md"]{box-shadow:var(--c-shadow)!important}
+.ledger-tab{background:#fff!important;border-color:var(--c-line)!important;color:#606A7A!important;font-weight:600!important}
+.ledger-tab.active{background:var(--c-accent-pale)!important;color:var(--c-accent)!important;border-color:#D9CDEA!important}
+.budget-salary-panel{padding:17px 16px;border:1px solid #E8E3F1;background:#FAF9FD;border-radius:14px;display:grid;gap:13px}
+.budget-salary-title{font-size:14px;font-weight:700;color:#3F4053}
+.budget-salary-grid{display:grid;gap:9px}
+.budget-salary-grid>div{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12px;border-bottom:1px solid #EAE7F1;padding-bottom:9px}
+.budget-salary-grid>div span{color:#667085}
+.budget-salary-grid strong{font-weight:700;color:#34384A;white-space:nowrap}
+.budget-salary-outcome{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:var(--c-green);font-weight:700}
+.budget-salary-outcome strong{font-size:20px;font-weight:700;direction:ltr;white-space:nowrap}
+.budget-over .budget-salary-outcome{color:var(--c-red)}
+.budget-salary-note{font-size:11px;color:#777B88;line-height:1.7}
+#appMain #budgetCategoriesList .budget-progress{position:relative;height:9px!important;border-radius:999px!important;background:#E4E8EE!important;overflow:hidden!important}
+#appMain #budgetCategoriesList .budget-progress>span{height:100%!important;display:block!important;border-radius:999px!important;transition:width .28s ease!important}
+#appMain #budgetCategoriesList>div{padding:18px 2px!important}
+#appMain #budgetCategoriesList .text-xs{line-height:1.8!important}
+#appMain #monthlyBudgetSection{font-size:14px}
+#appMain #monthlyBudgetSection .grid.grid-cols-3 strong{overflow-wrap:anywhere;font-size:clamp(12px,3.7vw,17px)!important}
+#appMain #monthlyBudgetSection .grid.grid-cols-3 .budget-small{font-weight:500!important;color:#6B7280!important}
+#appMain #monthlyBudgetSection h2{font-weight:700!important}
+#appMain #monthlyBudgetSection button:not([type=submit]){font-weight:600!important}
+#appMain .mobile-more-list button{min-height:64px!important}
+#appMain .mobile-more-subtitle{display:none!important}
+#appMain .more-list-text small{font-weight:400!important;color:#7D8591!important}
+#appMain .mobile-more-title{font-weight:700!important}
+@media(max-width:767px){
+ body,body.bg-slate-50{background:var(--c-bg)!important}
+ #appMain{padding:16px 18px 18px!important;gap:22px!important}
+ #appMain [data-mobile-screen="home"]{gap:10px!important}
+ #appMain #homeHeroCard{background:#7764A6!important;border-radius:15px!important;padding:21px!important;min-height:138px!important}
+ #appMain #homeHeroCard #cashInHandDisplay{font-size:clamp(27px,8vw,34px)!important;font-weight:700!important}
+ #appMain #homeFlowStats{padding:12px 0 16px!important;gap:4px!important}
+ #appMain #homeFlowStats .home-flow-stat,#appMain #homeFlowStats .home-flow-net{padding:8px!important}
+ #appMain #homeFlowStats span{font-size:11px!important;color:var(--c-muted)!important}
+ #appMain #homeFlowStats strong{font-size:clamp(13px,4vw,17px)!important;font-weight:700!important}
+ #appMain #actualConsumptionCard,#appMain #safeBorrowingCard{padding-top:16px!important;padding-bottom:16px!important}
+ #appMain #actualConsumptionCard #actualConsumptionDisplay{color:var(--c-red)!important}
+ #appMain #safeBorrowingCard #safeBorrowingAmountDisplay{color:var(--c-green)!important}
+ #appMain #homeOpeningCard{padding-top:18px!important}
+ #appMain #homeRecentSection,#appMain #homeBudgetPreview{padding:12px 0!important}
+ #appMain #homeRecentSection h2{font-weight:700!important}
+ #appMain .recent-item{padding:17px 0!important}
+ #appMain [data-mobile-screen="activity"] #transactionsListContainer>div,#appMain #globalDebtList>div,#appMain #fixedCommitmentsGrid>div,#appMain #borrowingListGrid>div{padding:18px 0!important;border-color:var(--c-line)!important;line-height:1.7!important}
+ #appMain section[data-mobile-screen="budget"],#appMain section[data-mobile-screen="salary"],#appMain section[data-mobile-screen="obligations"],#appMain section[data-mobile-screen="activity"],#appMain section[data-mobile-screen="analytics"]{padding:10px 0!important}
+ #appMain #monthlyBudgetSection .grid.grid-cols-3{gap:7px!important}
+ #appMain #monthlyBudgetSection .grid.grid-cols-3>div{padding:12px 6px!important}
+ #appMain #budgetCategoriesList>div{padding:20px 2px!important;border-color:var(--c-line)!important}
+ #appMain #budgetCategoriesList .flex.justify-between{flex-wrap:wrap;row-gap:8px}
+ #appMain #budgetCategoriesList .budget-progress{margin:10px 0 8px!important}
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{background:#fff!important;border-top:1px solid var(--c-line)!important;padding:10px 16px calc(10px + env(safe-area-inset-bottom))!important;min-height:74px!important;gap:14px!important;box-shadow:0 -2px 18px rgba(46,51,68,.035)!important}
+ .mobile-nav-item,.dark .mobile-nav-item{color:#788293!important;font-weight:500!important;font-size:11px!important;gap:5px!important}
+ .mobile-nav-item.active,.dark .mobile-nav-item.active{color:#67528D!important;background:transparent!important;font-weight:700!important}
+ .mobile-nav-item svg{stroke-width:1.8!important;width:21px!important;height:21px!important}
+ .mobile-fab{background:#7764A6!important;border-radius:16px!important;box-shadow:0 5px 12px rgba(112,90,160,.17)!important}
+}
+/* Reduced-motion and modest dark mode for anyone who explicitly re-enables it */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+html.dark body{background:#25252F!important;color:#F0EDF5!important}
+html.dark header.sticky{background:#2D2D39!important;border-color:#474653!important}
+html.dark #appMain input,html.dark #appMain select{background:#363644!important;color:#F3F1F7!important;border-color:#53515F!important}
+html.dark .budget-salary-panel{background:#302F3C;border-color:#4B475A}
+html.dark .budget-salary-grid strong,html.dark .budget-salary-title{color:#F1EEF6}
+html.dark .budget-salary-grid>div{border-color:#514D5E}
+html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!important}
 </style></head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 pb-14">
 <!-- إشعار عائم (Toast Container) -->
@@ -1017,6 +1100,16 @@ html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!i
 <div class="flex items-center justify-between gap-2">
 <h2 class="font-extrabold text-base flex items-center gap-2"><i class="w-5 h-5 text-teal-600" data-lucide="wallet-minimal"></i> ميزانيتي الشهرية</h2>
 <span class="text-xs font-bold text-slate-500" id="budgetMonthLabel"></span>
+</div>
+<div class="budget-salary-panel" id="budgetSalaryPanel" aria-live="polite">
+  <div class="budget-salary-title">خطة الشهر مقابل الراتب</div>
+  <div class="budget-salary-grid">
+    <div><span>صافي الراتب بعد الغياب والسلف</span><strong id="budgetSalaryNet">0 ج.م</strong></div>
+    <div><span>الالتزامات الثابتة</span><strong id="budgetSalaryFixed">0 ج.م</strong></div>
+    <div><span>المخصص لباقي المصاريف</span><strong id="budgetSalaryPlanned">0 ج.م</strong></div>
+  </div>
+  <div class="budget-salary-outcome"><span id="budgetSalaryStatus">الميزانية في الحدود</span><strong id="budgetSalaryRemaining">0 ج.م</strong></div>
+  <p class="budget-salary-note" id="budgetSalaryNote">التخطيط مبني على صافي الراتب، مش الكاش الموجود في جيبك.</p>
 </div>
 <div class="grid grid-cols-3 gap-2">
 <div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">المخصص</div><strong class="block text-sm font-black mt-1" id="budgetAllocated">0 ج.م</strong></div>
@@ -1832,23 +1925,20 @@ html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!i
         // ==========================================
         // 4. المظهر (ليلي / نهاري)
         // ==========================================
+        // Visual theme is a device preference, not a synchronized financial field.
+        // The redesigned app starts in light mode on each device unless the user opts into dark.
         function applyTheme() {
             const htmlEl = document.documentElement;
             const iconEl = document.getElementById('themeIcon');
-            if (rootState.theme === 'dark') {
-                htmlEl.classList.add('dark');
-                if (iconEl) iconEl.setAttribute('data-lucide', 'sun');
-            } else {
-                htmlEl.classList.remove('dark');
-                if (iconEl) iconEl.setAttribute('data-lucide', 'moon');
-            }
-            lucide.createIcons();
+            const dark = localStorage.getItem('mahfazet_comfort_local_theme') === 'dark';
+            htmlEl.classList.toggle('dark', dark);
+            if (iconEl) iconEl.setAttribute('data-lucide', dark ? 'sun' : 'moon');
+            if (window.lucide) lucide.createIcons();
         }
-
         function toggleTheme() {
-            rootState.theme = rootState.theme === 'dark' ? 'light' : 'dark';
+            const dark = localStorage.getItem('mahfazet_comfort_local_theme') === 'dark';
+            localStorage.setItem('mahfazet_comfort_local_theme',dark?'light':'dark');
             applyTheme();
-            saveState();
             updateDashboard();
         }
 
@@ -3411,6 +3501,11 @@ html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!i
         window.addEventListener('DOMContentLoaded', () => {
             loadCloudConfig();
             loadState();
+            // First-run appearance preference for the comfort redesign; no financial changes.
+            if (!localStorage.getItem('mahfazet_comfort_theme_seen_v1')) {
+                rootState.theme = 'light';
+                localStorage.setItem('mahfazet_comfort_theme_seen_v1','1');
+            }
             applyTheme();
             renderMonthSelector();
             syncInputsFromActiveMonth();
@@ -3448,6 +3543,37 @@ html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!i
             const spentConfigured=configured.reduce((s,k)=>s+actual[k],0);
             const spentAll=BUDGET_CATEGORIES.reduce((s,k)=>s+actual[k],0);
             const diff=allocated-spentConfigured;
+            // Financial planning: salary minus deductions and salary advances, fixed commitments,
+            // plus only the portion of category budgets not already covered by fixed commitments.
+            // Prevents double counting e.g. bills/installments entered as both fixed and budgeted.
+            const salary=Math.max(0,Number(m.monthlySalary)||0);
+            const absence=Math.min(30,Math.max(0,Number(m.deductionDays)||0));
+            const advances=(m.borrowings||[]).reduce((sum,b)=>sum+Math.max(0,Number(b.amount)||0),0);
+            const salaryNet=salary-(salary/30)*absence-advances;
+            const fixedByCategory={};
+            const fixedTotal=(m.fixedCommitments||[]).reduce((sum,fc)=>{
+                const amount=Math.max(0,Number(fc.paid ? fc.actualPaidAmount : fc.expectedAmount)||0);
+                const category=BUDGET_CATEGORIES.includes(fc.category)?fc.category:'other';
+                fixedByCategory[category]=(fixedByCategory[category]||0)+amount;
+                return sum+amount;
+            },0);
+            const coveredFixed=configured.reduce((sum,k)=>sum+Math.min(Number(limits[k])||0,fixedByCategory[k]||0),0);
+            const plannedAdditional=Math.max(0,allocated-coveredFixed);
+            const remainingSalary=salaryNet-fixedTotal-plannedAdditional;
+            const budgetStatusEl=document.getElementById('budgetSalaryStatus');
+            if(budgetStatusEl){
+                document.getElementById('budgetSalaryNet').textContent=formatCurrency(salaryNet)+' ج.م';
+                document.getElementById('budgetSalaryFixed').textContent=formatCurrency(fixedTotal)+' ج.م';
+                document.getElementById('budgetSalaryPlanned').textContent=formatCurrency(plannedAdditional)+' ج.م';
+                const remainingEl=document.getElementById('budgetSalaryRemaining');
+                remainingEl.textContent=(remainingSalary<0?'−':'+')+formatCurrency(Math.abs(remainingSalary))+' ج.م';
+                const panel=document.getElementById('budgetSalaryPanel');
+                panel.classList.toggle('budget-over',remainingSalary<0);
+                budgetStatusEl.textContent=remainingSalary<0?'الميزانية أعلى من الراتب':'الميزانية في حدود الراتب';
+                document.getElementById('budgetSalaryNote').textContent=coveredFixed>0
+                  ? 'تم استبعاد '+formatCurrency(coveredFixed)+' ج.م من الميزانيات لأنها محسوبة بالفعل ضمن الالتزامات الثابتة.'
+                  : 'الأرقام للتخطيط من الراتب فقط، ومش بتمثل الكاش الحالي.';
+            }
             const selector=document.getElementById('budgetCategory');
             if(!selector.options.length)selector.innerHTML=BUDGET_CATEGORIES.map(k=>`<option value="${k}">${escapeHTML(CATEGORIES[k].label)}</option>`).join('');
             document.getElementById('budgetMonthLabel').textContent=formatMonthLabel(rootState.activeMonth);
@@ -3478,7 +3604,7 @@ html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!i
                 return `<div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/50 space-y-2">
                     <div class="flex justify-between gap-2 items-start"><div class="font-extrabold text-sm">${escapeHTML(CATEGORIES[k].label)}</div><div class="flex items-center gap-3"><button type="button" onclick="editBudgetCategory('${k}')" class="text-xs font-bold text-teal-700 dark:text-teal-300">${hasLimit?'تعديل':'تحديد ميزانية'}</button>${hasLimit?`<button type="button" onclick="removeBudgetLimit('${k}')" class="text-xs font-bold text-rose-600">حذف</button>`:''}</div></div>
                     <div class="budget-small flex justify-between gap-1"><span>صرف: ${formatCurrency(spent)} ج.م</span><span>${hasLimit?'المخصص: '+formatCurrency(limit)+' ج.م':'بدون ميزانية محددة'}</span></div>
-                    ${hasLimit?`<div class="budget-progress"><span style="width:${Math.min(100,pct)}%;background:${barColor}"></span></div>
+                    ${hasLimit?`<div class="budget-progress" role="progressbar" aria-label="نسبة الصرف من ميزانية ${escapeHTML(CATEGORIES[k].label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100,pct)}"><span style="width:${Math.min(100,pct)}%;background:${barColor}"></span></div>
                     <div class="text-xs font-extrabold ${over?'text-rose-600':'text-teal-700 dark:text-teal-300'}">${over?'زيادة '+formatCurrency(-diff):'متبقي '+formatCurrency(diff)} ج.م ${limit>0?'• '+pct+'% من المخصص':''}</div>`:''}
                 </div>`;
             }).join(''):'<p class="text-sm text-slate-400 text-center py-6">حدد ميزانية لأول بند علشان تتابع صرفك</p>';
