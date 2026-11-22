@@ -1,16 +1,17 @@
 {
+  "id": "/mahfazty/mahfaza-messi-v5",
   "name": "mahfaza messi",
   "short_name": "mahfaza messi",
-  "start_url": "./?key=Messous1&icon=v2",
+  "start_url": "./?key=Messous1&v=5",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "wallet.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "wallet.png?v=5",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
