@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="theme-color" content="#13243a" />
+    <meta name="theme-color" content="#f6f8f7" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="mahfazet messi" />
@@ -162,6 +162,87 @@
         .ledger-tab.active{background:#12364a;border-color:#12364a;color:#76edda}
         .dark .ledger-tab{background:#182e43;border-color:#35516b;color:#d5e1ec}
         .dark .ledger-tab.active{background:#197f82;color:white}
+
+/* mahfazet messi — Mint Minimal × Monochrome Premium (visual-only layer) */
+:root{--mm-bg:#f6f8f7;--mm-card:#ffffff;--mm-ink:#222b29;--mm-muted:#788580;--mm-border:#e7eeea;--mm-mint:#128d75;--mm-soft:#e9f7f2;--mm-charcoal:#26312e;--mm-shadow:0 5px 22px rgba(34,55,47,.045);color-scheme:light}
+html{background:var(--mm-bg)}
+body,body.bg-slate-50{background:var(--mm-bg)!important;color:var(--mm-ink)!important}
+header.sticky{background:rgba(255,255,255,.97)!important;border-bottom:1px solid var(--mm-border)!important;box-shadow:none!important;backdrop-filter:blur(20px)}
+header h1{color:var(--mm-ink)!important;font-weight:900!important;letter-spacing:-.4px}
+header p{color:var(--mm-muted)!important}
+header .bg-gradient-to-br{background:var(--mm-charcoal)!important;border-radius:14px!important;box-shadow:none!important}
+#appMain{gap:18px!important}
+#appMain section.bg-white,#appMain section .bg-white,#appMain [data-mobile-screen="home"]>div:not(:nth-child(2)),#appMain .mobile-mixed>div.bg-white{background:var(--mm-card)!important;border-color:var(--mm-border)!important;box-shadow:var(--mm-shadow)!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(2){background:var(--mm-charcoal)!important;box-shadow:0 14px 28px rgba(27,40,35,.13)!important;border:none!important;color:#fff!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(2) #cashInHandDisplay{font-size:clamp(27px,7vw,38px)!important;letter-spacing:-.9px}
+#appMain [data-mobile-screen="home"]>div:nth-child(3),#appMain [data-mobile-screen="home"]>div:nth-child(4){background:var(--mm-card)!important;border:1px solid var(--mm-border)!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(3) #actualConsumptionDisplay{color:#d05255!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(4) #safeBorrowingAmountDisplay{color:var(--mm-mint)!important}
+#appMain #actualConsumptionCard{background:#fff!important}
+#appMain #safeBorrowingCard{background:#fff!important;border:1px solid var(--mm-border)!important}
+#appMain #safeBorrowingIconBox{background:var(--mm-soft)!important;color:var(--mm-mint)!important}
+#appMain #safeBorrowingTitle{color:#63746d!important}
+#appMain #safeBorrowingMessage{color:#7c8883!important}
+#appMain .bg-indigo-600,header .bg-indigo-600{background:var(--mm-mint)!important}
+#appMain .hover\\:bg-indigo-700:hover{background:#0a725e!important}
+#appMain .text-indigo-600,#appMain .text-indigo-700,#appMain .text-indigo-500{color:var(--mm-mint)!important}
+#appMain input:focus,#appMain select:focus,#appMain textarea:focus{--tw-ring-color:rgba(18,141,117,.22)!important}
+#appMain button,#appMain input,#appMain select{transition:border-color .15s,background .15s,color .15s}
+#appMain [class*="rounded-2xl"]{border-radius:19px}
+#appMain [class*="shadow-lg"]{box-shadow:var(--mm-shadow)!important}
+#appMain .mobile-quick-grid button{background:#fff!important;border:1px solid var(--mm-border)!important;color:var(--mm-ink)!important;border-radius:15px!important;box-shadow:none!important;font-weight:700!important}
+#appMain .mobile-quick-grid button svg{color:var(--mm-mint)!important}
+.mobile-home-heading{color:var(--mm-ink)!important}
+/* Navigation: no pills, no tinted selected backgrounds */
+@media(max-width:767px){
+ body,body.bg-slate-50{background:var(--mm-bg)!important;padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+ #appMain{padding:15px 14px 24px!important;gap:14px!important}
+ #appMain>section.bg-white,#appMain .mobile-mixed>div.bg-white,#appMain [data-mobile-screen="activity"].bg-white{padding:17px!important;border-radius:20px!important}
+ #appMain [data-mobile-screen="home"]{gap:10px!important}
+ #appMain [data-mobile-screen="home"]>div{padding:18px!important;border-radius:20px!important;min-height:unset!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2){padding:22px!important}
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{background:rgba(255,255,255,.985)!important;border-top:1px solid var(--mm-border)!important;box-shadow:0 -5px 22px rgba(24,37,32,.045)!important;min-height:71px!important;padding:9px 4px calc(7px + env(safe-area-inset-bottom))!important;gap:1px!important;backdrop-filter:blur(20px)}
+ .mobile-nav-item,.dark .mobile-nav-item{background:transparent!important;color:#97a19c!important;border-radius:0!important;gap:5px!important;font-size:10px!important;font-weight:700!important;min-width:0!important;padding:4px 1px!important;transition:color .15s!important}
+ .mobile-nav-item svg{width:20px!important;height:20px!important;stroke-width:1.8!important;transition:stroke-width .15s,transform .15s}
+ .mobile-nav-item.active,.dark .mobile-nav-item.active{background:transparent!important;color:var(--mm-mint)!important}
+ .mobile-nav-item.active svg{stroke-width:2.55!important;transform:translateY(-1px)}
+ .mobile-nav-item.active::before{content:none!important}
+ .mobile-nav-item:focus-visible{outline:2px solid var(--mm-mint);outline-offset:-3px;border-radius:10px!important}
+ .mobile-fab{background:var(--mm-mint)!important;left:17px!important;bottom:calc(83px + env(safe-area-inset-bottom))!important;border-radius:17px!important;box-shadow:0 8px 17px rgba(18,141,117,.22)!important;width:51px!important;height:51px!important}
+ #toastContainer{bottom:calc(88px + env(safe-area-inset-bottom))!important}
+}
+/* Dark mode is charcoal/graphite, not navy */
+html.dark{background:#151b19!important}
+html.dark body{--mm-bg:#151b19;--mm-card:#222a26;--mm-ink:#eff5f1;--mm-muted:#a5afa9;--mm-border:#36433b;--mm-soft:#243b32;--mm-charcoal:#26312e;--mm-shadow:0 5px 22px rgba(0,0,0,.12);background:var(--mm-bg)!important;color:var(--mm-ink)!important;color-scheme:dark}
+html.dark header.sticky{background:rgba(29,37,32,.97)!important;border-color:#344037!important}
+html.dark header h1{color:#f1f5f3!important}
+html.dark #appMain [data-mobile-screen="home"]>div:nth-child(3),html.dark #appMain [data-mobile-screen="home"]>div:nth-child(4),html.dark #appMain #actualConsumptionCard,html.dark #appMain #safeBorrowingCard{background:var(--mm-card)!important}
+html.dark #appMain .mobile-quick-grid button{background:var(--mm-card)!important;color:var(--mm-ink)!important}
+html.dark .mobile-bottom-nav{background:rgba(29,37,32,.98)!important;border-color:#344037!important}
+html.dark .mobile-nav-item{color:#9aa79d!important}
+html.dark .mobile-nav-item.active{color:#6bdfb7!important}
+html.dark #appMain #safeBorrowingAmountDisplay{color:#6bdfb7!important}
+
+    
+/* Four airy bottom destinations — keep every icon readable on narrow phones */
+.mobile-more-panel{display:none}
+@media(max-width:767px){
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{justify-content:space-evenly!important;gap:12px!important;padding-inline:18px!important;min-height:76px!important}
+ .mobile-nav-item,.dark .mobile-nav-item{flex:1 1 0!important;max-width:110px!important;gap:6px!important;padding:6px 6px!important;font-size:11px!important;white-space:nowrap!important}
+ .mobile-nav-item svg{height:22px!important;width:22px!important;flex-shrink:0!important}
+ #appMain section.mobile-more-panel.mobile-screen-active{display:block!important}
+ .mobile-more-panel{padding:8px 0 24px!important}
+ .mobile-more-title{font:900 23px Cairo,sans-serif;color:var(--mm-ink);margin-bottom:4px}
+ .mobile-more-subtitle{font:600 12px Cairo,sans-serif;color:var(--mm-muted);margin-bottom:20px}
+ .mobile-more-list{display:flex;flex-direction:column;gap:12px}
+ .mobile-more-list button{width:100%;border:1px solid var(--mm-border);border-radius:20px;background:var(--mm-card);color:var(--mm-ink);display:flex;align-items:center;gap:14px;text-align:right;padding:17px 15px;box-shadow:var(--mm-shadow);cursor:pointer}
+ .more-list-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--mm-soft);color:var(--mm-mint);border-radius:15px}
+ .more-list-icon svg{height:22px;width:22px;stroke-width:1.9}
+ .more-list-text{display:flex;flex-direction:column;flex:1;gap:3px;min-width:0}
+ .more-list-text strong{font-size:14px;font-weight:800}
+ .more-list-text small{font-size:11px;font-weight:500;color:var(--mm-muted)}
+ .more-arrow{height:18px;width:18px;color:var(--mm-muted)}
+}
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 pb-14">
@@ -281,9 +362,11 @@
                     <div id="cashInHandDisplay" class="text-2xl sm:text-3xl font-black tracking-tight">0 ج.م</div>
                     <p id="cashInHandStatusHint" class="text-[11px] text-indigo-200 mt-1">الراتب مستحق آخر الشهر (لم يُصرف بعد)</p>
                 </div>
-                <div class="text-[11px] text-indigo-200 flex items-center justify-between pt-2 border-t border-white/15">
-                    <span>سلف استلمتها: <strong id="borrowedCashSubDisplay" class="text-white">+0</strong></span>
-                    <span>ليك بره: <strong id="lentOutSubDisplay" class="text-sky-300">-0</strong></span>
+                <div class="grid grid-cols-2 gap-3 pt-3 border-t border-white/15 text-xs">
+                    <div><span class="block text-slate-300">كاش داخل الشهر</span><strong id="cashFlowInDisplay" class="text-emerald-300 font-black text-base">+0 ج.م</strong></div>
+                    <div><span class="block text-slate-300">كاش خارج الشهر</span><strong id="cashFlowOutDisplay" class="text-rose-300 font-black text-base">-0 ج.م</strong></div>
+                    <div class="col-span-2 flex justify-between items-center border-t border-white/10 pt-2"><span class="text-slate-200">صافي حركة الشهر</span><strong id="cashFlowNetDisplay" class="text-white font-extrabold">0 ج.م</strong></div>
+                    <div class="col-span-2 flex justify-between items-center text-[11px] text-slate-300"><span>بونص ودخل: <strong id="cashBonusDisplay" class="text-emerald-300">+0</strong></span><span>سلف: <strong id="borrowedCashSubDisplay" class="text-white">+0</strong></span><span>ليك بره: <strong id="lentOutSubDisplay" class="text-sky-300">-0</strong></span></div>
                 </div>
             </div>
 
@@ -813,25 +896,27 @@
                     <div><label for="budgetLimit">ميزانية الشهر (ج.م)</label><input id="budgetLimit" required min="0" step="0.01" type="number" placeholder="مثلاً 2000" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
                     <button type="submit" class="col-span-2 bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-2.5 text-sm font-bold">حفظ ميزانية البند</button>
                 </form>
-                <form onsubmit="addCustomCategory(event)" class="flex gap-2 items-end">
-                    <div class="flex-1"><label for="newCategoryName">تصنيف جديد</label><input id="newCategoryName" type="text" maxlength="40" placeholder="مثلاً: قهوة أو اشتراكات" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
-                    <button type="submit" class="shrink-0 rounded-xl bg-slate-800 dark:bg-teal-700 text-white px-4 h-[42px] text-sm font-bold">+ إضافة</button>
-                </form>
-                <div id="customCategoriesList" class="flex gap-2 flex-wrap"></div>
                 <button type="button" onclick="copyPreviousBudget()" class="text-xs font-extrabold text-teal-700 dark:text-teal-400 underline underline-offset-4">نسخ ميزانية آخر شهر سابق</button>
             </div>
             <div id="budgetCategoriesList" class="space-y-3"></div>
             <p class="text-[11px] text-slate-500 dark:text-slate-400">المقارنة بالمصاريف اليومية والالتزامات المسددة فقط. السلف والديون مش ضمن الاستهلاك.</p>
+        </section>
+        <section data-mobile-screen="more" id="mobileMoreScreen" class="mobile-more-panel">
+            <h2 class="mobile-more-title">المزيد</h2>
+            <p class="mobile-more-subtitle">حساباتك وتقاريرك في مكان واحد</p>
+            <div class="mobile-more-list">
+                <button type="button" onclick="switchMobileScreen('salary')"><span class="more-list-icon"><i data-lucide="wallet-cards"></i></span><span class="more-list-text"><strong>الراتب والسلف</strong><small>الراتب والغياب والسحوبات</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+                <button type="button" onclick="switchMobileScreen('obligations')"><span class="more-list-icon"><i data-lucide="calendar-check-2"></i></span><span class="more-list-text"><strong>الالتزامات</strong><small>الفواتير والأقساط ومواعيد السداد</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+                <button type="button" onclick="switchMobileScreen('analytics')"><span class="more-list-icon"><i data-lucide="chart-no-axes-combined"></i></span><span class="more-list-text"><strong>التحليل</strong><small>توزيع المصاريف حسب التصنيف</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+            </div>
         </section>
     </main>
 
     <nav id="mobileBottomNav" aria-label="التنقل بين أقسام المحفظة" class="mobile-bottom-nav">
         <button type="button" data-screen-target="home" class="mobile-nav-item active" aria-current="page" onclick="switchMobileScreen('home')"><i data-lucide="house"></i><span>الرئيسية</span></button>
         <button type="button" data-screen-target="activity" class="mobile-nav-item" onclick="switchMobileScreen('activity')"><i data-lucide="arrow-left-right"></i><span>الحركات</span></button>
-        <button type="button" data-screen-target="salary" class="mobile-nav-item" onclick="switchMobileScreen('salary')"><i data-lucide="wallet-cards"></i><span>الراتب والسلف</span></button>
-        <button type="button" data-screen-target="obligations" class="mobile-nav-item" onclick="switchMobileScreen('obligations')"><i data-lucide="calendar-check-2"></i><span>التزاماتي</span></button>
-        <button type="button" data-screen-target="budget" class="mobile-nav-item" onclick="switchMobileScreen('budget')"><i data-lucide="target"></i><span>ميزانيتي</span></button>
-        <button type="button" data-screen-target="analytics" class="mobile-nav-item" onclick="switchMobileScreen('analytics')"><i data-lucide="chart-no-axes-combined"></i><span>التحليل</span></button>
+        <button type="button" data-screen-target="budget" class="mobile-nav-item" onclick="switchMobileScreen('budget')"><i data-lucide="chart-pie"></i><span>ميزانيتي</span></button>
+        <button type="button" data-screen-target="more" class="mobile-nav-item" onclick="switchMobileScreen('more')"><i data-lucide="layout-grid"></i><span>المزيد</span></button>
     </nav>
     <button type="button" id="mobileQuickFab" class="mobile-fab" aria-label="إضافة حركة جديدة" title="إضافة حركة" onclick="openQuickEntry('expense')"><i data-lucide="plus"></i></button>
 
@@ -1028,7 +1113,7 @@
                     <label for="editTxTypeSelect" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">نوع الحركة</label>
                     <select id="editTxTypeSelect" onchange="handleEditTxTypeChange()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-extrabold">
                         <option value="expense">مصروف يومي فعلي (يخصم من الكاش)</option>
-                        <option value="income">بونص / دخل إضافي (يزود الكاش فقط)</option>
+                        <option value="income">بونص / دخل إضافي (+ للكاش)</option>
                         <option value="receivable">فلوس سلفتها لحد بره (ليا عند الناس)</option>
                     <option value="payable">عليا للناس</option></select>
                 </div>
@@ -1242,7 +1327,6 @@
             bills: { label: 'فواتير وخدمات', color: '#8b5cf6', bg: 'bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400' },
             installments: { label: 'أقساط والتزامات', color: '#eab308', bg: 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400' },
             health: { label: 'صحة وعلاج', color: '#ef4444', bg: 'bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400' },
-            cigarettes: { label: 'سجاير', color: '#b45309', bg: 'bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400' },
             entertainment: { label: 'ترفيه وخروجات', color: '#14b8a6', bg: 'bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400' },
             loans: { label: 'سلف وبواقي', color: '#0ea5e9', bg: 'bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400' },
             other: { label: 'أخرى', color: '#64748b', bg: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300' }
@@ -1474,7 +1558,6 @@
                 rootState.updatedAt = 0;
             }
             normalizeMonthsStructure(rootState);
-            syncCategoryRegistry();
         }
 
         function saveState(skipCloudPush = false) {
@@ -1563,7 +1646,6 @@
                     if (remoteUpdatedAt > localUpdatedAt) {
                         const preservedActiveMonth = remoteData.months[rootState.activeMonth] ? rootState.activeMonth : remoteData.activeMonth;
                         rootState = remoteData;
-                        syncCategoryRegistry();
                         rootState.activeMonth = preservedActiveMonth;
                         normalizeMonthsStructure(rootState);
                         lastSyncedUpdatedAt = remoteUpdatedAt;
@@ -1951,8 +2033,21 @@
             item.date = newDate;
             item.note = newNote;
 
+            for (const settlement of settlements) {
+                settlement.amount = newAmount;
+                settlement.desc = (newType === 'receivable' ? 'استرداد من ' : 'سداد إلى ') + (newPersonName || newDesc);
+            }
+            // النسخ المرحّلة القديمة تمثل الدين نفسه وليست دينًا إضافيًا.
+            if (oldType === 'receivable' || oldType === 'payable') {
+                Object.values(rootState.months || {}).forEach(m => (m.transactions || []).forEach(copy => {
+                    if (copy !== tx && copy.carriedOver && String(copy.originalId || copy.id) === oldReference) {
+                        copy.type = newType; copy.amount = newAmount; copy.desc = newDesc;
+                        copy.personName = newPersonName; copy.expectedReturn = newExpectedReturn;
+                    }
+                }));
+            }
             const targetYm = newDate.slice(0, 7);
-            if (targetYm !== rootState.activeMonth) {
+            if (targetYm !== sourceYm) {
                 if (!rootState.months[targetYm]) {
                     rootState.months[targetYm] = createEmptyMonth(targetYm);
                 }
@@ -2429,15 +2524,17 @@
             if (targetYm !== rootState.activeMonth && type !== 'receivable' && type !== 'payable') {
                 showToast(`تم تسجيل الحركة في شهر ${formatMonthLabel(targetYm)}`);
             } else {
-                showToast(type === 'payable' ? 'اتسجل الدين ضمن عليا للناس' : type === 'receivable' ? 'اتسجلت السلفة ضمن ليا عند الناس' : 'تمت إضافة الحركة بنجاح');
+                showToast(type === 'payable' ? 'اتسجل الدين ضمن عليا للناس' : type === 'receivable' ? 'اتسجلت السلفة ضمن ليا عند الناس' : type === 'income' ? `دخل +${formatCurrency(amount)} ج.م اتضاف للكاش` : type === 'expense' ? `مصروف -${formatCurrency(amount)} ج.م اتخصم من الكاش` : 'تمت إضافة الحركة بنجاح');
             }
         }
 
-        function openEditTransactionModal(id) {
-            const mData = getActiveMonthData();
-            const tx = mData.transactions.find(t => t.id === id);
+        let editTransactionMonth = null;
+        function openEditTransactionModal(id, originMonth = rootState.activeMonth) {
+            const mData = rootState.months?.[originMonth];
+            const tx = mData?.transactions?.find(t => String(t.id) === String(id));
             if (!tx) return;
 
+            editTransactionMonth = originMonth;
             document.getElementById('editTxIdInput').value = tx.id;
             document.getElementById('editTxTypeSelect').value = tx.type;
             document.getElementById('editTxDescInput').value = tx.desc || '';
@@ -2448,6 +2545,8 @@
             document.getElementById('editTxExpectedReturnInput').value = tx.expectedReturn || '';
             document.getElementById('editTxRecoveredCheckbox').checked = !!tx.recovered;
             document.getElementById('editTxRecoveredCheckbox').disabled = true;
+            // تسويات الديون تتحكم فيها أزرار الاسترداد والسداد، وليس مربع حالة يدوي.
+            document.getElementById('editTxRecoveredCheckbox').title = 'حالة التسوية تتغير من سجل الديون';
 
             handleEditTxTypeChange();
             document.getElementById('editTransactionModal').classList.remove('hidden');
@@ -2456,6 +2555,7 @@
 
         function closeEditTransactionModal() {
             document.getElementById('editTransactionModal').classList.add('hidden');
+            editTransactionMonth = null;
         }
 
         function handleEditTxTypeChange() {
@@ -2485,11 +2585,21 @@
                 return;
             }
 
-            const currentMonthData = getActiveMonthData();
-            const txIndex = currentMonthData.transactions.findIndex(t => t.id === id);
+            const sourceYm = editTransactionMonth || rootState.activeMonth;
+            const currentMonthData = rootState.months?.[sourceYm];
+            if (!currentMonthData) return;
+            const txIndex = currentMonthData.transactions.findIndex(t => String(t.id) === String(id));
             if (txIndex === -1) return;
 
             const tx = currentMonthData.transactions[txIndex];
+            const oldType = tx.type;
+            const oldReference = String(tx.originalId || tx.id);
+            const settlements = Object.values(rootState.months || {}).flatMap(m => (m.transactions || []).filter(t => t.type === 'debt_settlement' && String(t.originId) === oldReference));
+            // لا يمكن تحويل دين تمت تسويته لمصروف/دخل: التسوية مرتبطة بنفس الأصل.
+            if (settlements.length && newType !== oldType) {
+                showToast('لا يمكن تغيير نوع دين تمت تسويته. عدل بياناته فقط', 'error');
+                return;
+            }
             tx.type = newType;
             tx.desc = newDesc;
             tx.amount = newAmount;
@@ -2596,9 +2706,26 @@
                         <div class="text-xs font-black ${d.recovered?'text-emerald-600':'text-amber-700 dark:text-amber-400'}">${d.recovered?'تمت التسوية':formatCurrency(d.amount)+' ج.م'}</div>
                     </div>
                     <div class="flex flex-col gap-2 shrink-0">
-                      ${d.recovered ? '<span class="text-[11px] font-bold text-emerald-600">✓</span>' : `<button type="button" class="rounded-xl px-3 py-2 text-white text-xs font-extrabold ${d.type==='receivable'?'bg-sky-600':'bg-amber-600'}" onclick="settleDebtEntry('${escapeHTML(d._month)}','${escapeHTML(String(d.id))}','${d.type}')">${d.type==='receivable'?'استرداد':'سداد'}</button>`}
+                      ${d.recovered ? '<span class="text-[11px] font-bold text-emerald-600">✓ تمت التسوية</span>' : `<button type="button" class="rounded-xl px-3 py-2 text-white text-xs font-extrabold ${d.type==='receivable'?'bg-sky-600':'bg-amber-600'}" onclick="settleDebtEntry('${escapeHTML(d._month)}','${escapeHTML(String(d.id))}','${d.type}')">${d.type==='receivable'?'استرداد':'سداد'}</button>`}
+                      <button type="button" class="rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-1.5 text-xs font-bold" onclick="openEditTransactionModal('${escapeHTML(String(d.id))}','${escapeHTML(d._month)}')">تعديل</button>
+                      <button type="button" class="rounded-xl border border-rose-200 text-rose-600 px-3 py-1.5 text-xs font-bold" onclick="deleteDebtEntry('${escapeHTML(d._month)}','${escapeHTML(String(d.id))}')">حذف</button>
                     </div>
                 </div>`).join('') : '<div class="text-center text-sm text-slate-400 py-5">مفيش عمليات مسجلة</div>';
+        }
+        function deleteDebtEntry(monthKey, id) {
+            const m = rootState.months?.[monthKey];
+            const debt = m?.transactions?.find(t => String(t.id) === String(id));
+            if (!debt || !['receivable','payable'].includes(debt.type)) return;
+            if (!confirm('حذف الدين ده وكل التسويات المرتبطة بيه؟ ده هيعيد حساب الكاش.')) return;
+            const ref = String(debt.originalId || debt.id);
+            Object.values(rootState.months || {}).forEach(month => {
+                month.transactions = (month.transactions || []).filter(tx => {
+                    if (tx.type === 'debt_settlement' && String(tx.originId) === ref) return false;
+                    if ((tx.type === 'receivable' || tx.type === 'payable') && String(tx.originalId || tx.id) === ref) return false;
+                    return true;
+                });
+            });
+            saveState(); updateDashboard(); showToast('تم حذف الدين وتسوياته');
         }
         function settleDebtEntry(monthKey,id,kind) {
             const origin=rootState.months?.[monthKey]?.transactions?.find(tx=>String(tx.id)===String(id));
@@ -2630,7 +2757,6 @@
         }
 
         function updateDashboard() {
-            if (rootState.customCategories && Object.keys(rootState.customCategories).some(k=>!CATEGORIES[k])) syncCategoryRegistry();
             const mData = getActiveMonthData();
 
             const monthlySalary = parseFloat(mData.monthlySalary) || 0;
@@ -2701,20 +2827,21 @@
 
             const openingBalance = parseFloat(mData.openingBalance) || 0;
 
-            const cashInHand = openingBalance
-                + totalBorrowed
-                + bonusIncomeTotal
-                + salaryCashContribution
-                - dailyExpensesTotal
-                - fixedPaidActualTotal
-                - activeLentOutTotal
-                + (mData.transactions || []).reduce((sum, tx) => {
-                    const amt = Number(tx.amount) || 0;
-                    if (tx.type === 'payable') return sum + amt;
-                    if (tx.type === 'debt_settlement') return sum + (tx.direction === 'receivable' ? amt : -amt);
-                    return sum;
-                }, 0)
-                + (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && tx.carriedOver && tx.recovered && !tx.settledViaLedger ? (Number(tx.amount) || 0) : 0), 0);
+            // تدفقات الكاش: أي بونص يزيد المتاح فورًا، وأي مصروف يخصمه.
+            // القروض وتسويات الديون تغير السيولة فقط، ولا تُحسب دخلًا مكتسبًا أو استهلاكًا.
+            let loanCashIn = 0, debtsCollected = 0, debtsPaid = 0, oldLoansRecovered = 0;
+            (mData.transactions || []).forEach(tx => {
+                const amt = Math.max(0, Number(tx.amount) || 0);
+                if (tx.type === 'payable') loanCashIn += amt;
+                if (tx.type === 'debt_settlement') {
+                    if (tx.direction === 'receivable') debtsCollected += amt;
+                    else debtsPaid += amt;
+                }
+                if (tx.type === 'receivable' && tx.carriedOver && tx.recovered && !tx.settledViaLedger) oldLoansRecovered += amt;
+            });
+            const cashFlowIn = totalBorrowed + bonusIncomeTotal + salaryCashContribution + loanCashIn + debtsCollected + oldLoansRecovered;
+            const cashFlowOut = dailyExpensesTotal + fixedPaidActualTotal + activeLentOutTotal + debtsPaid;
+            const cashInHand = openingBalance + cashFlowIn - cashFlowOut;
             currentCashInHand = cashInHand;
 
             const actualConsumption = dailyExpensesTotal + fixedPaidActualTotal;
@@ -2732,6 +2859,12 @@
             document.getElementById('cashInHandStatusHint').textContent = isSalaryReceived
                 ? 'شامل صافي الراتب بعد استلامه نهاية الشهر'
                 : 'الراتب مستحق آخر الشهر (لم يُصرف بعد)';
+            document.getElementById('cashFlowInDisplay').textContent = `+${formatCurrency(cashFlowIn)} ج.م`;
+            document.getElementById('cashFlowOutDisplay').textContent = `-${formatCurrency(cashFlowOut)} ج.م`;
+            const netFlow = cashFlowIn - cashFlowOut;
+            document.getElementById('cashFlowNetDisplay').textContent = `${netFlow >= 0 ? '+' : '−'}${formatCurrency(Math.abs(netFlow))} ج.م`;
+            document.getElementById('cashFlowNetDisplay').className = netFlow < 0 ? 'text-rose-300 font-extrabold' : 'text-emerald-300 font-extrabold';
+            document.getElementById('cashBonusDisplay').textContent = `+${formatCurrency(bonusIncomeTotal)}`;
             document.getElementById('borrowedCashSubDisplay').textContent = `+${formatCurrency(totalBorrowed)}`;
             const outstandingReceivables = (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && !tx.recovered ? (Number(tx.amount) || 0) : 0), 0);
             document.getElementById('lentOutSubDisplay').textContent = `-${formatCurrency(outstandingReceivables)}`;
@@ -2842,7 +2975,7 @@
             emptyPlaceholder.classList.add('hidden');
             const [topKey, topVal] = entries[0];
             const topPct = Math.round((topVal / totalActualConsumption) * 100);
-            topBadge.textContent = `الأعلى صرفاً: ${(CATEGORIES[topKey] || CATEGORIES.other).label} (${topPct}%)`;
+            topBadge.textContent = `الأعلى صرفاً: ${CATEGORIES[topKey].label} (${topPct}%)`;
 
             listEl.innerHTML = entries.slice(0, 5).map(([key, val]) => {
                 const cat = CATEGORIES[key] || CATEGORIES.other;
@@ -3172,7 +3305,6 @@
                     if (!confirm('استعادة النسخة الاحتياطية هتستبدل كل البيانات الحالية. هل تريد المتابعة؟')) return;
                     rootState = parsed;
                     normalizeMonthsStructure(rootState);
-                    syncCategoryRegistry();
                     saveState();
                     applyTheme();
                     renderMonthSelector();
@@ -3203,54 +3335,7 @@
 
 
         // ميزانية شهرية مستقلة لكل شهر وتصنيف، محفوظة مع نفس حالة Firebase.
-        const BASE_BUDGET_CATEGORIES = ['food','transport','shopping','bills','installments','health','entertainment','cigarettes','other'];
-        let BUDGET_CATEGORIES = [...BASE_BUDGET_CATEGORIES];
-        // Custom categories live in the same rootState as the monthly financial data.
-        const BUILTIN_CATEGORY_KEYS = new Set(Object.keys(CATEGORIES));
-        const CUSTOM_COLORS = ['#0d9488','#8b5cf6','#ec4899','#2563eb','#c2410c','#64748b'];
-        function syncCategoryRegistry(){
-            if (!rootState.customCategories || typeof rootState.customCategories !== 'object' || Array.isArray(rootState.customCategories)) rootState.customCategories={};
-            // Remove old locally constructed category entries before loading cloud/imported state.
-            for (const key of Object.keys(CATEGORIES)) if (!BUILTIN_CATEGORY_KEYS.has(key)) delete CATEGORIES[key];
-            for (const [key,cat] of Object.entries(rootState.customCategories)) {
-                if (!/^custom_[a-z0-9_]{1,48}$/.test(key) || !cat || typeof cat.name!=='string') continue;
-                const label=cat.name.trim().slice(0,40);
-                if (!label)continue;
-                CATEGORIES[key]={label,color:CUSTOM_COLORS[Object.keys(CATEGORIES).length % CUSTOM_COLORS.length],bg:'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'};
-            }
-            BUDGET_CATEGORIES=[...BASE_BUDGET_CATEGORIES,...Object.keys(CATEGORIES).filter(k=>!BUILTIN_CATEGORY_KEYS.has(k))];
-            for (const id of ['txCategoryInput','editTxCategoryInput','fixedCategoryInput','editFixedCategoryInput','filterCategorySelect','budgetCategory']) {
-                const el=document.getElementById(id);if(!el)continue;
-                const prior=el.value;
-                const keys=id==='filterCategorySelect'?['all',...Object.keys(CATEGORIES)]:id==='budgetCategory'?BUDGET_CATEGORIES:Object.keys(CATEGORIES);
-                el.innerHTML=keys.map(k=>`<option value="${k}">${k==='all'?'كل التصنيفات':escapeHTML((CATEGORIES[k] || CATEGORIES.other).label)}</option>`).join('');
-                if(keys.includes(prior))el.value=prior;
-                else if(id==='filterCategorySelect')el.value='all';
-                else if(id==='txCategoryInput')el.value='food';
-            }
-            const holder=document.getElementById('customCategoriesList');
-            if(holder)holder.innerHTML=Object.entries(rootState.customCategories).filter(([k])=>CATEGORIES[k]).map(([k,cat])=>`<span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold">${escapeHTML(cat.name)} <button type="button" onclick="removeCustomCategory('${k}')" title="حذف التصنيف" class="text-rose-600 px-1">×</button></span>`).join('');
-        }
-        function addCustomCategory(e){
-            e.preventDefault();
-            const input=document.getElementById('newCategoryName'),name=input.value.trim();
-            if(!name || name.length>40){showToast('اكتب اسم تصنيف صحيح','error');return;}
-            if(Object.values(CATEGORIES).some(c=>c.label.toLocaleLowerCase('ar')===name.toLocaleLowerCase('ar'))){showToast('التصنيف موجود بالفعل','error');return;}
-            const key='custom_'+newEntryId('cat').replace(/[^a-z0-9_]/gi,'').toLowerCase();
-            if(!rootState.customCategories)rootState.customCategories={};
-            rootState.customCategories[key]={name};
-            input.value='';
-            saveState();syncCategoryRegistry();
-            document.getElementById('budgetCategory').value=key;
-            updateDashboard();showToast('تمت إضافة '+name);
-        }
-        function removeCustomCategory(key){
-            if(!rootState.customCategories || !rootState.customCategories[key])return;
-            const used=Object.values(rootState.months||{}).some(m=>(m.transactions||[]).some(t=>t.category===key)||(m.fixedCommitments||[]).some(f=>f.category===key)||(m.budgets&&Object.prototype.hasOwnProperty.call(m.budgets,key)));
-            if(used){showToast('التصنيف مستخدم في بيانات أو ميزانيات؛ مش ممكن حذفه','error');return;}
-            if(!confirm('حذف التصنيف؟'))return;
-            delete rootState.customCategories[key];saveState();syncCategoryRegistry();updateDashboard();
-        }
+        const BUDGET_CATEGORIES = ['food','transport','shopping','bills','installments','health','entertainment','other'];
         function budgetActuals(m) {
             const totals = {};
             BUDGET_CATEGORIES.forEach(k => totals[k]=0);
@@ -3278,7 +3363,7 @@
             const spentAll=BUDGET_CATEGORIES.reduce((s,k)=>s+actual[k],0);
             const diff=allocated-spentConfigured;
             const selector=document.getElementById('budgetCategory');
-            if(selector.options.length!==BUDGET_CATEGORIES.length)syncCategoryRegistry();
+            if(!selector.options.length)selector.innerHTML=BUDGET_CATEGORIES.map(k=>`<option value="${k}">${escapeHTML(CATEGORIES[k].label)}</option>`).join('');
             document.getElementById('budgetMonthLabel').textContent=formatMonthLabel(rootState.activeMonth);
             document.getElementById('budgetAllocated').textContent=formatCurrency(allocated)+' ج.م';
             document.getElementById('budgetSpent').textContent=formatCurrency(spentAll)+' ج.م';
@@ -3292,7 +3377,7 @@
                 const over=hasLimit&&spent>limit;
                 const barColor=over?'#ef4444':pct>=80?'#f59e0b':'#0d9488';
                 return `<div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/50 space-y-2">
-                    <div class="flex justify-between gap-2 items-start"><div class="font-extrabold text-sm">${escapeHTML((CATEGORIES[k] || CATEGORIES.other).label)}</div><button type="button" onclick="editBudgetCategory('${k}')" class="text-xs font-bold text-teal-700 dark:text-teal-300">${hasLimit?'تعديل':'تحديد ميزانية'}</button></div>
+                    <div class="flex justify-between gap-2 items-start"><div class="font-extrabold text-sm">${escapeHTML(CATEGORIES[k].label)}</div><div class="flex items-center gap-3"><button type="button" onclick="editBudgetCategory('${k}')" class="text-xs font-bold text-teal-700 dark:text-teal-300">${hasLimit?'تعديل':'تحديد ميزانية'}</button>${hasLimit?`<button type="button" onclick="removeBudgetLimit('${k}')" class="text-xs font-bold text-rose-600">حذف</button>`:''}</div></div>
                     <div class="budget-small flex justify-between gap-1"><span>صرف: ${formatCurrency(spent)} ج.م</span><span>${hasLimit?'المخصص: '+formatCurrency(limit)+' ج.م':'بدون ميزانية محددة'}</span></div>
                     ${hasLimit?`<div class="budget-progress"><span style="width:${Math.min(100,pct)}%;background:${barColor}"></span></div>
                     <div class="text-xs font-extrabold ${over?'text-rose-600':'text-teal-700 dark:text-teal-300'}">${over?'زيادة '+formatCurrency(-diff):'متبقي '+formatCurrency(diff)} ج.م ${limit>0?'• '+pct+'% من المخصص':''}</div>`:''}
@@ -3312,6 +3397,13 @@
             document.getElementById('budgetLimit').focus();
             document.getElementById('budgetForm').scrollIntoView({behavior:'smooth',block:'center'});
         }
+        function removeBudgetLimit(k) {
+            const m = getActiveMonthData();
+            if (!m.budgets || !Object.prototype.hasOwnProperty.call(m.budgets,k)) return;
+            if (!confirm('إزالة المبلغ المخصص للبند ده من ميزانية الشهر؟ المصاريف المسجلة مش هتتمسح.')) return;
+            delete m.budgets[k];
+            saveState(); updateDashboard(); showToast('تم حذف مخصص الميزانية');
+        }
         function saveBudgetLimit(e){
             e.preventDefault();
             const k=document.getElementById('budgetCategory').value;
@@ -3321,7 +3413,7 @@
             const m=getActiveMonthData();
             if(!m.budgets||typeof m.budgets!=='object'||Array.isArray(m.budgets))m.budgets={};
             m.budgets[k]=Math.round(amount*100)/100;
-            saveState();updateDashboard();showToast('تم حفظ ميزانية '+(CATEGORIES[k] || CATEGORIES.other).label);
+            saveState();updateDashboard();showToast('تم حفظ ميزانية '+CATEGORIES[k].label);
         }
         function copyPreviousBudget(){
             const prev=Object.keys(rootState.months||{}).filter(k=>k<rootState.activeMonth&&rootState.months[k].budgets&&Object.keys(rootState.months[k].budgets).length).sort().pop();
@@ -3334,7 +3426,7 @@
 
         // تنقل الموبايل: لا يلمس حالة المحفظة أو مفاتيح Firebase.
         let mobileActiveScreen = 'home';
-        const mobileScreenLabels = {home:'الرئيسية',activity:'الحركات',salary:'الراتب والسلف',obligations:'التزاماتي',analytics:'التحليل',budget:'ميزانيتي'};
+        const mobileScreenLabels = {home:'الرئيسية',activity:'الحركات',salary:'الراتب والسلف',obligations:'التزاماتي',analytics:'التحليل',budget:'ميزانيتي',more:'المزيد'};
         function switchMobileScreen(screen) {
             if (!Object.prototype.hasOwnProperty.call(mobileScreenLabels,screen)) return;
             mobileActiveScreen = screen;
@@ -3342,7 +3434,7 @@
                 el.classList.toggle('mobile-screen-active',el.dataset.mobileScreen === screen);
             });
             document.querySelectorAll('#mobileBottomNav [data-screen-target]').forEach(btn => {
-                const selected = btn.dataset.screenTarget === screen;
+                const selected = btn.dataset.screenTarget === screen || (btn.dataset.screenTarget === 'more' && ['salary','obligations','analytics'].includes(screen));
                 btn.classList.toggle('active',selected);
                 if (selected) btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');
             });
