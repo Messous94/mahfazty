@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="theme-color" content="#f6f8f7" />
+    <meta name="theme-color" content="#f8f6ff" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="mahfazet messi" />
@@ -243,6 +243,59 @@ html.dark #appMain #safeBorrowingAmountDisplay{color:#6bdfb7!important}
  .more-list-text small{font-size:11px;font-weight:500;color:var(--mm-muted)}
  .more-arrow{height:18px;width:18px;color:var(--mm-muted)}
 }
+
+/* Soft Lavender edition: presentation-only override, accounting and storage logic untouched */
+:root{--mm-bg:#f8f6ff;--mm-card:#ffffff;--mm-ink:#302d42;--mm-muted:#87829c;--mm-border:#ebe6f6;--mm-mint:#8065cb;--mm-soft:#f0eafb;--mm-charcoal:#6f5aa9;--mm-shadow:0 6px 22px rgba(93,74,148,.055);color-scheme:light}
+html,body,body.bg-slate-50{background:#f8f6ff!important;color:var(--mm-ink)!important}
+header.sticky{background:rgba(255,255,255,.97)!important;border-bottom:1px solid #ebe6f6!important}
+header .bg-gradient-to-br{background:linear-gradient(145deg,#a38be3,#7960c5)!important;border-radius:14px!important}
+header h1{color:#302d42!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(2){background:linear-gradient(135deg,#a18ae0 0%,#745cbb 100%)!important;color:#fff!important;box-shadow:0 14px 28px rgba(116,92,187,.16)!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(3),#appMain [data-mobile-screen="home"]>div:nth-child(4),#appMain #actualConsumptionCard,#appMain #safeBorrowingCard{background:#fff!important;border-color:#ebe6f6!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(3) #actualConsumptionDisplay{color:#d15e72!important}
+#appMain [data-mobile-screen="home"]>div:nth-child(4) #safeBorrowingAmountDisplay,#appMain #safeBorrowingAmountDisplay{color:#8065cb!important}
+#appMain #safeBorrowingIconBox{background:#f0eafb!important;color:#8065cb!important}
+#appMain #safeBorrowingTitle{color:#6b608b!important}
+#appMain #safeBorrowingMessage{color:#87829c!important}
+#appMain .bg-indigo-600,header .bg-indigo-600{background:#8065cb!important}
+#appMain .hover\\:bg-indigo-700:hover{background:#674caf!important}
+#appMain .text-indigo-600,#appMain .text-indigo-700,#appMain .text-indigo-500{color:#8065cb!important}
+#appMain input:focus,#appMain select:focus,#appMain textarea:focus{--tw-ring-color:rgba(128,101,203,.25)!important}
+#appMain .mobile-quick-grid button{background:#fff!important;color:#302d42!important;border-color:#ebe6f6!important}
+#appMain .mobile-quick-grid button svg{color:#8065cb!important}
+.mobile-home-heading{color:#302d42!important}
+.ledger-tab{border-color:#ebe6f6!important;background:#fbfaff!important;color:#777089!important}
+.ledger-tab.active{background:#eee8fb!important;border-color:#d7caf4!important;color:#7558bd!important}
+.more-list-icon{background:#f0eafb!important;color:#8065cb!important}
+.mobile-more-title{color:#302d42!important}
+.mobile-more-subtitle{color:#87829c!important}
+.mobile-more-list button{background:#fff!important;border-color:#ebe6f6!important;color:#302d42!important}
+@media(max-width:767px){
+ body,body.bg-slate-50{background:#f8f6ff!important}
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{background:rgba(255,255,255,.99)!important;border-top:1px solid #ebe6f6!important;box-shadow:0 -5px 22px rgba(83,65,128,.065)!important;justify-content:space-evenly!important;gap:12px!important;padding:9px 18px calc(8px + env(safe-area-inset-bottom))!important;min-height:76px!important}
+ .mobile-nav-item,.dark .mobile-nav-item{background:transparent!important;color:#a49fb5!important;max-width:110px!important;flex:1 1 0!important;border-radius:0!important;gap:6px!important;font-size:11px!important;padding:6px!important}
+ .mobile-nav-item.active,.dark .mobile-nav-item.active{color:#8065cb!important;background:transparent!important}
+ .mobile-nav-item.active svg{stroke-width:2.5!important}
+ .mobile-fab{background:#8065cb!important;box-shadow:0 9px 20px rgba(128,101,203,.25)!important}
+ .mobile-nav-item:focus-visible{outline-color:#8065cb!important}
+}
+html.dark{background:#191624!important}
+html.dark body,html.dark body.bg-slate-50{--mm-bg:#191624;--mm-card:#282338;--mm-ink:#f3efff;--mm-muted:#b3abc7;--mm-border:#423957;--mm-soft:#3c3157;--mm-charcoal:#6f5aa9;background:#191624!important;color:#f3efff!important;color-scheme:dark}
+html.dark header.sticky{background:rgba(35,29,50,.97)!important;border-color:#423957!important}
+html.dark header h1{color:#f3efff!important}
+html.dark #appMain [data-mobile-screen="home"]>div:nth-child(3),html.dark #appMain [data-mobile-screen="home"]>div:nth-child(4),html.dark #appMain #actualConsumptionCard,html.dark #appMain #safeBorrowingCard{background:#282338!important;border-color:#423957!important}
+html.dark #appMain [data-mobile-screen="home"]>div:nth-child(4) #safeBorrowingAmountDisplay,html.dark #appMain #safeBorrowingAmountDisplay{color:#c5b0ff!important}
+html.dark #appMain #safeBorrowingIconBox{background:#3c3157!important;color:#c5b0ff!important}
+html.dark #appMain .mobile-quick-grid button{background:#282338!important;color:#f3efff!important;border-color:#423957!important}
+html.dark .mobile-more-list button{background:#282338!important;border-color:#423957!important;color:#f3efff!important}
+html.dark .more-list-icon{background:#3c3157!important;color:#c5b0ff!important}
+html.dark .mobile-more-title{color:#f3efff!important}
+html.dark .mobile-bottom-nav{background:rgba(35,29,50,.98)!important;border-color:#423957!important}
+html.dark .mobile-nav-item{color:#a69cbb!important}
+html.dark .mobile-nav-item.active{color:#c5b0ff!important}
+html.dark .ledger-tab{background:#282338!important;border-color:#423957!important;color:#c4bcd4!important}
+html.dark .ledger-tab.active{background:#443360!important;border-color:#6f5aa9!important;color:#f3efff!important}
+
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 pb-14">
