@@ -10,9 +10,9 @@
     <meta name="apple-mobile-web-app-title" content="mahfazet messi" />
     <title>mahfazet messi</title>
 
-    <link rel="manifest" href="manifest.json?v=7" />
-    <link rel="icon" type="image/png" href="wallet.png?v=7" />
-    <link rel="apple-touch-icon" href="wallet.png?v=7" />
+    <link rel="manifest" href="manifest.json?v=8" />
+    <link rel="icon" type="image/png" href="wallet.png?v=8" />
+    <link rel="apple-touch-icon" href="wallet.png?v=8" />
 
     <!-- خط Cairo العربي -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,6 +85,40 @@
           .grid > *, .flex > * { min-width: 0; }
           input, select, textarea { font-size: 16px !important; }
           #toastContainer { bottom: calc(16px + env(safe-area-inset-bottom)); }
+        }
+
+        /* واجهة تنقل مستقلة للموبايل - باقي التطبيق يعمل دون أي تغيير بالحسابات */
+        .mobile-bottom-nav,.mobile-fab{display:none}
+        @media(max-width:767px){
+          html{scroll-padding-top:86px}
+          body{padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}
+          #appMain{padding-top:14px!important;gap:14px!important}
+          #appMain [data-mobile-screen]{display:none!important}
+          #appMain [data-mobile-screen].mobile-screen-active{display:grid!important}
+          #appMain section[data-mobile-screen="home"].mobile-screen-active{display:grid!important}
+          #appMain section[data-mobile-screen="salary"].mobile-screen-active,
+          #appMain section[data-mobile-screen="obligations"].mobile-screen-active,
+          #appMain section[data-mobile-screen="activity"].mobile-screen-active{display:block!important}
+          #appMain .mobile-home-actions.mobile-screen-active{display:block!important}
+          #appMain .mobile-mixed{display:contents!important}
+          #appMain .mobile-mixed>div[data-mobile-screen].mobile-screen-active{display:block!important}
+          #appMain section:not([data-mobile-screen]):not(.mobile-mixed){display:block}
+          #appMain .mobile-mixed:not(:has(>.mobile-screen-active)){display:none!important}
+          .mobile-bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:45;justify-content:space-around;align-items:stretch;background:rgba(255,255,255,.97);border-top:1px solid #e2e8f0;box-shadow:0 -8px 26px rgba(15,23,42,.06);padding:8px 4px calc(8px + env(safe-area-inset-bottom));min-height:72px;backdrop-filter:blur(16px)}
+          .dark .mobile-bottom-nav{background:rgba(15,23,42,.97);border-color:#334155}
+          .mobile-nav-item{min-width:0;flex:1;border:0;background:transparent;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#64748b;font-family:Cairo,sans-serif;font-size:10px;font-weight:800;line-height:1.25;border-radius:13px;padding:6px 1px;cursor:pointer}
+          .mobile-nav-item svg{height:21px;width:21px;stroke-width:2}
+          .mobile-nav-item.active{color:#4f46e5;background:#eef2ff}
+          .dark .mobile-nav-item.active{background:#312e81;color:#c7d2fe}
+          .mobile-fab{position:fixed;display:flex;align-items:center;justify-content:center;left:17px;bottom:calc(87px + env(safe-area-inset-bottom));width:52px;height:52px;color:white;border:none;border-radius:18px;z-index:44;background:linear-gradient(140deg,#4f46e5,#06b6d4);box-shadow:0 10px 23px rgba(79,70,229,.32);cursor:pointer}
+          .mobile-fab svg{width:27px;height:27px;stroke-width:3}
+          .mobile-home-heading{font-size:15px;font-weight:900;margin-bottom:10px;color:#0f172a}
+          .dark .mobile-home-heading{color:#f8fafc}
+          .mobile-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+          .mobile-quick-grid button{display:flex;gap:9px;align-items:center;justify-content:flex-start;padding:14px 12px;border:1px solid #e2e8f0;background:white;color:#334155;border-radius:17px;font:800 12px Cairo,sans-serif;text-align:right;box-shadow:0 2px 9px rgba(15,23,42,.03)}
+          .mobile-quick-grid button svg{height:19px;width:19px;color:#4f46e5;flex-shrink:0}
+          .dark .mobile-quick-grid button{background:#0f172a;border-color:#334155;color:#e2e8f0}
+          [data-mobile-screen="home"]>div{min-width:0}
         }
     </style>
 </head>
@@ -165,10 +199,10 @@
     </header>
 
     <!-- المحتوى الرئيسي -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
+    <main id="appMain" class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
 
         <!-- 1. البطاقات الرئيسية الأربعة (Summary Cards) -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <section data-mobile-screen="home" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
             <!-- بطاقة 1: رصيد أول المدة (المرحّل من الشهر السابق) -->
             <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
@@ -249,7 +283,7 @@
         </section>
 
         <!-- 2. قسم الراتب المستحق آخر الشهر، أيام الغياب، والسلف (Salary & Borrowing Hub) -->
-        <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
+        <section data-mobile-screen="salary" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
             <!-- رأس القسم وزر استلام الراتب نهاية الشهر -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-3">
@@ -391,7 +425,7 @@
         </section>
 
         <!-- 3. قسم الالتزامات والمصاريف الشهرية الثابتة الإجبارية (Fixed Monthly Obligations) -->
-        <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
+        <section data-mobile-screen="obligations" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
@@ -479,10 +513,10 @@
         </section>
 
         <!-- 4. تسجيل الحركات اليومية + الرسوم البيانية وتحليل الاستهلاك -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <section class="mobile-mixed grid grid-cols-1 lg:grid-cols-12 gap-6">
             
             <!-- نموذج تسجيل حركة يومية (5 أعمدة) -->
-            <div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm h-fit">
+            <div data-mobile-screen="activity" class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm h-fit">
                 <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                     <div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                         <i data-lucide="plus-circle" class="w-5 h-5"></i>
@@ -593,7 +627,7 @@
             </div>
 
             <!-- لوحة الرسوم البيانية وتحليل أكثر البنود استهلاكاً (7 أعمدة) -->
-            <div class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-5">
+            <div data-mobile-screen="analytics" class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-5">
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
                     <div class="flex items-center gap-2.5">
                         <div class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
@@ -625,8 +659,19 @@
             </div>
         </section>
 
+        
+        <section data-mobile-screen="home" class="mobile-home-actions hidden">
+            <div class="mobile-home-heading">وصول سريع</div>
+            <div class="mobile-quick-grid">
+                <button type="button" onclick="openQuickEntry('expense')"><i data-lucide="minus-circle"></i><span>تسجيل مصروف</span></button>
+                <button type="button" onclick="openQuickEntry('borrowing')"><i data-lucide="hand-coins"></i><span>تسجيل سلفة</span></button>
+                <button type="button" onclick="switchMobileScreen('obligations')"><i data-lucide="calendar-check"></i><span>الالتزامات</span></button>
+                <button type="button" onclick="switchMobileScreen('analytics')"><i data-lucide="chart-pie"></i><span>تحليل مصاريفك</span></button>
+            </div>
+        </section>
+
         <!-- 5. سجل المعاملات اليومية والتصفية -->
-        <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+        <section data-mobile-screen="activity" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
                 <div>
                     <h2 class="font-extrabold text-base text-slate-900 dark:text-white flex items-center gap-2">
@@ -679,6 +724,16 @@
             <div id="transactionsListContainer" class="divide-y divide-slate-100 dark:divide-slate-800"></div>
         </section>
     </main>
+
+    <nav id="mobileBottomNav" aria-label="التنقل بين أقسام المحفظة" class="mobile-bottom-nav">
+        <button type="button" data-screen-target="home" class="mobile-nav-item active" aria-current="page" onclick="switchMobileScreen('home')"><i data-lucide="house"></i><span>الرئيسية</span></button>
+        <button type="button" data-screen-target="activity" class="mobile-nav-item" onclick="switchMobileScreen('activity')"><i data-lucide="arrow-left-right"></i><span>الحركات</span></button>
+        <button type="button" data-screen-target="salary" class="mobile-nav-item" onclick="switchMobileScreen('salary')"><i data-lucide="wallet-cards"></i><span>الراتب والسلف</span></button>
+        <button type="button" data-screen-target="obligations" class="mobile-nav-item" onclick="switchMobileScreen('obligations')"><i data-lucide="calendar-check-2"></i><span>التزاماتي</span></button>
+        <button type="button" data-screen-target="analytics" class="mobile-nav-item" onclick="switchMobileScreen('analytics')"><i data-lucide="chart-no-axes-combined"></i><span>التحليل</span></button>
+    </nav>
+    <button type="button" id="mobileQuickFab" class="mobile-fab" aria-label="إضافة حركة جديدة" title="إضافة حركة" onclick="openQuickEntry('expense')"><i data-lucide="plus"></i></button>
+
 
     <!-- نافذة تسجيل سداد التزام ثابت (Pay Fixed Commitment Modal) -->
     <div id="payFixedCommitmentModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
@@ -2931,6 +2986,37 @@
             updateDashboard();
             pullStateFromCloud(true, false);
             startCloudPolling();
+        });
+
+        // تنقل الموبايل: لا يلمس حالة المحفظة أو مفاتيح Firebase.
+        let mobileActiveScreen = 'home';
+        const mobileScreenLabels = {home:'الرئيسية',activity:'الحركات',salary:'الراتب والسلف',obligations:'التزاماتي',analytics:'التحليل'};
+        function switchMobileScreen(screen) {
+            if (!Object.prototype.hasOwnProperty.call(mobileScreenLabels,screen)) return;
+            mobileActiveScreen = screen;
+            document.querySelectorAll('#appMain [data-mobile-screen]').forEach(el => {
+                el.classList.toggle('mobile-screen-active',el.dataset.mobileScreen === screen);
+            });
+            document.querySelectorAll('#mobileBottomNav [data-screen-target]').forEach(btn => {
+                const selected = btn.dataset.screenTarget === screen;
+                btn.classList.toggle('active',selected);
+                if (selected) btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');
+            });
+            if (window.matchMedia('(max-width:767px)').matches) {
+                window.scrollTo({top:0,behavior:'instant'});
+                if(screen === 'analytics') requestAnimationFrame(() => {
+                    if(typeof expensesChartInstance!=='undefined' && expensesChartInstance) expensesChartInstance.resize();
+                });
+            }
+        }
+        function openQuickEntry(kind) {
+            switchMobileScreen(kind === 'borrowing' ? 'salary' : 'activity');
+            const field = document.getElementById(kind === 'borrowing' ? 'borrowAmountInput' : 'txAmountInput');
+            if (field) requestAnimationFrame(()=>{field.scrollIntoView({block:'center',behavior:'smooth'});});
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            switchMobileScreen('home');
+            if(window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
         });
     </script>
 </body>
