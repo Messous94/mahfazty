@@ -2441,7 +2441,8 @@
             document.getElementById('borrowedCashSubDisplay').textContent = `+${formatCurrency(totalBorrowed)}`;
             document.getElementById('lentOutSubDisplay').textContent = `-${formatCurrency(activeLentOutTotal)}`;
 
-            document.getElementById('actualConsumptionDisplay').textContent = `${formatCurrency(actualConsumption)} ج.م`;
+            const actualConsumptionDisplay = document.getElementById('actualConsumptionDisplay');
+            actualConsumptionDisplay.textContent = `${formatCurrency(actualConsumption)} ج.م`;
             document.getElementById('dailyExpensesSubDisplay').textContent = formatCurrency(dailyExpensesTotal);
             document.getElementById('fixedPaidSubDisplay').textContent = formatCurrency(fixedPaidActualTotal);
 
@@ -2724,8 +2725,7 @@
         // 12. التصدير، النسخ الاحتياطي، ونسخ الكود لـ Google Sites
         // ==========================================
         function copyCodeForGoogleSites() {
-            const fullHtml = '<!DOCTYPE html>
-' + document.documentElement.outerHTML;
+            const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
             const tempTextarea = document.createElement('textarea');
             tempTextarea.value = fullHtml;
             tempTextarea.style.position = 'fixed';
@@ -2751,58 +2751,38 @@
             const totalBorrowed = (mData.borrowings || []).reduce((s, b) => s + (parseFloat(b.amount) || 0), 0);
             const netSalary = Math.max(0, monthlySalary - absenceDeduction - totalBorrowed);
 
-            let csv = '﻿';
-            csv += `الشهر,${formatMonthLabel(ym)}
-`;
-            csv += `رصيد أول المدة,${mData.openingBalance || 0}
-`;
-            csv += `الراتب الشهري الأساسي,${monthlySalary}
-`;
-            csv += `حالة صرف الراتب,${mData.salaryReceived ? 'تم الصرف للكاش' : 'مستحق آخر الشهر'}
-`;
-            csv += `أيام الغياب,${deductionDays}
-`;
-            csv += `خصم الغياب,${absenceDeduction.toFixed(2)}
-`;
-            csv += `إجمالي السلف على الراتب,${totalBorrowed.toFixed(2)}
-`;
-            csv += `صافي القبض بعد الغياب والسلف,${netSalary.toFixed(2)}
-`;
-            csv += `الكاش الفعلي في الجيب الآن,${currentCashInHand.toFixed(2)}
-
-`;
+            let csv = '\uFEFF';
+            csv += `الشهر,${formatMonthLabel(ym)}\n`;
+            csv += `رصيد أول المدة,${mData.openingBalance || 0}\n`;
+            csv += `الراتب الشهري الأساسي,${monthlySalary}\n`;
+            csv += `حالة صرف الراتب,${mData.salaryReceived ? 'تم الصرف للكاش' : 'مستحق آخر الشهر'}\n`;
+            csv += `أيام الغياب,${deductionDays}\n`;
+            csv += `خصم الغياب,${absenceDeduction.toFixed(2)}\n`;
+            csv += `إجمالي السلف على الراتب,${totalBorrowed.toFixed(2)}\n`;
+            csv += `صافي القبض بعد الغياب والسلف,${netSalary.toFixed(2)}\n`;
+            csv += `الكاش الفعلي في الجيب الآن,${currentCashInHand.toFixed(2)}\n\n`;
 
             if ((mData.borrowings || []).length > 0) {
-                csv += 'سلف وسحوبات على حساب الراتب
-';
-                csv += 'اليوم,التاريخ,المصدر / الجهة,المبلغ,ملاحظة
-';
+                csv += 'سلف وسحوبات على حساب الراتب\n';
+                csv += 'اليوم,التاريخ,المصدر / الجهة,المبلغ,ملاحظة\n';
                 mData.borrowings.forEach(b => {
-                    csv += `${getArabicDayName(b.date)},${b.date},"${(b.source || '').replace(/"/g, '""')}",${b.amount},"${(b.note || '-').replace(/"/g, '""')}"
-`;
+                    csv += `${getArabicDayName(b.date)},${b.date},"${(b.source || '').replace(/"/g, '""')}",${b.amount},"${(b.note || '-').replace(/"/g, '""')}"\n`;
                 });
-                csv += '
-';
+                csv += '\n';
             }
 
             if ((mData.fixedCommitments || []).length > 0) {
-                csv += 'الالتزامات والمصاريف الشهرية الثابتة الإجبارية
-';
-                csv += 'الالتزام,التصنيف,يوم الاستحقاق,الحالة,المبلغ التقديري,المبلغ الفعلي المدفوع,تاريخ السداد
-';
+                csv += 'الالتزامات والمصاريف الشهرية الثابتة الإجبارية\n';
+                csv += 'الالتزام,التصنيف,يوم الاستحقاق,الحالة,المبلغ التقديري,المبلغ الفعلي المدفوع,تاريخ السداد\n';
                 mData.fixedCommitments.forEach(fc => {
                     const catLabel = (CATEGORIES[fc.category] || CATEGORIES.bills).label;
-                    csv += `"${(fc.name || '').replace(/"/g, '""')}",${catLabel},${fc.dueDay || '-'},${fc.paid ? 'تم السداد' : 'غير مسدد'},${fc.expectedAmount},${fc.paid ? fc.actualPaidAmount : '-'},${fc.paidDate || '-'}
-`;
+                    csv += `"${(fc.name || '').replace(/"/g, '""')}",${catLabel},${fc.dueDay || '-'},${fc.paid ? 'تم السداد' : 'غير مسدد'},${fc.expectedAmount},${fc.paid ? fc.actualPaidAmount : '-'},${fc.paidDate || '-'}\n`;
                 });
-                csv += '
-';
+                csv += '\n';
             }
 
-            csv += 'سجل المعاملات اليومية
-';
-            csv += 'اليوم,التاريخ,الوصف,النوع,التصنيف,الشخص / الجهة,تاريخ الاسترداد,المبلغ
-';
+            csv += 'سجل المعاملات اليومية\n';
+            csv += 'اليوم,التاريخ,الوصف,النوع,التصنيف,الشخص / الجهة,تاريخ الاسترداد,المبلغ\n';
             const typeNames = {
                 expense: 'مصروف يومي',
                 income: 'بونص / دخل إضافي',
@@ -2812,8 +2792,7 @@
             (mData.transactions || []).forEach(tx => {
                 const catLabel = (CATEGORIES[tx.category] || CATEGORIES.other).label;
                 const statusSuffix = tx.type === 'receivable' ? (tx.recovered ? ' (مُستردة)' : ' (نشطة)') : '';
-                csv += `${getArabicDayName(tx.date)},${tx.date},"${(tx.desc || '').replace(/"/g, '""')}",${typeNames[tx.type] || tx.type}${statusSuffix},${catLabel},"${(tx.personName || '-').replace(/"/g, '""')}",${tx.expectedReturn || '-'},${tx.amount}
-`;
+                csv += `${getArabicDayName(tx.date)},${tx.date},"${(tx.desc || '').replace(/"/g, '""')}",${typeNames[tx.type] || tx.type}${statusSuffix},${catLabel},"${(tx.personName || '-').replace(/"/g, '""')}",${tx.expectedReturn || '-'},${tx.amount}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
