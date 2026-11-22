@@ -157,7 +157,12 @@
           .dark .mobile-quick-grid button{background:#1d2d40!important;color:#e8f1f7!important;border-color:#314457!important}
           #toastContainer{bottom:calc(91px + env(safe-area-inset-bottom))!important}
         }
-    </style>
+    
+        .ledger-tab{flex:1;border:1px solid #dbe5ed;border-radius:13px;padding:11px 7px;background:#f8fafc;color:#64748b;font:800 12px Cairo,sans-serif}
+        .ledger-tab.active{background:#12364a;border-color:#12364a;color:#76edda}
+        .dark .ledger-tab{background:#182e43;border-color:#35516b;color:#d5e1ec}
+        .dark .ledger-tab.active{background:#197f82;color:white}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 pb-14">
 
@@ -566,7 +571,7 @@
                     <!-- نوع الحركة -->
                     <div>
                         <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">نوع الحركة</label>
-                        <div class="grid grid-cols-3 gap-2">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                             <label class="cursor-pointer">
                                 <input type="radio" name="txType" value="expense" checked onchange="handleTxTypeChange()" class="peer sr-only">
                                 <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-rose-500 peer-checked:bg-rose-50 dark:peer-checked:bg-rose-950/40 text-center transition-all h-full flex flex-col justify-center">
@@ -588,6 +593,13 @@
                                 <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-sky-500 peer-checked:bg-sky-50 dark:peer-checked:bg-sky-950/40 text-center transition-all h-full flex flex-col justify-center">
                                     <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-sky-600">سلفت حد بره</span>
                                     <span class="block text-[10px] text-slate-400 mt-0.5">ليا عند الناس</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="txType" value="payable" onchange="handleTxTypeChange()" class="peer sr-only">
+                                <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-950/40 text-center transition-all h-full flex flex-col justify-center">
+                                    <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200">عليا للناس</span>
+                                    <span class="block text-[10px] text-slate-400 mt-0.5">فلوس استلفتها</span>
                                 </div>
                             </label>
                         </div>
@@ -758,6 +770,59 @@
             <!-- قائمة المعاملات -->
             <div id="transactionsListContainer" class="divide-y divide-slate-100 dark:divide-slate-800"></div>
         </section>
+
+        <section data-mobile-screen="activity" id="debtsLedgerSection" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between gap-2">
+                <h2 class="font-extrabold text-base">حسابات الناس</h2>
+                <span class="text-[11px] text-slate-500">كل الشهور</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-900 p-3">
+                    <p class="text-xs font-bold text-sky-700 dark:text-sky-300">ليا عند الناس</p>
+                    <strong id="totalReceivablesAll" class="block text-lg font-black text-sky-800 dark:text-sky-200">0 ج.م</strong>
+                </div>
+                <div class="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 p-3">
+                    <p class="text-xs font-bold text-amber-700 dark:text-amber-300">عليا للناس</p>
+                    <strong id="totalPayablesAll" class="block text-lg font-black text-amber-800 dark:text-amber-200">0 ج.م</strong>
+                </div>
+            </div>
+            <div id="netDebtsPanel" class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 p-4 flex items-center justify-between gap-3">
+                <div><div class="text-sm font-extrabold">صافي الديون</div><div class="text-[11px] text-slate-500 dark:text-slate-400">ليا − عليا</div></div>
+                <div class="text-left"><strong id="netDebtsTotal" class="block text-xl font-black">0 ج.م</strong><span id="netDebtsStatus" class="block text-[11px] font-bold">متوازن</span></div>
+            </div>
+            <div class="flex gap-2">
+                <button type="button" id="ledgerTabReceivable" onclick="setLedgerType('receivable')" class="ledger-tab active">ليا عند الناس</button>
+                <button type="button" id="ledgerTabPayable" onclick="setLedgerType('payable')" class="ledger-tab">عليا للناس</button>
+            </div>
+            <div id="globalDebtList" class="space-y-2.5"></div>
+        </section>
+
+        <section data-mobile-screen="budget" id="monthlyBudgetSection" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between gap-2">
+                <h2 class="font-extrabold text-base flex items-center gap-2"><i data-lucide="wallet-minimal" class="w-5 h-5 text-teal-600"></i> ميزانيتي الشهرية</h2>
+                <span id="budgetMonthLabel" class="text-xs font-bold text-slate-500"></span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">المخصص</div><strong id="budgetAllocated" class="block text-sm font-black mt-1">0 ج.م</strong></div>
+                <div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">اتصرف</div><strong id="budgetSpent" class="block text-sm font-black mt-1">0 ج.م</strong></div>
+                <div id="budgetDifferenceBox" class="rounded-xl bg-teal-50 dark:bg-teal-950/40 p-3"><div id="budgetDifferenceLabel" class="budget-small">المتبقي</div><strong id="budgetDifference" class="block text-sm font-black mt-1">0 ج.م</strong></div>
+            </div>
+            <div class="space-y-2">
+                <form id="budgetForm" onsubmit="saveBudgetLimit(event)" class="grid grid-cols-2 gap-2">
+                    <div><label for="budgetCategory">البند</label><select id="budgetCategory" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></select></div>
+                    <div><label for="budgetLimit">ميزانية الشهر (ج.م)</label><input id="budgetLimit" required min="0" step="0.01" type="number" placeholder="مثلاً 2000" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
+                    <button type="submit" class="col-span-2 bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-2.5 text-sm font-bold">حفظ ميزانية البند</button>
+                </form>
+                <form onsubmit="addCustomCategory(event)" class="flex gap-2 items-end">
+                    <div class="flex-1"><label for="newCategoryName">تصنيف جديد</label><input id="newCategoryName" type="text" maxlength="40" placeholder="مثلاً: قهوة أو اشتراكات" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
+                    <button type="submit" class="shrink-0 rounded-xl bg-slate-800 dark:bg-teal-700 text-white px-4 h-[42px] text-sm font-bold">+ إضافة</button>
+                </form>
+                <div id="customCategoriesList" class="flex gap-2 flex-wrap"></div>
+                <button type="button" onclick="copyPreviousBudget()" class="text-xs font-extrabold text-teal-700 dark:text-teal-400 underline underline-offset-4">نسخ ميزانية آخر شهر سابق</button>
+            </div>
+            <div id="budgetCategoriesList" class="space-y-3"></div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">المقارنة بالمصاريف اليومية والالتزامات المسددة فقط. السلف والديون مش ضمن الاستهلاك.</p>
+        </section>
     </main>
 
     <nav id="mobileBottomNav" aria-label="التنقل بين أقسام المحفظة" class="mobile-bottom-nav">
@@ -765,6 +830,7 @@
         <button type="button" data-screen-target="activity" class="mobile-nav-item" onclick="switchMobileScreen('activity')"><i data-lucide="arrow-left-right"></i><span>الحركات</span></button>
         <button type="button" data-screen-target="salary" class="mobile-nav-item" onclick="switchMobileScreen('salary')"><i data-lucide="wallet-cards"></i><span>الراتب والسلف</span></button>
         <button type="button" data-screen-target="obligations" class="mobile-nav-item" onclick="switchMobileScreen('obligations')"><i data-lucide="calendar-check-2"></i><span>التزاماتي</span></button>
+        <button type="button" data-screen-target="budget" class="mobile-nav-item" onclick="switchMobileScreen('budget')"><i data-lucide="target"></i><span>ميزانيتي</span></button>
         <button type="button" data-screen-target="analytics" class="mobile-nav-item" onclick="switchMobileScreen('analytics')"><i data-lucide="chart-no-axes-combined"></i><span>التحليل</span></button>
     </nav>
     <button type="button" id="mobileQuickFab" class="mobile-fab" aria-label="إضافة حركة جديدة" title="إضافة حركة" onclick="openQuickEntry('expense')"><i data-lucide="plus"></i></button>
@@ -964,7 +1030,7 @@
                         <option value="expense">مصروف يومي فعلي (يخصم من الكاش)</option>
                         <option value="income">بونص / دخل إضافي (يزود الكاش فقط)</option>
                         <option value="receivable">فلوس سلفتها لحد بره (ليا عند الناس)</option>
-                    </select>
+                    <option value="payable">عليا للناس</option></select>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
@@ -1176,6 +1242,7 @@
             bills: { label: 'فواتير وخدمات', color: '#8b5cf6', bg: 'bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400' },
             installments: { label: 'أقساط والتزامات', color: '#eab308', bg: 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400' },
             health: { label: 'صحة وعلاج', color: '#ef4444', bg: 'bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400' },
+            cigarettes: { label: 'سجاير', color: '#b45309', bg: 'bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400' },
             entertainment: { label: 'ترفيه وخروجات', color: '#14b8a6', bg: 'bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400' },
             loans: { label: 'سلف وبواقي', color: '#0ea5e9', bg: 'bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400' },
             other: { label: 'أخرى', color: '#64748b', bg: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300' }
@@ -1407,6 +1474,7 @@
                 rootState.updatedAt = 0;
             }
             normalizeMonthsStructure(rootState);
+            syncCategoryRegistry();
         }
 
         function saveState(skipCloudPush = false) {
@@ -1495,6 +1563,7 @@
                     if (remoteUpdatedAt > localUpdatedAt) {
                         const preservedActiveMonth = remoteData.months[rootState.activeMonth] ? rootState.activeMonth : remoteData.activeMonth;
                         rootState = remoteData;
+                        syncCategoryRegistry();
                         rootState.activeMonth = preservedActiveMonth;
                         normalizeMonthsStructure(rootState);
                         lastSyncedUpdatedAt = remoteUpdatedAt;
@@ -2286,8 +2355,10 @@
             const extraBox = document.getElementById('receivableExtraFields');
             const catSelect = document.getElementById('txCategoryInput');
 
-            if (selectedType === 'receivable') {
+            if (selectedType === 'receivable' || selectedType === 'payable') {
                 extraBox.classList.remove('hidden');
+                const note=extraBox.querySelector('p');
+                if(note) note.textContent=selectedType==='payable'?'الدين يزود الكاش وقت الاستلاف، وعند سداده يقل الكاش في شهر السداد.':'السلفة تقلل الكاش وقت إعطائها، وعند الاسترداد تزيد الكاش في شهر الاسترداد.';
                 catSelect.value = 'loans';
             } else {
                 extraBox.classList.add('hidden');
@@ -2331,7 +2402,7 @@
                 date: dateVal
             };
 
-            if (type === 'receivable') {
+            if (type === 'receivable' || type === 'payable') {
                 newTx.personName = personName;
                 newTx.expectedReturn = expectedReturn;
                 newTx.recovered = false;
@@ -2346,11 +2417,19 @@
             document.getElementById('txPersonNameInput').value = '';
             document.getElementById('txExpectedReturnInput').value = '';
 
-            updateDashboard();
-            if (targetYm !== rootState.activeMonth) {
+            if (targetYm !== rootState.activeMonth && type !== 'receivable' && type !== 'payable') {
+                switchMonth(targetYm);
+            } else {
+                updateDashboard();
+            }
+            if (type === 'receivable' || type === 'payable') {
+                setLedgerType(type);
+                if (window.matchMedia('(max-width:767px)').matches) switchMobileScreen('activity');
+            }
+            if (targetYm !== rootState.activeMonth && type !== 'receivable' && type !== 'payable') {
                 showToast(`تم تسجيل الحركة في شهر ${formatMonthLabel(targetYm)}`);
             } else {
-                showToast('تمت إضافة الحركة بنجاح');
+                showToast(type === 'payable' ? 'اتسجل الدين ضمن عليا للناس' : type === 'receivable' ? 'اتسجلت السلفة ضمن ليا عند الناس' : 'تمت إضافة الحركة بنجاح');
             }
         }
 
@@ -2368,6 +2447,7 @@
             document.getElementById('editTxPersonNameInput').value = tx.personName || '';
             document.getElementById('editTxExpectedReturnInput').value = tx.expectedReturn || '';
             document.getElementById('editTxRecoveredCheckbox').checked = !!tx.recovered;
+            document.getElementById('editTxRecoveredCheckbox').disabled = true;
 
             handleEditTxTypeChange();
             document.getElementById('editTransactionModal').classList.remove('hidden');
@@ -2381,7 +2461,7 @@
         function handleEditTxTypeChange() {
             const typeVal = document.getElementById('editTxTypeSelect').value;
             const extraBox = document.getElementById('editReceivableExtraFields');
-            if (typeVal === 'receivable') {
+            if (typeVal === 'receivable' || typeVal === 'payable') {
                 extraBox.classList.remove('hidden');
             } else {
                 extraBox.classList.add('hidden');
@@ -2416,7 +2496,7 @@
             tx.category = newCategory;
             tx.date = newDate;
 
-            if (newType === 'receivable') {
+            if (newType === 'receivable' || newType === 'payable') {
                 tx.personName = newPersonName;
                 tx.expectedReturn = newExpectedReturn;
                 tx.recovered = newRecovered;
@@ -2449,14 +2529,8 @@
         }
 
         function markReceivableRecovered(id) {
-            const mData = getActiveMonthData();
-            const tx = mData.transactions.find(t => t.id === id);
-            if (!tx || tx.type !== 'receivable' || tx.recovered) return;
-            tx.recovered = true;
-            tx.recoveredDate = localToday();
-            saveState();
-            updateDashboard();
-            showToast(`تم استرداد ${formatCurrency(tx.amount)} ج.م وعودتها للكاش في جيبك`);
+            const ym = rootState.activeMonth;
+            settleDebtEntry(ym, id, 'receivable');
         }
 
         function deleteTransaction(id) {
@@ -2470,7 +2544,93 @@
         // ==========================================
         // 9. المحرك المحاسبي وتحديث لوحة المعلومات
         // ==========================================
+        // سجل الديون من جميع الشهور، دون ترحيل السلفة أو الدين كحركة نقدية جديدة.
+        let activeLedgerType = 'receivable';
+        function setLedgerType(type) {
+            activeLedgerType = type === 'payable' ? 'payable' : 'receivable';
+            renderDebtLedger();
+        }
+        function getGlobalDebtRecords() {
+            const all = [];
+            Object.keys(rootState.months || {}).sort().forEach(ym => {
+                const month = rootState.months[ym];
+                (month.transactions || []).forEach(tx => {
+                    if (tx.type !== 'receivable' && tx.type !== 'payable') return;
+                    all.push({...tx, _month:ym});
+                });
+            });
+            // ترحيلات النسخ القديمة مجرد مراجع للسلفة الأصلية، وليست ديون جديدة.
+            const originals = new Set(all.filter(t => !t.carriedOver).map(t => String(t.originalId || t.id)));
+            const seen = new Set();
+            return all.filter(t => {
+                const ref = String(t.originalId || t.id);
+                if (t.carriedOver && originals.has(ref)) return false;
+                if (seen.has(ref)) return false;
+                seen.add(ref);
+                return true;
+            }).sort((a,b) => (b.date||'').localeCompare(a.date||''));
+        }
+        function renderDebtLedger() {
+            const list = document.getElementById('globalDebtList');
+            if (!list) return;
+            const debts = getGlobalDebtRecords();
+            const open = kind => debts.filter(d=>d.type===kind && !d.recovered);
+            const owedToMe = open('receivable').reduce((sum,d)=>sum+(Number(d.amount)||0),0);
+            const owedByMe = open('payable').reduce((sum,d)=>sum+(Number(d.amount)||0),0);
+            const net = Math.round((owedToMe - owedByMe)*100)/100;
+            document.getElementById('totalReceivablesAll').textContent = formatCurrency(owedToMe)+' ج.م';
+            document.getElementById('totalPayablesAll').textContent = formatCurrency(owedByMe)+' ج.م';
+            const netEl=document.getElementById('netDebtsTotal'), statusEl=document.getElementById('netDebtsStatus');
+            netEl.textContent=(net>0?'+':'')+formatCurrency(net)+' ج.م';
+            netEl.className='block text-xl font-black '+(net>0?'text-emerald-600 dark:text-emerald-400':net<0?'text-rose-600 dark:text-rose-400':'text-slate-700 dark:text-slate-200');
+            statusEl.textContent=net>0?'ليك أكتر من اللي عليك':net<0?'عليك أكتر من اللي ليك':'متوازن';
+            document.getElementById('ledgerTabReceivable').classList.toggle('active',activeLedgerType==='receivable');
+            document.getElementById('ledgerTabPayable').classList.toggle('active',activeLedgerType==='payable');
+            const visible=debts.filter(d=>d.type===activeLedgerType);
+            list.innerHTML=visible.length ? visible.map(d => `
+                <div class="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 flex items-start justify-between gap-3">
+                    <div class="min-w-0 space-y-1">
+                        <div class="font-extrabold text-sm text-slate-800 dark:text-white">${escapeHTML(d.personName || d.desc || 'بدون اسم')}</div>
+                        <div class="text-[11px] text-slate-500 dark:text-slate-400">${escapeHTML(d.desc||'')} · ${escapeHTML(d.date||d._month)}</div>
+                        ${d.expectedReturn ? `<div class="text-[11px] text-slate-500">الموعد: ${escapeHTML(d.expectedReturn)}</div>` : ''}
+                        <div class="text-xs font-black ${d.recovered?'text-emerald-600':'text-amber-700 dark:text-amber-400'}">${d.recovered?'تمت التسوية':formatCurrency(d.amount)+' ج.م'}</div>
+                    </div>
+                    <div class="flex flex-col gap-2 shrink-0">
+                      ${d.recovered ? '<span class="text-[11px] font-bold text-emerald-600">✓</span>' : `<button type="button" class="rounded-xl px-3 py-2 text-white text-xs font-extrabold ${d.type==='receivable'?'bg-sky-600':'bg-amber-600'}" onclick="settleDebtEntry('${escapeHTML(d._month)}','${escapeHTML(String(d.id))}','${d.type}')">${d.type==='receivable'?'استرداد':'سداد'}</button>`}
+                    </div>
+                </div>`).join('') : '<div class="text-center text-sm text-slate-400 py-5">مفيش عمليات مسجلة</div>';
+        }
+        function settleDebtEntry(monthKey,id,kind) {
+            const origin=rootState.months?.[monthKey]?.transactions?.find(tx=>String(tx.id)===String(id));
+            if (!origin || origin.type!==kind || origin.recovered) return;
+            const amount=Number(origin.amount)||0;
+            if (!(amount>0)) return;
+            const action=kind==='receivable'?'استرداد':'سداد';
+            if (!confirm(`تأكيد ${action} ${formatCurrency(amount)} ج.م بالكامل؟`)) return;
+            const today=localToday(),settlementYm=today.slice(0,7);
+            if (!rootState.months[settlementYm]) rootState.months[settlementYm]=createEmptyMonth(settlementYm);
+            origin.recovered=true;
+            origin.recoveredDate=today;
+            origin.settledViaLedger=true;
+            // نسخ الترحيل القديمة لنفس الدين لازم تعكس حالة التسوية.
+            const originalRef=String(origin.originalId||origin.id);
+            Object.values(rootState.months).forEach(m=>(m.transactions||[]).forEach(tx=>{
+                if (tx!==origin && tx.type===kind && String(tx.originalId||tx.id)===originalRef) {
+                    tx.recovered=true;tx.recoveredDate=today;tx.settledViaLedger=true;
+                }
+            }));
+            rootState.months[settlementYm].transactions.unshift({
+                id:newEntryId('settlement'),type:'debt_settlement',direction:kind,
+                originId:originalRef,amount,date:today,category:'loans',
+                desc:(kind==='receivable'?'استرداد من ':'سداد إلى ')+(origin.personName||origin.desc||'')
+            });
+            saveState();
+            updateDashboard();
+            showToast(`تم ${action} ${formatCurrency(amount)} ج.م`);
+        }
+
         function updateDashboard() {
+            if (rootState.customCategories && Object.keys(rootState.customCategories).some(k=>!CATEGORIES[k])) syncCategoryRegistry();
             const mData = getActiveMonthData();
 
             const monthlySalary = parseFloat(mData.monthlySalary) || 0;
@@ -2535,9 +2695,7 @@
                 } else if (tx.type === 'income') {
                     bonusIncomeTotal += amt;
                 } else if (tx.type === 'receivable') {
-                    if (!tx.recovered && !tx.carriedOver) {
-                        activeLentOutTotal += amt;
-                    }
+                    if (!tx.carriedOver && (!tx.recovered || tx.settledViaLedger)) activeLentOutTotal += amt;
                 }
             });
 
@@ -2550,7 +2708,13 @@
                 - dailyExpensesTotal
                 - fixedPaidActualTotal
                 - activeLentOutTotal
-                + (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && tx.carriedOver && tx.recovered ? (Number(tx.amount) || 0) : 0), 0);
+                + (mData.transactions || []).reduce((sum, tx) => {
+                    const amt = Number(tx.amount) || 0;
+                    if (tx.type === 'payable') return sum + amt;
+                    if (tx.type === 'debt_settlement') return sum + (tx.direction === 'receivable' ? amt : -amt);
+                    return sum;
+                }, 0)
+                + (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && tx.carriedOver && tx.recovered && !tx.settledViaLedger ? (Number(tx.amount) || 0) : 0), 0);
             currentCashInHand = cashInHand;
 
             const actualConsumption = dailyExpensesTotal + fixedPaidActualTotal;
@@ -2646,6 +2810,8 @@
             }
 
             renderCategoryAnalytics(categoryTotals, actualConsumption);
+            renderBudgetSection();
+            renderDebtLedger();
             renderTransactions();
             lucide.createIcons();
         }
@@ -2676,7 +2842,7 @@
             emptyPlaceholder.classList.add('hidden');
             const [topKey, topVal] = entries[0];
             const topPct = Math.round((topVal / totalActualConsumption) * 100);
-            topBadge.textContent = `الأعلى صرفاً: ${CATEGORIES[topKey].label} (${topPct}%)`;
+            topBadge.textContent = `الأعلى صرفاً: ${(CATEGORIES[topKey] || CATEGORIES.other).label} (${topPct}%)`;
 
             listEl.innerHTML = entries.slice(0, 5).map(([key, val]) => {
                 const cat = CATEGORIES[key] || CATEGORIES.other;
@@ -2807,6 +2973,11 @@
                     typeBadge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">بونص / دخل إضافي</span>`;
                     amountColor = 'text-emerald-600 dark:text-emerald-400';
                     amountPrefix = '+';
+                } else if (tx.type === 'debt_settlement') {
+                    const received = tx.direction === 'receivable';
+                    typeBadge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${received?'bg-emerald-50 text-emerald-700':'bg-rose-50 text-rose-700'}">${received?'كاش دخل · استرداد دين':'كاش خرج · سداد دين'}</span>`;
+                    amountColor = received?'text-emerald-600 dark:text-emerald-400':'text-rose-600 dark:text-rose-400';
+                    amountPrefix = received?'+':'-';
                 } else if (tx.type === 'receivable') {
                     if (tx.recovered) {
                         typeBadge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">تم استردادها ✓</span>`;
@@ -2823,7 +2994,13 @@
                     }
                 }
 
-                const personInfo = tx.type === 'receivable' && (tx.personName || tx.expectedReturn)
+                if (tx.type === 'payable') {
+                    typeBadge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700">عليا للناس</span>`;
+                    amountColor = 'text-emerald-600 dark:text-emerald-400';
+                    amountPrefix = '+';
+                    if (!tx.recovered) actionBtn = `<button type="button" onclick="settleDebtEntry('${rootState.activeMonth}','${tx.id}','payable')" class="px-2 py-1 rounded-lg bg-amber-600 text-white text-xs font-bold">سداد</button>`;
+                }
+                const personInfo = (tx.type === 'receivable' || tx.type === 'payable') && (tx.personName || tx.expectedReturn)
                     ? `<span class="text-[11px] text-sky-700 dark:text-sky-300 font-semibold">
                         ${tx.personName ? `عند: ${escapeHTML(tx.personName)}` : ''}
                         ${tx.expectedReturn ? ` • موعد الرد: ${tx.expectedReturn}` : ''}
@@ -2995,6 +3172,7 @@
                     if (!confirm('استعادة النسخة الاحتياطية هتستبدل كل البيانات الحالية. هل تريد المتابعة؟')) return;
                     rootState = parsed;
                     normalizeMonthsStructure(rootState);
+                    syncCategoryRegistry();
                     saveState();
                     applyTheme();
                     renderMonthSelector();
@@ -3023,9 +3201,140 @@
             startCloudPolling();
         });
 
+
+        // ميزانية شهرية مستقلة لكل شهر وتصنيف، محفوظة مع نفس حالة Firebase.
+        const BASE_BUDGET_CATEGORIES = ['food','transport','shopping','bills','installments','health','entertainment','cigarettes','other'];
+        let BUDGET_CATEGORIES = [...BASE_BUDGET_CATEGORIES];
+        // Custom categories live in the same rootState as the monthly financial data.
+        const BUILTIN_CATEGORY_KEYS = new Set(Object.keys(CATEGORIES));
+        const CUSTOM_COLORS = ['#0d9488','#8b5cf6','#ec4899','#2563eb','#c2410c','#64748b'];
+        function syncCategoryRegistry(){
+            if (!rootState.customCategories || typeof rootState.customCategories !== 'object' || Array.isArray(rootState.customCategories)) rootState.customCategories={};
+            // Remove old locally constructed category entries before loading cloud/imported state.
+            for (const key of Object.keys(CATEGORIES)) if (!BUILTIN_CATEGORY_KEYS.has(key)) delete CATEGORIES[key];
+            for (const [key,cat] of Object.entries(rootState.customCategories)) {
+                if (!/^custom_[a-z0-9_]{1,48}$/.test(key) || !cat || typeof cat.name!=='string') continue;
+                const label=cat.name.trim().slice(0,40);
+                if (!label)continue;
+                CATEGORIES[key]={label,color:CUSTOM_COLORS[Object.keys(CATEGORIES).length % CUSTOM_COLORS.length],bg:'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'};
+            }
+            BUDGET_CATEGORIES=[...BASE_BUDGET_CATEGORIES,...Object.keys(CATEGORIES).filter(k=>!BUILTIN_CATEGORY_KEYS.has(k))];
+            for (const id of ['txCategoryInput','editTxCategoryInput','fixedCategoryInput','editFixedCategoryInput','filterCategorySelect','budgetCategory']) {
+                const el=document.getElementById(id);if(!el)continue;
+                const prior=el.value;
+                const keys=id==='filterCategorySelect'?['all',...Object.keys(CATEGORIES)]:id==='budgetCategory'?BUDGET_CATEGORIES:Object.keys(CATEGORIES);
+                el.innerHTML=keys.map(k=>`<option value="${k}">${k==='all'?'كل التصنيفات':escapeHTML((CATEGORIES[k] || CATEGORIES.other).label)}</option>`).join('');
+                if(keys.includes(prior))el.value=prior;
+                else if(id==='filterCategorySelect')el.value='all';
+                else if(id==='txCategoryInput')el.value='food';
+            }
+            const holder=document.getElementById('customCategoriesList');
+            if(holder)holder.innerHTML=Object.entries(rootState.customCategories).filter(([k])=>CATEGORIES[k]).map(([k,cat])=>`<span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold">${escapeHTML(cat.name)} <button type="button" onclick="removeCustomCategory('${k}')" title="حذف التصنيف" class="text-rose-600 px-1">×</button></span>`).join('');
+        }
+        function addCustomCategory(e){
+            e.preventDefault();
+            const input=document.getElementById('newCategoryName'),name=input.value.trim();
+            if(!name || name.length>40){showToast('اكتب اسم تصنيف صحيح','error');return;}
+            if(Object.values(CATEGORIES).some(c=>c.label.toLocaleLowerCase('ar')===name.toLocaleLowerCase('ar'))){showToast('التصنيف موجود بالفعل','error');return;}
+            const key='custom_'+newEntryId('cat').replace(/[^a-z0-9_]/gi,'').toLowerCase();
+            if(!rootState.customCategories)rootState.customCategories={};
+            rootState.customCategories[key]={name};
+            input.value='';
+            saveState();syncCategoryRegistry();
+            document.getElementById('budgetCategory').value=key;
+            updateDashboard();showToast('تمت إضافة '+name);
+        }
+        function removeCustomCategory(key){
+            if(!rootState.customCategories || !rootState.customCategories[key])return;
+            const used=Object.values(rootState.months||{}).some(m=>(m.transactions||[]).some(t=>t.category===key)||(m.fixedCommitments||[]).some(f=>f.category===key)||(m.budgets&&Object.prototype.hasOwnProperty.call(m.budgets,key)));
+            if(used){showToast('التصنيف مستخدم في بيانات أو ميزانيات؛ مش ممكن حذفه','error');return;}
+            if(!confirm('حذف التصنيف؟'))return;
+            delete rootState.customCategories[key];saveState();syncCategoryRegistry();updateDashboard();
+        }
+        function budgetActuals(m) {
+            const totals = {};
+            BUDGET_CATEGORIES.forEach(k => totals[k]=0);
+            (m.transactions||[]).forEach(tx=>{
+                if(tx.type !== 'expense') return;
+                const k=BUDGET_CATEGORIES.includes(tx.category)?tx.category:'other';
+                totals[k]+=Math.max(0,Number(tx.amount)||0);
+            });
+            (m.fixedCommitments||[]).forEach(fc=>{
+                if(!fc.paid)return;
+                const k=BUDGET_CATEGORIES.includes(fc.category)?fc.category:'other';
+                totals[k]+=Math.max(0,Number(fc.actualPaidAmount)||0);
+            });
+            return totals;
+        }
+        function renderBudgetSection() {
+            const section=document.getElementById('monthlyBudgetSection');
+            if(!section)return;
+            const m=getActiveMonthData();
+            const limits=(m.budgets && typeof m.budgets==='object' && !Array.isArray(m.budgets))?m.budgets:{};
+            const actual=budgetActuals(m);
+            const configured=BUDGET_CATEGORIES.filter(k=>Object.prototype.hasOwnProperty.call(limits,k)&&Number.isFinite(Number(limits[k]))&&Number(limits[k])>=0);
+            const allocated=configured.reduce((s,k)=>s+Number(limits[k]),0);
+            const spentConfigured=configured.reduce((s,k)=>s+actual[k],0);
+            const spentAll=BUDGET_CATEGORIES.reduce((s,k)=>s+actual[k],0);
+            const diff=allocated-spentConfigured;
+            const selector=document.getElementById('budgetCategory');
+            if(selector.options.length!==BUDGET_CATEGORIES.length)syncCategoryRegistry();
+            document.getElementById('budgetMonthLabel').textContent=formatMonthLabel(rootState.activeMonth);
+            document.getElementById('budgetAllocated').textContent=formatCurrency(allocated)+' ج.م';
+            document.getElementById('budgetSpent').textContent=formatCurrency(spentAll)+' ج.م';
+            document.getElementById('budgetDifferenceLabel').textContent=diff<0?'تجاوزت المخصص':'المتبقي من المخصص';
+            document.getElementById('budgetDifference').textContent=formatCurrency(Math.abs(diff))+' ج.م';
+            document.getElementById('budgetDifferenceBox').className='rounded-xl p-3 '+(diff<0?'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300':'bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300');
+            const entries=BUDGET_CATEGORIES.filter(k=>configured.includes(k)||actual[k]>0);
+            document.getElementById('budgetCategoriesList').innerHTML=entries.length?entries.map(k=>{
+                const limit=Number(limits[k])||0,spent=actual[k],hasLimit=configured.includes(k);
+                const diff=limit-spent,pct=limit>0?Math.round(spent/limit*100):0;
+                const over=hasLimit&&spent>limit;
+                const barColor=over?'#ef4444':pct>=80?'#f59e0b':'#0d9488';
+                return `<div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/50 space-y-2">
+                    <div class="flex justify-between gap-2 items-start"><div class="font-extrabold text-sm">${escapeHTML((CATEGORIES[k] || CATEGORIES.other).label)}</div><button type="button" onclick="editBudgetCategory('${k}')" class="text-xs font-bold text-teal-700 dark:text-teal-300">${hasLimit?'تعديل':'تحديد ميزانية'}</button></div>
+                    <div class="budget-small flex justify-between gap-1"><span>صرف: ${formatCurrency(spent)} ج.م</span><span>${hasLimit?'المخصص: '+formatCurrency(limit)+' ج.م':'بدون ميزانية محددة'}</span></div>
+                    ${hasLimit?`<div class="budget-progress"><span style="width:${Math.min(100,pct)}%;background:${barColor}"></span></div>
+                    <div class="text-xs font-extrabold ${over?'text-rose-600':'text-teal-700 dark:text-teal-300'}">${over?'زيادة '+formatCurrency(-diff):'متبقي '+formatCurrency(diff)} ج.م ${limit>0?'• '+pct+'% من المخصص':''}</div>`:''}
+                </div>`;
+            }).join(''):'<p class="text-sm text-slate-400 text-center py-6">حدد ميزانية لأول بند علشان تتابع صرفك</p>';
+            if(spentAll>spentConfigured){
+                const el=document.createElement('p');el.className='text-xs font-bold text-amber-700 dark:text-amber-300';
+                el.textContent='مصاريف بدون ميزانية محددة: '+formatCurrency(spentAll-spentConfigured)+' ج.م';
+                document.getElementById('budgetCategoriesList').appendChild(el);
+            }
+        }
+        function editBudgetCategory(k){
+            const m=getActiveMonthData();
+            document.getElementById('budgetCategory').value=k;
+            const v=m.budgets&&Object.prototype.hasOwnProperty.call(m.budgets,k)?m.budgets[k]:'';
+            document.getElementById('budgetLimit').value=v;
+            document.getElementById('budgetLimit').focus();
+            document.getElementById('budgetForm').scrollIntoView({behavior:'smooth',block:'center'});
+        }
+        function saveBudgetLimit(e){
+            e.preventDefault();
+            const k=document.getElementById('budgetCategory').value;
+            const raw=document.getElementById('budgetLimit').value;
+            const amount=Number(raw);
+            if(!BUDGET_CATEGORIES.includes(k)||raw.trim()===''||!Number.isFinite(amount)||amount<0){showToast('راجع قيمة الميزانية','error');return;}
+            const m=getActiveMonthData();
+            if(!m.budgets||typeof m.budgets!=='object'||Array.isArray(m.budgets))m.budgets={};
+            m.budgets[k]=Math.round(amount*100)/100;
+            saveState();updateDashboard();showToast('تم حفظ ميزانية '+(CATEGORIES[k] || CATEGORIES.other).label);
+        }
+        function copyPreviousBudget(){
+            const prev=Object.keys(rootState.months||{}).filter(k=>k<rootState.activeMonth&&rootState.months[k].budgets&&Object.keys(rootState.months[k].budgets).length).sort().pop();
+            if(!prev){showToast('مفيش ميزانية محفوظة لشهر سابق','error');return;}
+            const m=getActiveMonthData();
+            if(m.budgets&&Object.keys(m.budgets).length&&!confirm('ده هيستبدل الميزانيات المحددة للشهر الحالي. موافق؟'))return;
+            m.budgets={...rootState.months[prev].budgets};
+            saveState();updateDashboard();showToast('تم نسخ الميزانية من '+formatMonthLabel(prev));
+        }
+
         // تنقل الموبايل: لا يلمس حالة المحفظة أو مفاتيح Firebase.
         let mobileActiveScreen = 'home';
-        const mobileScreenLabels = {home:'الرئيسية',activity:'الحركات',salary:'الراتب والسلف',obligations:'التزاماتي',analytics:'التحليل'};
+        const mobileScreenLabels = {home:'الرئيسية',activity:'الحركات',salary:'الراتب والسلف',obligations:'التزاماتي',analytics:'التحليل',budget:'ميزانيتي'};
         function switchMobileScreen(screen) {
             if (!Object.prototype.hasOwnProperty.call(mobileScreenLabels,screen)) return;
             mobileActiveScreen = screen;
