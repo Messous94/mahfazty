@@ -2,17 +2,17 @@
 <html lang="ar" dir="rtl" class="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="mahfaza messi" />
-    <title>mahfaza messi</title>
+    <meta name="apple-mobile-web-app-title" content="mahfazet messi" />
+    <title>mahfazet messi</title>
 
-    <link rel="manifest" href="manifest.json?v=6" />
-    <link rel="icon" type="image/png" href="wallet.png?v=6" />
-    <link rel="apple-touch-icon" href="wallet.png?v=6" />
+    <link rel="manifest" href="manifest.json?v=7" />
+    <link rel="icon" type="image/png" href="wallet.png?v=7" />
+    <link rel="apple-touch-icon" href="wallet.png?v=7" />
 
     <!-- خط Cairo العربي -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@
 
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).catch(console.warn));
         }
     </script>
 
@@ -74,6 +74,17 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(148, 163, 184, 0.7);
+        }
+        /* PWA: mobile-first readability and safe-area spacing */
+        html { -webkit-text-size-adjust: 100%; }
+        body { padding-bottom: max(3.5rem, env(safe-area-inset-bottom)); }
+        input, select, textarea { max-width: 100%; }
+        @media (max-width: 639px) {
+          main { padding-top: 1rem !important; }
+          main > section { min-width: 0; }
+          .grid > *, .flex > * { min-width: 0; }
+          input, select, textarea { font-size: 16px !important; }
+          #toastContainer { bottom: calc(16px + env(safe-area-inset-bottom)); }
         }
     </style>
 </head>
@@ -1018,11 +1029,11 @@
                 </div>
 
                 <div>
-                    <label for="workspaceKeyInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">رمز المحفظة السري (Workspace Key)</label>
+                    <label for="workspaceKeyInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">معرّف المحفظة (ليس كلمة مرور)</label>
                     <input type="text" id="workspaceKeyInput" required dir="ltr" placeholder="Messous1"
                         class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-sky-500">
                     <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                        استخدم نفس الرمز السري على الموبايل واللابتوب لتتزامن نفس المحفظة فوراً.
+                        استخدم نفس المعرّف على الجهازين. تنبيه: المعرّف وحده لا يحمي بياناتك؛ لازم تضبط صلاحيات Firebase Authentication وDatabase Rules.
                     </p>
                 </div>
 
@@ -1063,6 +1074,10 @@
         let syncPollInterval = null;
         let isSyncInFlight = false;
         let lastSyncedUpdatedAt = 0;
+        let localRevision = 0;
+        let cloudPushPending = false;
+        let cloudOperation = null;
+        const initialCloudConfig = { ...cloudConfig };
 
         const CATEGORIES = {
             food: { label: 'أكل وشرب', color: '#f97316', bg: 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400' },
@@ -1096,6 +1111,21 @@
         // ==========================================
         // 2. دوال المساعدة والتنسيق
         // ==========================================
+        function localToday() {
+            const now = new Date();
+            return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+        }
+
+        function newEntryId(prefix) {
+            return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+        }
+
+        function isValidDate(dateStr) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr || '')) return false;
+            const d = new Date(`${dateStr}T12:00:00`);
+            return !isNaN(d.getTime()) && `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` === dateStr;
+        }
+
         function getCurrentYearMonth() {
             const now = new Date();
             return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -1237,7 +1267,7 @@
         }
 
         function normalizeMonthsStructure(stateObj) {
-            if (!stateObj.months || typeof stateObj.months !== 'object') {
+            if (!stateObj.months || typeof stateObj.months !== 'object' || Array.isArray(stateObj.months)) {
                 stateObj.months = {};
             }
             Object.keys(stateObj.months).forEach(ym => {
@@ -1291,7 +1321,9 @@
 
         function saveState(skipCloudPush = false) {
             if (!skipCloudPush) {
-                rootState.updatedAt = Date.now();
+                rootState.updatedAt = Math.max(Date.now(), (Number(rootState.updatedAt) || 0) + 1);
+                localRevision++;
+                cloudPushPending = true;
             }
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(rootState));
@@ -1305,103 +1337,100 @@
 
         function scheduleCloudPush() {
             if (syncPushTimer) clearTimeout(syncPushTimer);
-            updateCloudStatusUI('syncing', 'جاري الحفظ...');
+            updateCloudStatusUI('syncing', 'في انتظار حفظ آخر تعديل...');
             syncPushTimer = setTimeout(() => {
+                syncPushTimer = null;
                 pushStateToCloud(false);
-            }, 600);
+            }, 700);
         }
 
         async function pushStateToCloud(showFeedback = false) {
-            if (isSyncInFlight) return;
+            if (isSyncInFlight) {
+                cloudPushPending = true;
+                return;
+            }
             isSyncInFlight = true;
+            cloudOperation = 'push';
+            const revisionAtStart = localRevision;
+            const snapshot = JSON.stringify(rootState);
+            cloudPushPending = false;
             updateCloudStatusUI('syncing');
-
             try {
                 const response = await fetch(getFirebaseEndpoint(), {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(rootState)
+                    body: snapshot
                 });
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                lastSyncedUpdatedAt = rootState.updatedAt || Date.now();
-                updateCloudStatusUI('connected');
-                if (showFeedback) {
-                    showToast('تم رفع بياناتك وحفظها على السحابة بنجاح ✓');
-                }
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const snapshotTime = JSON.parse(snapshot).updatedAt || 0;
+                lastSyncedUpdatedAt = snapshotTime;
+                if (localRevision !== revisionAtStart) cloudPushPending = true;
+                updateCloudStatusUI(cloudPushPending ? 'syncing' : 'connected');
+                if (showFeedback && !cloudPushPending) showToast('تم حفظ آخر نسخة من البيانات على السحابة');
             } catch (err) {
                 console.warn('Firebase push error:', err);
+                cloudPushPending = true;
                 updateCloudStatusUI('offline');
-                if (showFeedback) {
-                    showToast('تعذر الاتصال بقاعدة البيانات، البيانات محفوظة محلياً', 'error');
-                }
+                if (showFeedback) showToast('فشل الرفع للسحابة؛ البيانات محفوظة محلياً فقط', 'error');
             } finally {
                 isSyncInFlight = false;
+                cloudOperation = null;
+                if (cloudPushPending && navigator.onLine) scheduleCloudRetry();
             }
         }
 
+        let cloudRetryTimer = null;
+        function scheduleCloudRetry() {
+            if (cloudRetryTimer || syncPushTimer) return;
+            cloudRetryTimer = setTimeout(() => {
+                cloudRetryTimer = null;
+                if (cloudPushPending) pushStateToCloud(false);
+            }, 3500);
+        }
+
         async function pullStateFromCloud(isInitial = false, showFeedback = false) {
-            if (isSyncInFlight || syncPushTimer) return;
+            if (isSyncInFlight || syncPushTimer || cloudPushPending) return;
             isSyncInFlight = true;
-            if (isInitial || showFeedback) {
-                updateCloudStatusUI('syncing');
-            }
-
+            cloudOperation = 'pull';
+            const revisionAtStart = localRevision;
+            if (isInitial || showFeedback) updateCloudStatusUI('syncing');
             try {
-                const response = await fetch(getFirebaseEndpoint(), {
-                    method: 'GET',
-                    cache: 'no-store'
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
+                const response = await fetch(getFirebaseEndpoint(), { method: 'GET', cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const remoteData = await response.json();
-
+                if (localRevision !== revisionAtStart) return;
                 if (remoteData && typeof remoteData === 'object' && remoteData.months) {
                     const remoteUpdatedAt = Number(remoteData.updatedAt) || 0;
                     const localUpdatedAt = Number(rootState.updatedAt) || 0;
-
                     if (remoteUpdatedAt > localUpdatedAt) {
-                        const preservedActiveMonth = remoteData.months[rootState.activeMonth]
-                            ? rootState.activeMonth
-                            : remoteData.activeMonth;
+                        const preservedActiveMonth = remoteData.months[rootState.activeMonth] ? rootState.activeMonth : remoteData.activeMonth;
                         rootState = remoteData;
                         rootState.activeMonth = preservedActiveMonth;
                         normalizeMonthsStructure(rootState);
                         lastSyncedUpdatedAt = remoteUpdatedAt;
-
                         saveState(true);
                         applyTheme();
                         renderMonthSelector();
                         syncInputsFromActiveMonth();
                         updateDashboard();
-                        if (showFeedback) {
-                            showToast('تم تحديث البيانات من السحابة بنجاح ✓');
-                        }
-                    } else if (isInitial && localUpdatedAt > remoteUpdatedAt && hasMeaningfulData(rootState)) {
-                        isSyncInFlight = false;
-                        await pushStateToCloud(false);
-                        return;
+                        if (showFeedback) showToast('تم تحميل أحدث بيانات من السحابة');
+                    } else if (localUpdatedAt > remoteUpdatedAt && hasMeaningfulData(rootState)) {
+                        cloudPushPending = true;
                     } else if (showFeedback) {
-                        showToast('بياناتك محدّثة بالفعل بأحدث نسخة ✓');
+                        showToast('البيانات محدثة بالفعل');
                     }
-                } else if (isInitial && hasMeaningfulData(rootState)) {
-                    if (!rootState.updatedAt) rootState.updatedAt = Date.now();
-                    isSyncInFlight = false;
-                    await pushStateToCloud(false);
-                    return;
+                } else if (hasMeaningfulData(rootState)) {
+                    cloudPushPending = true;
                 }
-
-                updateCloudStatusUI('connected');
+                updateCloudStatusUI(cloudPushPending ? 'syncing' : 'connected');
             } catch (err) {
                 console.warn('Firebase pull error:', err);
                 updateCloudStatusUI('offline');
-                if (showFeedback) {
-                    showToast('تعذر الاتصال بالسحابة حالياً، تعمل بالنسخة المحلية', 'error');
-                }
+                if (showFeedback) showToast('تعذر الوصول للسحابة؛ البيانات المحلية لم تتغير', 'error');
             } finally {
                 isSyncInFlight = false;
+                cloudOperation = null;
+                if (cloudPushPending && navigator.onLine) scheduleCloudRetry();
             }
         }
 
@@ -1427,16 +1456,21 @@
 
         function saveCloudConfig(e) {
             e.preventDefault();
-            cloudConfig.dbUrl = normalizeDbUrl(document.getElementById('firebaseUrlInput').value);
-            cloudConfig.workspaceKey = sanitizeWorkspaceKey(document.getElementById('workspaceKeyInput').value);
+            const newUrl = normalizeDbUrl(document.getElementById('firebaseUrlInput').value);
+            const newKey = sanitizeWorkspaceKey(document.getElementById('workspaceKeyInput').value);
+            if (newUrl !== cloudConfig.dbUrl || newKey !== cloudConfig.workspaceKey) {
+                if (!confirm('تغيير المحفظة السحابية قد يستبدل البيانات الظاهرة عند سحب النسخة الجديدة. اعمل نسخة احتياطية أولاً. هل تريد المتابعة؟')) return;
+            }
+            cloudConfig.dbUrl = newUrl;
+            cloudConfig.workspaceKey = newKey;
             saveCloudConfigToStorage();
             closeCloudSyncModal();
             pullStateFromCloud(true, true);
         }
 
         function manualSyncNow() {
-            if (syncPushTimer) {
-                clearTimeout(syncPushTimer);
+            if (syncPushTimer || cloudPushPending) {
+                if (syncPushTimer) clearTimeout(syncPushTimer);
                 syncPushTimer = null;
                 pushStateToCloud(true);
             } else {
@@ -1449,8 +1483,10 @@
                 clearTimeout(syncPushTimer);
                 syncPushTimer = null;
             }
-            rootState.updatedAt = Date.now();
-            saveState(true);
+            if (!confirm('هيتم استبدال نسخة السحابة بالكامل بالبيانات الموجودة على الجهاز ده. هل أنت متأكد؟')) return;
+            saveState();
+            if (syncPushTimer) clearTimeout(syncPushTimer);
+            syncPushTimer = null;
             pushStateToCloud(true);
         }
 
@@ -1569,7 +1605,7 @@
 
             const newMonth = createEmptyMonth(targetYm);
             if (carryBalance) {
-                newMonth.openingBalance = Math.max(0, Math.round(currentCashInHand * 100) / 100);
+                newMonth.openingBalance = Math.round(currentCashInHand * 100) / 100;
             }
             if (copyFixed) {
                 newMonth.fixedCommitments = (prevData.fixedCommitments || []).map((fc, idx) => ({
@@ -1591,7 +1627,9 @@
                 const pendingReceivables = prevData.transactions.filter(tx => tx.type === 'receivable' && !tx.recovered);
                 newMonth.transactions = pendingReceivables.map((tx, idx) => ({
                     ...tx,
-                    id: `tx_carried_${Date.now()}_${idx}`,
+                    id: newEntryId('tx_carried'),
+                    originalId: tx.originalId || tx.id,
+                    carriedOver: carryBalance,
                     date: `${targetYm}-01`
                 }));
             }
@@ -1639,7 +1677,7 @@
             document.getElementById('deductionDaysInput').value = mData.deductionDays || 0;
             document.getElementById('salaryReceivedCheckbox').checked = !!mData.salaryReceived;
 
-            const today = new Date().toISOString().slice(0, 10);
+            const today = localToday();
             const defaultDate = today.startsWith(rootState.activeMonth) ? today : `${rootState.activeMonth}-01`;
             document.getElementById('txDateInput').value = defaultDate;
             document.getElementById('borrowDateInput').value = defaultDate;
@@ -1691,7 +1729,7 @@
             }
 
             rootState.months[targetYm].borrowings.unshift({
-                id: 'brw_' + Date.now(),
+                id: newEntryId('brw'),
                 amount,
                 source,
                 date: dateVal,
@@ -1838,7 +1876,7 @@
 
             const mData = getActiveMonthData();
             mData.fixedCommitments.push({
-                id: 'fc_' + Date.now(),
+                id: newEntryId('fc'),
                 name,
                 category,
                 expectedAmount,
@@ -1866,7 +1904,7 @@
             document.getElementById('payFixedExpectedHint').textContent = `${formatCurrency(fc.expectedAmount)} ج.م`;
             document.getElementById('payFixedActualInput').value = fc.expectedAmount;
 
-            const today = new Date().toISOString().slice(0, 10);
+            const today = localToday();
             document.getElementById('payFixedDateInput').value = today.startsWith(rootState.activeMonth) ? today : `${rootState.activeMonth}-01`;
 
             updatePayVariancePreview();
@@ -2195,7 +2233,7 @@
             }
 
             const newTx = {
-                id: 'tx_' + Date.now(),
+                id: newEntryId('tx'),
                 desc,
                 amount,
                 type,
@@ -2293,7 +2331,7 @@
                 tx.expectedReturn = newExpectedReturn;
                 tx.recovered = newRecovered;
                 if (newRecovered && !tx.recoveredDate) {
-                    tx.recoveredDate = new Date().toISOString().slice(0, 10);
+                    tx.recoveredDate = localToday();
                 } else if (!newRecovered) {
                     delete tx.recoveredDate;
                 }
@@ -2325,7 +2363,7 @@
             const tx = mData.transactions.find(t => t.id === id);
             if (!tx || tx.type !== 'receivable' || tx.recovered) return;
             tx.recovered = true;
-            tx.recoveredDate = new Date().toISOString().slice(0, 10);
+            tx.recoveredDate = localToday();
             saveState();
             updateDashboard();
             showToast(`تم استرداد ${formatCurrency(tx.amount)} ج.م وعودتها للكاش في جيبك`);
@@ -2355,7 +2393,8 @@
             const netSalaryAfterAdvances = Math.max(0, netSalaryAfterAbsence - totalBorrowed);
 
             const isSalaryReceived = !!mData.salaryReceived;
-            const salaryCashContribution = isSalaryReceived ? netSalaryAfterAbsence : 0;
+            // السلف أُضيفت للكاش عند استلامها؛ لا تعيد إضافتها عند صرف الراتب.
+            const salaryCashContribution = isSalaryReceived ? (netSalaryAfterAbsence - totalBorrowed) : 0;
 
             document.getElementById('dailyRateDisplay').textContent = formatCurrency(dailyRate);
             document.getElementById('absenceDeductionDisplay').textContent = formatCurrency(absenceDeduction);
@@ -2406,7 +2445,7 @@
                 } else if (tx.type === 'income') {
                     bonusIncomeTotal += amt;
                 } else if (tx.type === 'receivable') {
-                    if (!tx.recovered) {
+                    if (!tx.recovered && !tx.carriedOver) {
                         activeLentOutTotal += amt;
                     }
                 }
@@ -2420,7 +2459,8 @@
                 + salaryCashContribution
                 - dailyExpensesTotal
                 - fixedPaidActualTotal
-                - activeLentOutTotal;
+                - activeLentOutTotal
+                + (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && tx.carriedOver && tx.recovered ? (Number(tx.amount) || 0) : 0), 0);
             currentCashInHand = cashInHand;
 
             const actualConsumption = dailyExpensesTotal + fixedPaidActualTotal;
@@ -2439,7 +2479,8 @@
                 ? 'شامل صافي الراتب بعد استلامه نهاية الشهر'
                 : 'الراتب مستحق آخر الشهر (لم يُصرف بعد)';
             document.getElementById('borrowedCashSubDisplay').textContent = `+${formatCurrency(totalBorrowed)}`;
-            document.getElementById('lentOutSubDisplay').textContent = `-${formatCurrency(activeLentOutTotal)}`;
+            const outstandingReceivables = (mData.transactions || []).reduce((sum, tx) => sum + (tx.type === 'receivable' && !tx.recovered ? (Number(tx.amount) || 0) : 0), 0);
+            document.getElementById('lentOutSubDisplay').textContent = `-${formatCurrency(outstandingReceivables)}`;
 
             const actualConsumptionDisplay = document.getElementById('actualConsumptionDisplay');
             actualConsumptionDisplay.textContent = `${formatCurrency(actualConsumption)} ج.م`;
@@ -2478,6 +2519,8 @@
 
             document.getElementById('reservedFixedSubDisplay').textContent = formatCurrency(fixedUnpaidReservedTotal);
             document.getElementById('currentBorrowedSubDisplay').textContent = formatCurrency(totalBorrowed);
+            document.getElementById('currentBorrowedSubDisplay').className = totalBorrowed >= 9000 ? 'text-rose-700 dark:text-rose-300 font-black' : 'text-rose-600 dark:text-rose-400';
+            document.getElementById('totalBorrowedDisplay').className = totalBorrowed >= 9000 ? 'block text-sm sm:text-base font-black text-red-600 dark:text-red-400 mt-1' : 'block text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400 mt-1';
 
             if (safeBorrowingLimit >= 0) {
                 safeCard.className = 'bg-emerald-50/70 dark:bg-emerald-950/25 rounded-2xl p-5 border-2 border-emerald-300/80 dark:border-emerald-800/70 shadow-sm flex flex-col justify-between transition-colors';
@@ -2498,6 +2541,18 @@
                 safeAmtEl.textContent = `-${formatCurrency(deficit)} ج.م`;
                 safeMsgEl.className = 'text-[11px] font-extrabold text-rose-600 dark:text-rose-300 mt-1';
                 safeMsgEl.textContent = `تجاوزت الحد الآمن وعليك عجز متوقع بقيمة ${formatCurrency(deficit)} ج.م`;
+            }
+
+            // تنبيه بصري فقط: إجمالي السلف 9000 جنيه أو أكثر.
+            // لا نغيّر الأرقام المحاسبية أو أيقونة التثبيت على الشاشة الرئيسية.
+            if (totalBorrowed >= 9000) {
+                safeIconBox.className = 'w-8 h-8 rounded-xl bg-red-100 dark:bg-red-900/60 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 ring-2 ring-red-400';
+                safeIconBox.innerHTML = '<i data-lucide="alert-circle" class="w-4 h-4"></i>';
+                safeIconBox.title = 'تنبيه: إجمالي السلف وصل إلى 9000 جنيه أو أكثر';
+                document.getElementById('totalBorrowedDisplay').title = 'وصلت لحد تنبيه السلف 9000 جنيه';
+            } else {
+                safeIconBox.removeAttribute('title');
+                document.getElementById('totalBorrowedDisplay').removeAttribute('title');
             }
 
             renderCategoryAnalytics(categoryTotals, actualConsumption);
@@ -2741,6 +2796,12 @@
             document.body.removeChild(tempTextarea);
         }
 
+        function safeCsvText(value) {
+            const str = String(value ?? '');
+            const safe = /^[=+@\-\t\r]/.test(str.trimStart()) ? "'" + str : str;
+            return '"' + safe.replace(/"/g, '""') + '"';
+        }
+
         function exportCSV() {
             const ym = rootState.activeMonth;
             const mData = getActiveMonthData();
@@ -2766,7 +2827,7 @@
                 csv += 'سلف وسحوبات على حساب الراتب\n';
                 csv += 'اليوم,التاريخ,المصدر / الجهة,المبلغ,ملاحظة\n';
                 mData.borrowings.forEach(b => {
-                    csv += `${getArabicDayName(b.date)},${b.date},"${(b.source || '').replace(/"/g, '""')}",${b.amount},"${(b.note || '-').replace(/"/g, '""')}"\n`;
+                    csv += `${getArabicDayName(b.date)},${b.date},${safeCsvText(b.source)},${b.amount},${safeCsvText(b.note || '-')}\n`;
                 });
                 csv += '\n';
             }
@@ -2776,7 +2837,7 @@
                 csv += 'الالتزام,التصنيف,يوم الاستحقاق,الحالة,المبلغ التقديري,المبلغ الفعلي المدفوع,تاريخ السداد\n';
                 mData.fixedCommitments.forEach(fc => {
                     const catLabel = (CATEGORIES[fc.category] || CATEGORIES.bills).label;
-                    csv += `"${(fc.name || '').replace(/"/g, '""')}",${catLabel},${fc.dueDay || '-'},${fc.paid ? 'تم السداد' : 'غير مسدد'},${fc.expectedAmount},${fc.paid ? fc.actualPaidAmount : '-'},${fc.paidDate || '-'}\n`;
+                    csv += `${safeCsvText(fc.name)},${catLabel},${fc.dueDay || '-'},${fc.paid ? 'تم السداد' : 'غير مسدد'},${fc.expectedAmount},${fc.paid ? fc.actualPaidAmount : '-'},${fc.paidDate || '-'}\n`;
                 });
                 csv += '\n';
             }
@@ -2792,7 +2853,7 @@
             (mData.transactions || []).forEach(tx => {
                 const catLabel = (CATEGORIES[tx.category] || CATEGORIES.other).label;
                 const statusSuffix = tx.type === 'receivable' ? (tx.recovered ? ' (مُستردة)' : ' (نشطة)') : '';
-                csv += `${getArabicDayName(tx.date)},${tx.date},"${(tx.desc || '').replace(/"/g, '""')}",${typeNames[tx.type] || tx.type}${statusSuffix},${catLabel},"${(tx.personName || '-').replace(/"/g, '""')}",${tx.expectedReturn || '-'},${tx.amount}\n`;
+                csv += `${getArabicDayName(tx.date)},${tx.date},${safeCsvText(tx.desc)},${typeNames[tx.type] || tx.type}${statusSuffix},${catLabel},${safeCsvText(tx.personName || '-')},${tx.expectedReturn || '-'},${tx.amount}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -2813,7 +2874,7 @@
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `mahfazty_backup_${new Date().toISOString().slice(0, 10)}.json`;
+            link.download = `mahfazty_backup_${localToday()}.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -2841,7 +2902,9 @@
                     if (!parsed.activeMonth || !parsed.months[parsed.activeMonth]) {
                         parsed.activeMonth = Object.keys(parsed.months).sort().pop();
                     }
+                    if (!confirm('استعادة النسخة الاحتياطية هتستبدل كل البيانات الحالية. هل تريد المتابعة؟')) return;
                     rootState = parsed;
+                    normalizeMonthsStructure(rootState);
                     saveState();
                     applyTheme();
                     renderMonthSelector();
