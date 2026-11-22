@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="light">
+
+<html class="light" dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="theme-color" content="#f8f6ff" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="mahfazet messi" />
-    <title>mahfazet messi</title>
-
-    <link rel="manifest" href="manifest.json?v=8" />
-    <link rel="icon" type="image/png" href="wallet.png?v=8" />
-    <link rel="apple-touch-icon" href="wallet.png?v=8" />
-
-    <!-- خط Cairo العربي -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control">
+<meta content="#f8f6ff" name="theme-color">
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="mahfazet messi" name="apple-mobile-web-app-title"/>
+<title>mahfazet messi</title>
+<link href="manifest.json?v=8" rel="manifest"/>
+<link href="wallet.png?v=8" rel="icon" type="image/png"/>
+<link href="wallet.png?v=8" rel="apple-touch-icon"/>
+<!-- خط Cairo العربي -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -33,20 +31,16 @@
             }
         };
     </script>
-
-    <!-- Chart.js للرسوم البيانية -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <script>
+<!-- Chart.js للرسوم البيانية -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).catch(console.warn));
         }
     </script>
-
-    <style>
+<style>
         body {
             font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
@@ -296,1061 +290,1100 @@ html.dark .mobile-nav-item.active{color:#c5b0ff!important}
 html.dark .ledger-tab{background:#282338!important;border-color:#423957!important;color:#c4bcd4!important}
 html.dark .ledger-tab.active{background:#443360!important;border-color:#6f5aa9!important;color:#f3efff!important}
 
+
+/* === Minimal Fintech | Soft Lavender — clean mobile experience === */
+:root{--fin-bg:#faf9fc;--fin-paper:#ffffff;--fin-text:#272333;--fin-muted:#85818f;--fin-line:#eceaf0;--fin-accent:#8572b8;--fin-soft:#f3effa}
+html:not(.dark) body{background:var(--fin-bg)!important;color:var(--fin-text)!important}
+html:not(.dark) header{background:rgba(250,249,252,.97)!important;border-bottom:1px solid var(--fin-line)!important;box-shadow:none!important}
+html:not(.dark) header .bg-gradient-to-br{background:#eee9f7!important;color:#7862ac!important;box-shadow:none!important}
+html:not(.dark) header .bg-gradient-to-br svg{color:#7862ac!important}
+html:not(.dark) #appMain>section:not([data-mobile-screen="home"]):not(.mobile-mixed),html:not(.dark) #appMain .mobile-mixed>div[data-mobile-screen],html:not(.dark) #appMain [data-mobile-screen="home"]>div,html:not(.dark) #debtsLedgerSection,html:not(.dark) #monthlyBudgetSection{border-color:var(--fin-line)!important;box-shadow:none!important}
+html:not(.dark) #appMain h2,html:not(.dark) #appMain h3{color:#312d3b!important}
+html:not(.dark) #appMain input,html:not(.dark) #appMain select,html:not(.dark) #appMain textarea{border-color:#e8e5ee!important}
+html:not(.dark) #appMain button.bg-indigo-600,html:not(.dark) #appMain button.bg-teal-700{background:#8572b8!important}
+html:not(.dark) #appMain [class*="rounded-3xl"],html:not(.dark) #appMain [class*="rounded-2xl"]{border-radius:15px!important}
+html:not(.dark) #appMain [class*="shadow-lg"],html:not(.dark) #appMain [class*="shadow-md"],html:not(.dark) #appMain [class*="shadow-sm"]{box-shadow:none!important}
+@media(max-width:767px){
+ html{scroll-padding-top:75px}
+ body{padding-bottom:calc(89px + env(safe-area-inset-bottom))!important}
+ #appMain{padding:12px 17px 0!important;gap:16px!important}
+ #appMain section[data-mobile-screen="home"].mobile-screen-active{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch}
+ #appMain [data-mobile-screen="home"]>div{min-width:0!important;border-radius:14px!important;padding:14px!important;box-shadow:none!important;min-height:unset!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2){grid-column:1/-1!important;grid-row:1!important;background:#f0eafb!important;border:0!important;padding:21px 21px 17px!important;border-radius:16px!important;color:#302a42!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) .text-white{color:#302a42!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) [class*="text-slate-300"],#appMain [data-mobile-screen="home"]>div:nth-child(2) [class*="text-indigo-200"]{color:#6c647b!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) #cashInHandDisplay{font-size:38px!important;line-height:1.4!important;color:#302a42!important;font-weight:800!important;letter-spacing:-.8px}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) .grid.grid-cols-2{border-color:#ddd2f0!important;gap:12px!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) .grid.grid-cols-2>div:nth-child(-n+2){background:rgba(255,255,255,.52);border-radius:11px;padding:9px}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) #cashFlowInDisplay{color:#168967!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) #cashFlowOutDisplay{color:#ba5970!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(2) #cashFlowNetDisplay{color:#302a42!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3){grid-column:1!important;grid-row:2!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(4){grid-column:2!important;grid-row:2!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(1){grid-column:1/-1!important;grid-row:3!important;flex-direction:row!important;align-items:center!important;gap:15px!important;background:transparent!important;border:0!important;border-top:1px solid #e8e5ed!important;border-radius:0!important;padding:13px 3px 0!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(1)>div:nth-child(2){margin:0!important;margin-inline-start:auto!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(1)>div:last-child{display:none!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(1) #openingBalanceDisplay{font-size:19px!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3),#appMain [data-mobile-screen="home"]>div:nth-child(4){background:white!important;border:1px solid #efedf3!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3) .text-2xl,#appMain [data-mobile-screen="home"]>div:nth-child(4) .text-2xl{font-size:23px!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3)>div:last-child,#appMain [data-mobile-screen="home"]>div:nth-child(4)>div:last-child{display:none!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3) [id$="IconBox"],#appMain [data-mobile-screen="home"]>div:nth-child(4) [id$="IconBox"]{background:transparent!important;width:auto!important;height:auto!important}
+ #appMain [data-mobile-screen="home"]>div:nth-child(3) p,#appMain [data-mobile-screen="home"]>div:nth-child(4) p{display:none!important}
+ #appMain .mobile-home-actions{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+ #appMain .mobile-quick-grid{gap:9px!important}
+ #appMain .mobile-quick-grid button{border:1px solid #eeebf3!important;border-radius:12px!important;background:white!important;box-shadow:none!important}
+ #appMain section[data-mobile-screen="salary"],#appMain section[data-mobile-screen="obligations"],#appMain section[data-mobile-screen="activity"],#appMain section[data-mobile-screen="analytics"],#appMain section[data-mobile-screen="budget"],#appMain section[data-mobile-screen="more"]{border-radius:15px!important;padding:16px!important;box-shadow:none!important}
+ #appMain #transactionsListContainer>div,#appMain #borrowingListGrid>div,#appMain #fixedCommitmentsGrid>div,#appMain #globalDebtList>div,#appMain #budgetCategoriesList>div{box-shadow:none!important;border-radius:12px!important}
+ #debtsLedgerSection>div.grid.grid-cols-2>div{background:#f8f7fa!important;border:0!important;border-radius:12px!important}
+ #netDebtsPanel{background:#f8f7fa!important;border:0!important;border-radius:12px!important}
+ #monthlyBudgetSection>div.grid.grid-cols-3>div{border-radius:10px!important;background:#f8f7fa!important}
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{min-height:72px!important;background:rgba(255,255,255,.98)!important;border-top:1px solid #ebe9ef!important;box-shadow:none!important;gap:15px!important;padding:8px 18px calc(8px + env(safe-area-inset-bottom))!important;justify-content:space-between!important}
+ .mobile-nav-item,.dark .mobile-nav-item{color:#95909e!important;flex:1!important;min-width:0!important;max-width:none!important;font-size:10px!important;font-weight:600!important;gap:3px!important;border:0!important;background:transparent!important;border-radius:0!important}
+ .mobile-nav-item.active,.dark .mobile-nav-item.active{color:#7963a6!important;background:transparent!important}
+ .mobile-nav-item svg{height:21px!important;width:21px!important;stroke-width:1.7!important;transform:none!important}
+ .mobile-nav-item.active svg{stroke-width:2.2!important;transform:none!important}
+ .mobile-fab{width:50px!important;height:50px!important;border-radius:15px!important;background:#8572b8!important;box-shadow:0 5px 15px rgba(89,68,130,.15)!important;bottom:calc(84px + env(safe-area-inset-bottom))!important}
+ .mobile-more-list button{background:transparent!important;border:0!important;border-bottom:1px solid #eceaf0!important;border-radius:0!important;box-shadow:none!important;padding:14px 4px!important}
+ .more-list-icon{background:#f3effa!important;color:#8572b8!important;border-radius:11px!important}
+ .more-list-text small,.mobile-more-subtitle{display:none!important}
+ .mobile-home-heading{font-weight:700!important}
+ #homeRecentSection{grid-column:1/-1!important;margin-top:3px!important}
+ #homeRecentSection .recent-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 2px;border-bottom:1px solid #eeecf2}
+ #homeRecentSection .recent-item:last-child{border-bottom:0}
+ #homeRecentSection .recent-title{font-size:13px;font-weight:700;color:#332e3f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #homeRecentSection .recent-date{font-size:10px;color:#918b9d;margin-top:3px}
+ #homeRecentSection .recent-amount{font-weight:800;font-size:13px;white-space:nowrap}
+ #homeRecentSection .recent-empty{padding:18px 4px;color:#918b9d;text-align:center;font-size:12px}
+}
+html.dark body{background:#1c1925!important}
+html.dark #appMain [data-mobile-screen="home"]>div:nth-child(2){background:#332a46!important;color:#f6f1ff!important}
+html.dark #appMain [data-mobile-screen="home"]>div:nth-child(2) #cashInHandDisplay{color:#f6f1ff!important}
+html.dark .mobile-bottom-nav{background:#24202e!important;border-color:#393143!important}
+html.dark #homeRecentSection .recent-title{color:#f6f1ff}
+html.dark #homeRecentSection .recent-item{border-color:#393143}
+
+
+@media(max-width:767px){#homeRecentSection.mobile-screen-active{display:block!important}#homeRecentSection{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}#homeRecentList{border:1px solid #eeebf2}}
 </style>
-</head>
+</meta></meta><style>
+/* Approved Minimal Fintech × Lavender design. Cosmetic layer, no data migrations. */
+@media (max-width:767px) {
+ html {scroll-behavior:smooth}
+ body {background:#F8F7FC!important;color:#292531!important}
+ #appMain {padding:10px 18px 0!important;gap:17px!important}
+ #appMain [data-mobile-screen].mobile-screen-active {animation:walletScreenIn .18s ease both}
+ @keyframes walletScreenIn {from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+ header {background:rgba(248,247,252,.98)!important;border-bottom:1px solid #F0EDF5!important;box-shadow:none!important}
+ header h1{color:#292531!important;font-size:17px!important;letter-spacing:-.4px}
+ header p{display:none!important}
+ header [class*="bg-gradient"]{background:#EEE8F8!important;color:#75639A!important;box-shadow:none!important}
+ #appMain section[data-mobile-screen="home"].mobile-screen-active {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important}
+ #appMain #homeHeroCard{order:1!important;grid-column:1/-1!important;grid-row:auto!important;background:#7663A6!important;color:white!important;padding:21px 20px 19px!important;border:0!important;border-radius:16px!important;box-shadow:none!important;min-height:140px!important;margin-bottom:10px}
+ #appMain #homeHeroCard .text-white,#appMain #homeHeroCard #cashInHandDisplay{color:#fff!important}
+ #appMain #homeHeroCard .text-indigo-100,#appMain #homeHeroCard .text-indigo-200,#appMain #homeHeroCard #cashInHandStatusHint{color:#EAE3F7!important}
+ #appMain #homeHeroCard #cashInHandDisplay{font-size:36px!important;font-weight:800!important;line-height:1.48!important;letter-spacing:-.7px}
+ #appMain #homeHeroCard>div:first-child>span:last-child {background:rgba(255,255,255,.13)!important}
+ #appMain #homeHeroCard .my-2\.5 {margin-top:12px!important;margin-bottom:0!important}
+ #appMain #homeFlowStats {order:2;grid-column:1/-1!important;grid-row:auto!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:2px 0 9px!important;padding:9px 0 12px!important;border:0!important;border-bottom:1px solid #E9E5F0!important;background:transparent!important}
+ #appMain #homeFlowStats .home-flow-stat,#appMain #homeFlowStats .home-flow-net{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;min-width:0!important;border:0!important;padding:4px 9px!important;background:transparent!important;border-radius:0!important}
+ #appMain #homeFlowStats .home-flow-net {grid-column:auto!important;flex-direction:column!important;gap:3px!important}
+ #appMain #homeFlowStats span{display:block!important;color:#80798B!important;font-size:10px!important;font-weight:500!important;white-space:normal!important;line-height:1.5}
+ #appMain #homeFlowStats strong{display:block!important;font-size:clamp(13px,4vw,17px)!important;line-height:1.5!important;font-weight:750!important;white-space:nowrap!important}
+ #appMain #homeFlowStats #cashFlowInDisplay {color:#21785E!important}
+ #appMain #homeFlowStats #cashFlowOutDisplay {color:#C75E63!important}
+ #appMain #homeFlowStats #cashFlowNetDisplay {color:#463D58!important}
+ #appMain #homeFlowStats .home-flow-extra{display:none!important}
+ #appMain #actualConsumptionCard,#appMain #safeBorrowingCard{order:4!important;grid-column:auto!important;grid-row:auto!important;display:flex!important;padding:10px 8px!important;border:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;gap:2px!important}
+ #appMain #actualConsumptionCard {grid-column:1/2!important}
+ #appMain #safeBorrowingCard {grid-column:2/4!important;border-right:1px solid #E9E5F0!important;padding-right:20px!important}
+ #appMain #actualConsumptionCard span:first-child,#appMain #safeBorrowingCard span:first-child{color:#80798B!important;font-size:11px!important;font-weight:600!important}
+ #appMain #actualConsumptionCard #actualConsumptionDisplay,#appMain #safeBorrowingCard #safeBorrowingAmountDisplay{font-size:19px!important;font-weight:750!important;margin-top:4px!important}
+ #appMain #actualConsumptionCard [id$="IconBox"],#appMain #safeBorrowingCard [id$="IconBox"]{display:none!important}
+ #appMain #actualConsumptionCard>div:last-child,#appMain #safeBorrowingCard>div:last-child{display:none!important}
+ #appMain #actualConsumptionCard p,#appMain #safeBorrowingCard p{display:none!important}
+ #appMain #homeOpeningCard{order:5!important;grid-column:1/-1!important;grid-row:auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;padding:12px 3px 3px!important;border:0!important;border-top:1px solid #E9E5F0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important}
+ #appMain #homeOpeningCard>.my-2\.5{margin:0!important}
+ #appMain #homeOpeningCard #openingBalanceDisplay{font-size:17px!important}
+ #appMain #homeOpeningCard>div:last-child{display:none!important}
+ #appMain #homeOpeningCard span{font-size:11px!important;color:#80798B!important}
+ #appMain #homeRecentSection.mobile-screen-active{display:block!important;animation:walletScreenIn .18s ease both}
+ #appMain #homeRecentSection,#appMain #homeBudgetPreview{padding:6px 1px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+ #homeRecentSection #homeRecentList{background:transparent!important;border:0!important;padding:0!important}
+ #homeRecentSection .recent-item{padding:13px 2px!important;border-bottom:1px solid #E9E5F0!important}
+ #homeRecentSection .recent-title{color:#292531!important;font-size:13px!important;font-weight:600!important}
+ #homeRecentSection .recent-date{color:#898293!important}
+ #homeRecentSection .recent-amount{font-weight:650!important}
+ #homeRecentSection h2{font-size:15px!important;font-weight:700!important;color:#292531!important}
+ #homeRecentSection button{color:#7663A6!important;font-weight:600!important}
+ #appMain #homeBudgetPreview{display:none!important}
+ #appMain #homeBudgetPreview.mobile-screen-active{display:block!important}
+ .home-preview-head{display:flex;align-items:center;justify-content:space-between;width:100%;color:#292531;font-size:15px;font-weight:700;padding:2px 0 12px;background:transparent;border:0;text-align:right}
+ .home-preview-percent{font-size:18px;color:#7663A6}
+ .home-budget-track{height:7px;border-radius:99px;background:#E6E1EC;overflow:hidden}
+ .home-budget-track span{display:block;height:100%;background:#8B76B3;border-radius:99px;transition:width .2s ease}
+ .home-budget-meta{display:flex;justify-content:space-between;gap:8px;color:#80798B;font-size:11px;margin-top:9px}
+ #appMain section[data-mobile-screen="salary"],#appMain section[data-mobile-screen="obligations"],#appMain section[data-mobile-screen="activity"],#appMain section[data-mobile-screen="analytics"],#appMain section[data-mobile-screen="budget"],#appMain section[data-mobile-screen="more"],#appMain .mobile-mixed>div{background:transparent!important;border:0!important;box-shadow:none!important;padding:10px 0!important}
+ #appMain [data-mobile-screen="activity"] #transactionsListContainer>div,#appMain #globalDebtList>div,#appMain #fixedCommitmentsGrid>div,#appMain #borrowingListGrid>div,#appMain #budgetCategoriesList>div{border:0!important;border-bottom:1px solid #E9E5F0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:14px 2px!important}
+ #appMain [data-mobile-screen="activity"] #transactionsListContainer{border:0!important}
+ #appMain #monthlyBudgetSection .grid.grid-cols-3>div{background:transparent!important;border:0!important;padding:6px!important;border-radius:0!important}
+ #appMain #monthlyBudgetSection .grid.grid-cols-3>div:not(:last-child){border-left:1px solid #E9E5F0!important}
+ #appMain #budgetCategoriesList .budget-progress{height:6px!important;border-radius:99px!important;background:#E6E1EC!important}
+ #appMain #budgetCategoriesList .budget-progress span{background:#8B76B3}
+ #appMain #monthlyBudgetSection form{padding:14px 0!important}
+ #appMain .mobile-more-list button{padding:15px 2px!important;border:0!important;border-bottom:1px solid #E9E5F0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+ #appMain .more-list-icon{background:#EEEAF5!important;color:#756397!important;border-radius:11px!important}
+ #appMain .more-list-text strong{font-weight:600!important;color:#292531!important}
+ #appMain .mobile-more-title{color:#292531!important;font-weight:700!important}
+ .mobile-bottom-nav,.dark .mobile-bottom-nav{background:rgba(255,255,255,.97)!important;min-height:72px!important;border-top:1px solid #E9E5F0!important;box-shadow:none!important;padding:8px 17px calc(8px + env(safe-area-inset-bottom))!important;justify-content:space-between!important;gap:17px!important}
+ .mobile-nav-item,.dark .mobile-nav-item{flex:1 1 0!important;min-width:0!important;background:transparent!important;border:0!important;color:#A6A0AF!important;border-radius:0!important;font-weight:500!important;font-size:10px!important;padding:7px 3px!important;gap:4px!important}
+ .mobile-nav-item.active,.dark .mobile-nav-item.active{color:#7663A6!important;background:transparent!important;font-weight:700!important}
+ .mobile-nav-item svg{height:20px!important;width:20px!important;stroke-width:1.8!important;transform:none!important}
+ .mobile-nav-item.active svg{stroke-width:2.2!important}
+ .mobile-fab{border-radius:15px!important;width:50px!important;height:50px!important;background:#7663A6!important;box-shadow:0 5px 14px rgba(99,81,139,.16)!important}
+ #appMain input,#appMain select{border-radius:11px!important}
+}
+@media (max-width:767px) and (prefers-reduced-motion:reduce){#appMain [data-mobile-screen].mobile-screen-active{animation:none!important}}
+html.dark body{background:#1C1925!important}
+html.dark #appMain #homeHeroCard{background:#4B3A68!important}
+html.dark #appMain #homeFlowStats span,html.dark #appMain #homeOpeningCard span{color:#B5AEC3!important}
+html.dark #appMain #homeFlowStats #cashFlowNetDisplay{color:#D9CFF0!important}
+html.dark #appMain #homeRecentSection .recent-title,html.dark #appMain .home-preview-head,html.dark #appMain .more-list-text strong{color:#F5F0FF!important}
+html.dark .mobile-bottom-nav{background:#24202E!important;border-color:#393143!important}
+</style></head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 pb-14">
+<!-- إشعار عائم (Toast Container) -->
+<div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-11/12 max-w-md" id="toastContainer"></div>
+<!-- الشريط العلوي (Navbar) -->
+<header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+<!-- الشعار والعنوان -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-emerald-500 text-white flex items-center justify-center shadow-md shadow-indigo-500/20 shrink-0">
+<i class="w-5 h-5" data-lucide="wallet"></i>
+</div>
+<div>
+<h1 class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">محفظتي</h1>
+<p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">فلوسك تحت السيطرة</p>
+</div>
+</div>
+<!-- مبدّل الشهور والأرشيف (Month Switcher) -->
+<div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/90 p-1.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 order-3 sm:order-2 w-full sm:w-auto justify-between sm:justify-center">
+<button class="p-2 rounded-xl hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all" onclick="navigateMonth(-1)" title="الشهر السابق" type="button">
+<i class="w-4 h-4" data-lucide="chevron-right"></i>
+</button>
+<div class="flex items-center gap-2 px-1">
+<i class="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" data-lucide="calendar-days"></i>
+<select aria-label="اختر الشهر" class="bg-transparent font-extrabold text-sm text-slate-800 dark:text-white focus:outline-none cursor-pointer pr-1" id="monthSelector" onchange="switchMonth(this.value)"></select>
+</div>
+<button class="p-2 rounded-xl hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all" onclick="navigateMonth(1)" title="الشهر التالي" type="button">
+<i class="w-4 h-4" data-lucide="chevron-left"></i>
+</button>
+<button class="mr-1 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm transition-all shrink-0" onclick="openNewMonthModal()" type="button">
+<i class="w-3.5 h-3.5" data-lucide="plus"></i>
+<span>شهر جديد</span>
+</button>
+</div>
+<!-- أدوات التحكم والنسخ الاحتياطي -->
+<div class="flex items-center gap-1.5 order-2 sm:order-3">
+<button class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 text-xs font-bold flex items-center gap-1.5 transition-all" onclick="copyCodeForGoogleSites()" title="نسخ كود الصفحة كاملاً للّصق في Google Sites" type="button">
+<i class="w-4 h-4" data-lucide="code-2"></i>
+<span class="hidden md:inline">نسخ الكود لـ Google Sites</span>
+</button>
+<!-- زر ومؤشر المزامنة السحابية Firebase -->
+<button class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all" onclick="openCloudSyncModal()" title="إعدادات المزامنة السحابية بين الموبايل واللابتوب" type="button">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shrink-0" id="cloudStatusDot"></span>
+<span class="hidden sm:inline" id="cloudStatusText">جاري الاتصال...</span>
+<i class="w-4 h-4 sm:hidden" data-lucide="cloud"></i>
+</button>
+<button class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors" onclick="exportCSV()" title="تصدير الشهر الحالي إلى Excel (CSV)" type="button">
+<i class="w-4 h-4" data-lucide="file-spreadsheet"></i>
+</button>
+<button class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors" onclick="exportJsonBackup()" title="تنزيل نسخة احتياطية كاملة لكل الشهور (JSON)" type="button">
+<i class="w-4 h-4" data-lucide="download"></i>
+</button>
+<button class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors" onclick="triggerJsonImport()" title="استعادة نسخة احتياطية (JSON)" type="button">
+<i class="w-4 h-4" data-lucide="upload"></i>
+</button>
+<input accept=".json,application/json" class="hidden" id="jsonImportInput" onchange="importJsonBackup(event)" type="file"/>
+<button class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 transition-colors" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري" type="button">
+<i class="w-4 h-4" data-lucide="moon" id="themeIcon"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- المحتوى الرئيسي -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6" id="appMain">
+<!-- 1. البطاقات الرئيسية الأربعة (Summary Cards) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-mobile-screen="home">
+<!-- بطاقة 1: رصيد أول المدة (المرحّل من الشهر السابق) -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between" id="homeOpeningCard">
+<div class="flex items-center justify-between gap-2">
+<span class="text-xs font-extrabold text-slate-500 dark:text-slate-400">رصيد أول الشهر</span>
+<button class="p-1.5 rounded-lg bg-slate-100 hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-indigo-950/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 transition-colors" onclick="toggleOpeningBalanceEdit()" title="تعديل رصيد أول المدة" type="button">
+<i class="w-3.5 h-3.5" data-lucide="pencil"></i>
+</button>
+</div>
+<div class="my-2.5">
+<div class="cursor-pointer group" id="openingBalanceView" onclick="toggleOpeningBalanceEdit()">
+<div class="text-2xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors" id="openingBalanceDisplay">0 ج.م</div>
+</div>
+<div class="hidden mt-1 flex items-center gap-1.5" id="openingBalanceEditBox">
+<input class="w-full px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-indigo-400 text-sm font-extrabold focus:outline-none" id="openingBalanceInput" placeholder="0" step="any" type="number"/>
+<button class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-bold" onclick="saveOpeningBalance()" type="button">حفظ</button>
+</div>
+</div>
+<div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
+<span>بونص ودخل إضافي:</span>
+<strong class="text-emerald-600 dark:text-emerald-400 font-extrabold" id="bonusIncomeSubDisplay">+0 ج.م</strong>
+</div>
+</div>
+<!-- بطاقة 2: الكاش الفعلي في جيبي الآن (السيولة اليومية) -->
+<div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-900 text-white rounded-2xl p-5 shadow-lg shadow-indigo-500/15 flex flex-col justify-between" id="homeHeroCard">
+<div class="flex items-center justify-between gap-2">
+<span class="text-xs font-extrabold text-indigo-100">الكاش المتاح</span>
+<span class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+<i class="w-4 h-4 text-white" data-lucide="banknote"></i>
+</span>
+</div>
+<div class="my-2.5">
+<div class="text-2xl sm:text-3xl font-black tracking-tight" id="cashInHandDisplay">0 ج.م</div>
+<p class="text-[11px] text-indigo-200 mt-1" id="cashInHandStatusHint">الراتب مستحق آخر الشهر (لم يُصرف بعد)</p>
+</div>
 
-    <!-- إشعار عائم (Toast Container) -->
-    <div id="toastContainer" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-11/12 max-w-md"></div>
-
-    <!-- الشريط العلوي (Navbar) -->
-    <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-            
-            <!-- الشعار والعنوان -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-emerald-500 text-white flex items-center justify-center shadow-md shadow-indigo-500/20 shrink-0">
-                    <i data-lucide="wallet" class="w-5 h-5"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">محفظتي</h1>
-                    <p class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">فلوسك تحت السيطرة</p>
-                </div>
-            </div>
-
-            <!-- مبدّل الشهور والأرشيف (Month Switcher) -->
-            <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/90 p-1.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 order-3 sm:order-2 w-full sm:w-auto justify-between sm:justify-center">
-                <button type="button" onclick="navigateMonth(-1)" title="الشهر السابق" class="p-2 rounded-xl hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all">
-                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
-                
-                <div class="flex items-center gap-2 px-1">
-                    <i data-lucide="calendar-days" class="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0"></i>
-                    <select id="monthSelector" onchange="switchMonth(this.value)" aria-label="اختر الشهر" class="bg-transparent font-extrabold text-sm text-slate-800 dark:text-white focus:outline-none cursor-pointer pr-1"></select>
-                </div>
-
-                <button type="button" onclick="navigateMonth(1)" title="الشهر التالي" class="p-2 rounded-xl hover:bg-white dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all">
-                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                </button>
-
-                <button type="button" onclick="openNewMonthModal()" class="mr-1 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm transition-all shrink-0">
-                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                    <span>شهر جديد</span>
-                </button>
-            </div>
-
-            <!-- أدوات التحكم والنسخ الاحتياطي -->
-            <div class="flex items-center gap-1.5 order-2 sm:order-3">
-                <button type="button" onclick="copyCodeForGoogleSites()" title="نسخ كود الصفحة كاملاً للّصق في Google Sites" class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/70 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 text-xs font-bold flex items-center gap-1.5 transition-all">
-                    <i data-lucide="code-2" class="w-4 h-4"></i>
-                    <span class="hidden md:inline">نسخ الكود لـ Google Sites</span>
-                </button>
-
-                <!-- زر ومؤشر المزامنة السحابية Firebase -->
-                <button type="button" onclick="openCloudSyncModal()" title="إعدادات المزامنة السحابية بين الموبايل واللابتوب"
-                    class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all">
-                    <span id="cloudStatusDot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
-                    <span id="cloudStatusText" class="hidden sm:inline">جاري الاتصال...</span>
-                    <i data-lucide="cloud" class="w-4 h-4 sm:hidden"></i>
-                </button>
-
-                <button type="button" onclick="exportCSV()" title="تصدير الشهر الحالي إلى Excel (CSV)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
-                    <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-                </button>
-
-                <button type="button" onclick="exportJsonBackup()" title="تنزيل نسخة احتياطية كاملة لكل الشهور (JSON)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                </button>
-
-                <button type="button" onclick="triggerJsonImport()" title="استعادة نسخة احتياطية (JSON)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
-                    <i data-lucide="upload" class="w-4 h-4"></i>
-                </button>
-                <input type="file" id="jsonImportInput" accept=".json,application/json" onchange="importJsonBackup(event)" class="hidden">
-
-                <button type="button" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 transition-colors">
-                    <i id="themeIcon" data-lucide="moon" class="w-4 h-4"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- المحتوى الرئيسي -->
-    <main id="appMain" class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
-
-        <!-- 1. البطاقات الرئيسية الأربعة (Summary Cards) -->
-        <section data-mobile-screen="home" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <!-- بطاقة 1: رصيد أول المدة (المرحّل من الشهر السابق) -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
-                <div class="flex items-center justify-between gap-2">
-                    <span class="text-xs font-extrabold text-slate-500 dark:text-slate-400">رصيد أول الشهر</span>
-                    <button type="button" onclick="toggleOpeningBalanceEdit()" title="تعديل رصيد أول المدة" class="p-1.5 rounded-lg bg-slate-100 hover:bg-indigo-50 dark:bg-slate-800 dark:hover:bg-indigo-950/60 text-slate-600 dark:text-slate-300 hover:text-indigo-600 transition-colors">
-                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
-                    </button>
-                </div>
-                <div class="my-2.5">
-                    <div id="openingBalanceView" onclick="toggleOpeningBalanceEdit()" class="cursor-pointer group">
-                        <div id="openingBalanceDisplay" class="text-2xl font-black text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">0 ج.م</div>
-                    </div>
-                    <div id="openingBalanceEditBox" class="hidden mt-1 flex items-center gap-1.5">
-                        <input type="number" id="openingBalanceInput" step="any" placeholder="0" class="w-full px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-indigo-400 text-sm font-extrabold focus:outline-none">
-                        <button type="button" onclick="saveOpeningBalance()" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-bold">حفظ</button>
-                    </div>
-                </div>
-                <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <span>بونص ودخل إضافي:</span>
-                    <strong id="bonusIncomeSubDisplay" class="text-emerald-600 dark:text-emerald-400 font-extrabold">+0 ج.م</strong>
-                </div>
-            </div>
-
-            <!-- بطاقة 2: الكاش الفعلي في جيبي الآن (السيولة اليومية) -->
-            <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-900 text-white rounded-2xl p-5 shadow-lg shadow-indigo-500/15 flex flex-col justify-between">
-                <div class="flex items-center justify-between gap-2">
-                    <span class="text-xs font-extrabold text-indigo-100">الكاش المتاح</span>
-                    <span class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
-                        <i data-lucide="banknote" class="w-4 h-4 text-white"></i>
-                    </span>
-                </div>
-                <div class="my-2.5">
-                    <div id="cashInHandDisplay" class="text-2xl sm:text-3xl font-black tracking-tight">0 ج.م</div>
-                    <p id="cashInHandStatusHint" class="text-[11px] text-indigo-200 mt-1">الراتب مستحق آخر الشهر (لم يُصرف بعد)</p>
-                </div>
-                <div class="grid grid-cols-2 gap-3 pt-3 border-t border-white/15 text-xs">
-                    <div><span class="block text-slate-300">كاش داخل الشهر</span><strong id="cashFlowInDisplay" class="text-emerald-300 font-black text-base">+0 ج.م</strong></div>
-                    <div><span class="block text-slate-300">كاش خارج الشهر</span><strong id="cashFlowOutDisplay" class="text-rose-300 font-black text-base">-0 ج.م</strong></div>
-                    <div class="col-span-2 flex justify-between items-center border-t border-white/10 pt-2"><span class="text-slate-200">صافي حركة الشهر</span><strong id="cashFlowNetDisplay" class="text-white font-extrabold">0 ج.م</strong></div>
-                    <div class="col-span-2 flex justify-between items-center text-[11px] text-slate-300"><span>بونص ودخل: <strong id="cashBonusDisplay" class="text-emerald-300">+0</strong></span><span>سلف: <strong id="borrowedCashSubDisplay" class="text-white">+0</strong></span><span>ليك بره: <strong id="lentOutSubDisplay" class="text-sky-300">-0</strong></span></div>
-                </div>
-            </div>
-
-            <!-- بطاقة 3: إجمالي استهلاكي الفعلي (بعيداً عن الديون والسلف) -->
-            <div id="actualConsumptionCard" class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between transition-colors">
-                <div class="flex items-center justify-between gap-2">
-                    <span id="actualConsumptionTitle" class="text-xs font-extrabold text-slate-500 dark:text-slate-400">إجمالي المصاريف</span>
-                    <span id="actualConsumptionIconBox" class="w-8 h-8 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 transition-colors">
-                        <i id="actualConsumptionIcon" data-lucide="shopping-bag" class="w-4 h-4"></i>
-                    </span>
-                </div>
-                <div class="my-2.5">
-                    <div id="actualConsumptionDisplay" class="text-2xl font-black text-rose-600 dark:text-rose-400">0 ج.م</div>
-                    <p id="actualConsumptionHint" class="text-[11px] text-slate-400 mt-1">المصاريف المدفوعة</p>
-                </div>
-                <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <span>يومي: <strong id="dailyExpensesSubDisplay" class="text-slate-700 dark:text-slate-200">0</strong></span>
-                    <span>ثابت مسدد: <strong id="fixedPaidSubDisplay" class="text-slate-700 dark:text-slate-200">0</strong></span>
-                </div>
-            </div>
-
-            <!-- بطاقة 4: الحد الآمن المتاح للاستلاف الآن (Safe Borrowing Limit) -->
-            <div id="safeBorrowingCard" class="bg-emerald-50/60 dark:bg-emerald-950/25 rounded-2xl p-5 border-2 border-emerald-300/80 dark:border-emerald-800/70 shadow-sm flex flex-col justify-between transition-colors">
-                <div class="flex items-center justify-between gap-2">
-                    <span id="safeBorrowingTitle" class="text-xs font-extrabold text-emerald-800 dark:text-emerald-300">المتاح للاستلاف</span>
-                    <span id="safeBorrowingIconBox" class="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i>
-                    </span>
-                </div>
-                <div class="my-2.5">
-                    <div id="safeBorrowingAmountDisplay" class="text-2xl font-black text-emerald-700 dark:text-emerald-400">0 ج.م</div>
-                    <p id="safeBorrowingMessage" class="text-[11px] font-bold text-emerald-700/80 dark:text-emerald-300/80 mt-1">بعد السلف والالتزامات</p>
-                </div>
-                <div class="text-[11px] text-slate-600 dark:text-slate-300 flex items-center justify-between pt-2 border-t border-emerald-200/60 dark:border-emerald-800/50">
-                    <span>محجوز للثابت: <strong id="reservedFixedSubDisplay" class="text-amber-600 dark:text-amber-400">0</strong></span>
-                    <span>سلف حالية: <strong id="currentBorrowedSubDisplay" class="text-rose-600 dark:text-rose-400">0</strong></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. قسم راتب الشهر، أيام الغياب، والسلف (Salary & Borrowing Hub) -->
-        <section data-mobile-screen="salary" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
-            <!-- رأس القسم وزر استلام الراتب نهاية الشهر -->
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
-                        <i data-lucide="briefcase" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-extrabold text-base text-slate-900 dark:text-white">
-                            راتب <span id="salaryMonthTitle" class="text-teal-600 dark:text-teal-400">الشهر</span> والسلف
+</div><div aria-label="الدخل والخارج وصافي حركة الشهر" class="grid grid-cols-3 gap-2 home-flow-stats" id="homeFlowStats">
+<div class="home-flow-stat"><span class="block text-slate-300">كاش داخل الشهر</span><strong class="text-emerald-300 font-black text-base" id="cashFlowInDisplay">+0 ج.م</strong></div>
+<div class="home-flow-stat"><span class="block text-slate-300">كاش خارج الشهر</span><strong class="text-rose-300 font-black text-base" id="cashFlowOutDisplay">-0 ج.م</strong></div>
+<div class="home-flow-net"><span class="text-slate-200">صافي حركة الشهر</span><strong class="text-white font-extrabold" id="cashFlowNetDisplay">0 ج.م</strong></div>
+<div class="home-flow-extra"><span>بونص ودخل: <strong class="text-emerald-300" id="cashBonusDisplay">+0</strong></span><span>سلف: <strong class="text-white" id="borrowedCashSubDisplay">+0</strong></span><span>ليك بره: <strong class="text-sky-300" id="lentOutSubDisplay">-0</strong></span></div>
+</div>
+<!-- بطاقة 3: إجمالي استهلاكي الفعلي (بعيداً عن الديون والسلف) -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between transition-colors" id="actualConsumptionCard">
+<div class="flex items-center justify-between gap-2">
+<span class="text-xs font-extrabold text-slate-500 dark:text-slate-400" id="actualConsumptionTitle">إجمالي المصاريف</span>
+<span class="w-8 h-8 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 transition-colors" id="actualConsumptionIconBox">
+<i class="w-4 h-4" data-lucide="shopping-bag" id="actualConsumptionIcon"></i>
+</span>
+</div>
+<div class="my-2.5">
+<div class="text-2xl font-black text-rose-600 dark:text-rose-400" id="actualConsumptionDisplay">0 ج.م</div>
+<p class="text-[11px] text-slate-400 mt-1" id="actualConsumptionHint">المصاريف المدفوعة</p>
+</div>
+<div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
+<span>يومي: <strong class="text-slate-700 dark:text-slate-200" id="dailyExpensesSubDisplay">0</strong></span>
+<span>ثابت مسدد: <strong class="text-slate-700 dark:text-slate-200" id="fixedPaidSubDisplay">0</strong></span>
+</div>
+</div>
+<!-- بطاقة 4: الحد الآمن المتاح للاستلاف الآن (Safe Borrowing Limit) -->
+<div class="bg-emerald-50/60 dark:bg-emerald-950/25 rounded-2xl p-5 border-2 border-emerald-300/80 dark:border-emerald-800/70 shadow-sm flex flex-col justify-between transition-colors" id="safeBorrowingCard">
+<div class="flex items-center justify-between gap-2">
+<span class="text-xs font-extrabold text-emerald-800 dark:text-emerald-300" id="safeBorrowingTitle">المتاح للاستلاف</span>
+<span class="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0" id="safeBorrowingIconBox">
+<i class="w-4 h-4" data-lucide="shield-check"></i>
+</span>
+</div>
+<div class="my-2.5">
+<div class="text-2xl font-black text-emerald-700 dark:text-emerald-400" id="safeBorrowingAmountDisplay">0 ج.م</div>
+<p class="text-[11px] font-bold text-emerald-700/80 dark:text-emerald-300/80 mt-1" id="safeBorrowingMessage">بعد السلف والالتزامات</p>
+</div>
+<div class="text-[11px] text-slate-600 dark:text-slate-300 flex items-center justify-between pt-2 border-t border-emerald-200/60 dark:border-emerald-800/50">
+<span>محجوز للثابت: <strong class="text-amber-600 dark:text-amber-400" id="reservedFixedSubDisplay">0</strong></span>
+<span>سلف حالية: <strong class="text-rose-600 dark:text-rose-400" id="currentBorrowedSubDisplay">0</strong></span>
+</div>
+</div>
+</section>
+<section aria-label="آخر الحركات" class="hidden" data-mobile-screen="home" id="homeRecentSection">
+<div class="flex items-center justify-between mb-2"><h2 class="text-base font-bold">آخر الحركات</h2><button class="text-xs font-bold" onclick="switchMobileScreen('activity')" style="color:#8572b8" type="button">عرض الكل</button></div>
+<div class="bg-white dark:bg-slate-900 px-4 rounded-xl" id="homeRecentList"></div>
+</section><section aria-label="ملخص الميزانية" class="home-budget-preview" data-mobile-screen="home" id="homeBudgetPreview">
+<button class="home-preview-head" onclick="switchMobileScreen('budget')" type="button"><span>ميزانية الشهر</span><span class="home-preview-percent" id="homeBudgetPercent">—</span></button>
+<div aria-label="نسبة الميزانية المستخدمة" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="home-budget-track" role="progressbar"><span id="homeBudgetBar"></span></div>
+<div class="home-budget-meta"><span id="homeBudgetSpentLabel">المصروف 0 ج.م</span><span id="homeBudgetLeftLabel">حدد ميزانية شهرية</span></div>
+</section>
+<!-- 2. قسم راتب الشهر، أيام الغياب، والسلف (Salary & Borrowing Hub) -->
+<section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5" data-mobile-screen="salary">
+<!-- رأس القسم وزر استلام الراتب نهاية الشهر -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+<i class="w-5 h-5" data-lucide="briefcase"></i>
+</div>
+<div>
+<h2 class="font-extrabold text-base text-slate-900 dark:text-white">
+                            راتب <span class="text-teal-600 dark:text-teal-400" id="salaryMonthTitle">الشهر</span> والسلف
                         </h2>
-                        
-                    </div>
-                </div>
-
-                <!-- زر تبديل استلام الراتب نهاية الشهر -->
-                <div id="salaryReceivedToggleBox" class="flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 rounded-2xl border transition-all bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700">
-                    <label class="inline-flex items-center gap-2.5 cursor-pointer select-none">
-                        <input type="checkbox" id="salaryReceivedCheckbox" onchange="handleSalaryInputChange()" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300">
-                        <span id="salaryReceivedLabel" class="text-xs font-extrabold text-slate-700 dark:text-slate-200">
+</div>
+</div>
+<!-- زر تبديل استلام الراتب نهاية الشهر -->
+<div class="flex items-center justify-between sm:justify-start gap-3 px-4 py-2.5 rounded-2xl border transition-all bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700" id="salaryReceivedToggleBox">
+<label class="inline-flex items-center gap-2.5 cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300" id="salaryReceivedCheckbox" onchange="handleSalaryInputChange()" type="checkbox"/>
+<span class="text-xs font-extrabold text-slate-700 dark:text-slate-200" id="salaryReceivedLabel">
                             استلام وصرف الراتب للكاش (نهاية الشهر)
                         </span>
-                    </label>
-                    <span id="salaryReceivedStatusPill" class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300">
+</label>
+<span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300" id="salaryReceivedStatusPill">
                         لم يُصرف بعد
                     </span>
-                </div>
-            </div>
-
-            <!-- صف إدخال الراتب وأيام الغياب والملخص الحسابي -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-                <!-- الراتب الشهري الأساسي -->
-                <div class="lg:col-span-3">
-                    <label for="monthlySalaryInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">الراتب الشهري الأساسي</label>
-                    <div class="relative">
-                        <input type="number" id="monthlySalaryInput" min="0" step="any" placeholder="0" oninput="handleSalaryInputChange()"
-                            class="w-full pl-12 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-teal-500 outline-none text-base font-extrabold text-slate-900 dark:text-white">
-                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                    </div>
-                </div>
-
-                <!-- عداد أيام الغياب والخصم -->
-                <div class="lg:col-span-3">
-                    <label for="deductionDaysInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">أيام الغياب والخصم (÷ 30)</label>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="adjustDeductionDays(-0.5)" title="تقليل نصف يوم" class="w-10 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-extrabold flex items-center justify-center transition-colors shrink-0">
-                            <i data-lucide="minus" class="w-4 h-4"></i>
-                        </button>
-                        <div class="relative flex-1">
-                            <input type="number" id="deductionDaysInput" min="0" max="30" step="0.5" value="0" oninput="handleSalaryInputChange()"
-                                class="w-full text-center py-2 px-2 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 focus:ring-2 focus:ring-rose-500 outline-none text-base font-extrabold text-rose-600 dark:text-rose-400">
-                            <span class="block text-[10px] text-center text-slate-400 mt-0.5">يوم غياب</span>
-                        </div>
-                        <button type="button" onclick="adjustDeductionDays(0.5)" title="زيادة نصف يوم" class="w-10 h-11 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900 text-rose-600 dark:text-rose-400 font-extrabold flex items-center justify-center transition-colors shrink-0">
-                            <i data-lucide="plus" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- بطاقة تفصيل الراتب والخصومات -->
-                <div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-slate-50 dark:bg-slate-800/70 p-3.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
-                    <div class="text-center border-l border-slate-200 dark:border-slate-700 pl-2">
-                        <span class="block text-[11px] text-slate-500 dark:text-slate-400">قيمة اليوم</span>
-                        <strong id="dailyRateDisplay" class="block text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100 mt-1">0</strong>
-                        <span class="text-[10px] text-slate-400">ج.م / يوم</span>
-                    </div>
-                    <div class="text-center sm:border-l border-slate-200 dark:border-slate-700 sm:pl-2">
-                        <span class="block text-[11px] text-rose-500 dark:text-rose-400">خصم الغياب</span>
-                        <strong id="absenceDeductionDisplay" class="block text-sm sm:text-base font-extrabold text-rose-600 dark:text-rose-400 mt-1">0</strong>
-                        <span class="text-[10px] text-slate-400">ج.م</span>
-                    </div>
-                    <div class="text-center border-l border-slate-200 dark:border-slate-700 pl-2 pt-2 sm:pt-0 border-t sm:border-t-0">
-                        <span class="block text-[11px] text-amber-600 dark:text-amber-400">إجمالي السلف</span>
-                        <strong id="totalBorrowedDisplay" class="block text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400 mt-1">0</strong>
-                        <span class="text-[10px] text-slate-400">ج.م</span>
-                    </div>
-                    <div class="text-center pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200 dark:border-slate-700">
-                        <span class="block text-[11px] text-teal-600 dark:text-teal-400 font-bold">صافي القبض</span>
-                        <strong id="netSalaryAfterAdvancesDisplay" class="block text-sm sm:text-base font-extrabold text-teal-600 dark:text-teal-400 mt-1">0</strong>
-                        <span class="text-[10px] text-slate-400">بعد الغياب والسلف</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- سجل السلف والسحوبات على حساب الراتب -->
-            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                            <i data-lucide="hand-coins" class="w-4 h-4"></i>
-                        </span>
-                        <div>
-                            <h3 class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100">السلف والسحوبات</h3>
-                            
-                        </div>
-                    </div>
-                    <span id="borrowingCountBadge" class="text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 px-3 py-1 rounded-xl w-fit">
+</div>
+</div>
+<!-- صف إدخال الراتب وأيام الغياب والملخص الحسابي -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+<!-- الراتب الشهري الأساسي -->
+<div class="lg:col-span-3">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5" for="monthlySalaryInput">الراتب الشهري الأساسي</label>
+<div class="relative">
+<input class="w-full pl-12 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-teal-500 outline-none text-base font-extrabold text-slate-900 dark:text-white" id="monthlySalaryInput" min="0" oninput="handleSalaryInputChange()" placeholder="0" step="any" type="number"/>
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+<!-- عداد أيام الغياب والخصم -->
+<div class="lg:col-span-3">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5" for="deductionDaysInput">أيام الغياب والخصم (÷ 30)</label>
+<div class="flex items-center gap-2">
+<button class="w-10 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-extrabold flex items-center justify-center transition-colors shrink-0" onclick="adjustDeductionDays(-0.5)" title="تقليل نصف يوم" type="button">
+<i class="w-4 h-4" data-lucide="minus"></i>
+</button>
+<div class="relative flex-1">
+<input class="w-full text-center py-2 px-2 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/60 focus:ring-2 focus:ring-rose-500 outline-none text-base font-extrabold text-rose-600 dark:text-rose-400" id="deductionDaysInput" max="30" min="0" oninput="handleSalaryInputChange()" step="0.5" type="number" value="0"/>
+<span class="block text-[10px] text-center text-slate-400 mt-0.5">يوم غياب</span>
+</div>
+<button class="w-10 h-11 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900 text-rose-600 dark:text-rose-400 font-extrabold flex items-center justify-center transition-colors shrink-0" onclick="adjustDeductionDays(0.5)" title="زيادة نصف يوم" type="button">
+<i class="w-4 h-4" data-lucide="plus"></i>
+</button>
+</div>
+</div>
+<!-- بطاقة تفصيل الراتب والخصومات -->
+<div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-slate-50 dark:bg-slate-800/70 p-3.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
+<div class="text-center border-l border-slate-200 dark:border-slate-700 pl-2">
+<span class="block text-[11px] text-slate-500 dark:text-slate-400">قيمة اليوم</span>
+<strong class="block text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100 mt-1" id="dailyRateDisplay">0</strong>
+<span class="text-[10px] text-slate-400">ج.م / يوم</span>
+</div>
+<div class="text-center sm:border-l border-slate-200 dark:border-slate-700 sm:pl-2">
+<span class="block text-[11px] text-rose-500 dark:text-rose-400">خصم الغياب</span>
+<strong class="block text-sm sm:text-base font-extrabold text-rose-600 dark:text-rose-400 mt-1" id="absenceDeductionDisplay">0</strong>
+<span class="text-[10px] text-slate-400">ج.م</span>
+</div>
+<div class="text-center border-l border-slate-200 dark:border-slate-700 pl-2 pt-2 sm:pt-0 border-t sm:border-t-0">
+<span class="block text-[11px] text-amber-600 dark:text-amber-400">إجمالي السلف</span>
+<strong class="block text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400 mt-1" id="totalBorrowedDisplay">0</strong>
+<span class="text-[10px] text-slate-400">ج.م</span>
+</div>
+<div class="text-center pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200 dark:border-slate-700">
+<span class="block text-[11px] text-teal-600 dark:text-teal-400 font-bold">صافي القبض</span>
+<strong class="block text-sm sm:text-base font-extrabold text-teal-600 dark:text-teal-400 mt-1" id="netSalaryAfterAdvancesDisplay">0</strong>
+<span class="text-[10px] text-slate-400">بعد الغياب والسلف</span>
+</div>
+</div>
+</div>
+<!-- سجل السلف والسحوبات على حساب الراتب -->
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+<i class="w-4 h-4" data-lucide="hand-coins"></i>
+</span>
+<div>
+<h3 class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100">السلف والسحوبات</h3>
+</div>
+</div>
+<span class="text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 px-3 py-1 rounded-xl w-fit" id="borrowingCountBadge">
                         0 سلف مسجلة
                     </span>
-                </div>
-
-                <!-- نموذج إضافة سلفة/سحبة -->
-                <form onsubmit="addBorrowingEntry(event)" class="bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-900/50 rounded-2xl p-3.5">
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
-                        <div class="sm:col-span-2">
-                            <label for="borrowAmountInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ</label>
-                            <div class="relative">
-                                <input type="number" id="borrowAmountInput" required min="1" step="any" placeholder="0"
-                                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-sm font-extrabold">
-                                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400">ج.م</span>
-                            </div>
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="borrowSourceInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">المصدر / الجهة</label>
-                            <input type="text" id="borrowSourceInput" required placeholder="مثلاً: سحبة من الشغل، سلفة من أحمد..."
-                                class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label for="borrowDateInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">التاريخ</label>
-                            <input type="date" id="borrowDateInput" required
-                                class="w-full px-2.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold">
-                        </div>
-                        <div class="sm:col-span-3">
-                            <label for="borrowNoteInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">ملاحظة (اختياري)</label>
-                            <input type="text" id="borrowNoteInput" placeholder="سبب السلفة..."
-                                class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <button type="submit" class="w-full py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold shadow-sm transition-colors flex items-center justify-center gap-1.5 h-[38px]">
-                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                                <span>تسجيل سلفة</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- قائمة السلف والسحوبات المسجلة -->
-                <div id="borrowingListGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5"></div>
-            </div>
-        </section>
-
-        <!-- 3. قسم الالتزامات الشهرية (Fixed Monthly Obligations) -->
-        <section data-mobile-screen="obligations" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
-                        <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h2 class="font-extrabold text-base text-slate-900 dark:text-white">الالتزامات الشهرية</h2>
-                            <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-100/80 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300">
-                                
-                            </span>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <!-- ملخص الالتزامات الثابتة -->
-                <div class="flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-50 dark:bg-slate-800/80 px-4 py-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
-                    <div class="flex items-center gap-1.5 text-xs">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        <strong id="fixedStatusCountText" class="font-extrabold text-slate-800 dark:text-white">مسدد 0 من 0</strong>
-                    </div>
-                    <span class="text-slate-300 dark:text-slate-600">|</span>
-                    <div class="flex items-center gap-1.5 text-xs">
-                        <span class="text-slate-500 dark:text-slate-400">محجوز (غير مسدد):</span>
-                        <strong id="fixedRemainingTotalText" class="font-extrabold text-amber-600 dark:text-amber-400">0 ج.م</strong>
-                    </div>
-                    <span class="text-slate-300 dark:text-slate-600">|</span>
-                    <div class="flex items-center gap-1.5 text-xs">
-                        <span class="text-slate-500 dark:text-slate-400">مدفوع فعلياً:</span>
-                        <strong id="fixedPaidTotalText" class="font-extrabold text-emerald-600 dark:text-emerald-400">0 ج.م</strong>
-                    </div>
-                </div>
-            </div>
-
-            <!-- نموذج إضافة التزام شهري ثابت -->
-            <form onsubmit="addFixedCommitment(event)" class="bg-slate-50/90 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/70 rounded-2xl p-3.5">
-                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
-                    <div class="sm:col-span-4">
-                        <label for="fixedNameInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">اسم الالتزام الثابت</label>
-                        <input type="text" id="fixedNameInput" required placeholder="مثلاً: إيجار، كهرباء، نت، قسط، جمعية..."
-                            class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold">
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <label for="fixedCategoryInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">التصنيف</label>
-                        <select id="fixedCategoryInput" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold">
-                            <option value="bills">فواتير وخدمات</option>
-                            <option value="installments">أقساط والتزامات</option>
-                            <option value="food">أكل وشرب</option>
-                            <option value="transport">بنزين ومواصلات</option>
-                            <option value="health">صحة وعلاج</option>
-                            <option value="other">أخرى</option>
-                        </select>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <label for="fixedExpectedInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ التقديري / الأساسي</label>
-                        <div class="relative">
-                            <input type="number" id="fixedExpectedInput" required min="1" step="any" placeholder="0"
-                                class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-extrabold">
-                            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400">ج.م</span>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-1">
-                        <label for="fixedDueDayInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1 truncate" title="يوم الاستحقاق">يوم</label>
-                        <input type="number" id="fixedDueDayInput" min="1" max="31" placeholder="1-31"
-                            class="w-full px-2 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold text-center">
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <button type="submit" class="w-full py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-extrabold shadow-sm transition-colors flex items-center justify-center gap-1.5 h-[36px]">
-                            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                            <span>إضافة التزام</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <!-- بطاقات الالتزامات الثابتة -->
-            <div id="fixedCommitmentsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
-        </section>
-
-        <!-- 4. تسجيل الحركات اليومية + الرسوم البيانية وتحليل الاستهلاك -->
-        <section class="mobile-mixed grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
-            <!-- نموذج حركة جديدة (5 أعمدة) -->
-            <div data-mobile-screen="activity" class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm h-fit">
-                <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
-                    <div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                        <i data-lucide="plus-circle" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-extrabold text-base text-slate-900 dark:text-white">حركة جديدة</h2>
-                        
-                    </div>
-                </div>
-
-                <form id="transactionForm" onsubmit="addTransaction(event)" class="space-y-4">
-                    <!-- نوع الحركة -->
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">نوع الحركة</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="txType" value="expense" checked onchange="handleTxTypeChange()" class="peer sr-only">
-                                <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-rose-500 peer-checked:bg-rose-50 dark:peer-checked:bg-rose-950/40 text-center transition-all h-full flex flex-col justify-center">
-                                    <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-rose-600">مصروف يومي</span>
-                                    <span class="block text-[10px] text-slate-400 mt-0.5">يخصم من الكاش</span>
-                                </div>
-                            </label>
-
-                            <label class="cursor-pointer">
-                                <input type="radio" name="txType" value="income" onchange="handleTxTypeChange()" class="peer sr-only">
-                                <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 dark:peer-checked:bg-emerald-950/40 text-center transition-all h-full flex flex-col justify-center">
-                                    <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-emerald-600">بونص / دخل</span>
-                                    <span class="block text-[10px] text-slate-400 mt-0.5">يزود الكاش فقط</span>
-                                </div>
-                            </label>
-
-                            <label class="cursor-pointer">
-                                <input type="radio" name="txType" value="receivable" onchange="handleTxTypeChange()" class="peer sr-only">
-                                <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-sky-500 peer-checked:bg-sky-50 dark:peer-checked:bg-sky-950/40 text-center transition-all h-full flex flex-col justify-center">
-                                    <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-sky-600">سلفت حد بره</span>
-                                    <span class="block text-[10px] text-slate-400 mt-0.5">ليا عند الناس</span>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="txType" value="payable" onchange="handleTxTypeChange()" class="peer sr-only">
-                                <div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-950/40 text-center transition-all h-full flex flex-col justify-center">
-                                    <span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200">عليا للناس</span>
-                                    <span class="block text-[10px] text-slate-400 mt-0.5">فلوس استلفتها</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- الوصف والمبلغ -->
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                        <div class="sm:col-span-7">
-                            <label for="txDescInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">الوصف / البيان</label>
-                            <input type="text" id="txDescInput" required placeholder="مثلاً: غداء، بنزين، بونص تارجت..."
-                                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-                        </div>
-                        <div class="sm:col-span-5">
-                            <label for="txAmountInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ</label>
-                            <div class="relative">
-                                <input type="number" id="txAmountInput" required min="0.5" step="any" placeholder="0"
-                                    class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-extrabold">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- التصنيف واليوم/التاريخ -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label for="txCategoryInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">التصنيف</label>
-                            <select id="txCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold">
-                                <option value="food">أكل وشرب</option>
-                                <option value="transport">بنزين ومواصلات</option>
-                                <option value="shopping">تسوق ومشتريات</option>
-                                <option value="bills">فواتير وخدمات</option>
-                                <option value="health">صحة وعلاج</option>
-                                <option value="entertainment">ترفيه وخروجات</option>
-                                <option value="loans">سلف وبواقي</option>
-                                <option value="other">أخرى</option>
-                            </select>
-                        </div>
-                        <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <label for="txDateInput" class="text-xs font-bold text-slate-600 dark:text-slate-300">التاريخ</label>
-                                <span id="selectedDayNameBadge" class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400"></span>
-                            </div>
-                            <input type="date" id="txDateInput" required onchange="updateSelectedDayBadge()"
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold">
-                        </div>
-                    </div>
-
-                    <!-- حقول إضافية عند اختيار "فلوس سلفتها لحد بره" -->
-                    <div id="receivableExtraFields" class="hidden p-3.5 rounded-2xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200/80 dark:border-sky-800/60 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label for="txPersonNameInput" class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1">اسم الشخص / الجهة</label>
-                                <input type="text" id="txPersonNameInput" placeholder="مثلاً: محمد علي"
-                                    class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none">
-                            </div>
-                            <div>
-                                <label for="txExpectedReturnInput" class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1">تاريخ الاسترداد المتوقع</label>
-                                <input type="date" id="txExpectedReturnInput"
-                                    class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none">
-                            </div>
-                        </div>
-                        <p class="text-[11px] text-sky-700 dark:text-sky-300">
+</div>
+<!-- نموذج إضافة سلفة/سحبة -->
+<form class="bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-900/50 rounded-2xl p-3.5" onsubmit="addBorrowingEntry(event)">
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+<div class="sm:col-span-2">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="borrowAmountInput">المبلغ</label>
+<div class="relative">
+<input class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-sm font-extrabold" id="borrowAmountInput" min="1" placeholder="0" required="" step="any" type="number"/>
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+<div class="sm:col-span-3">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="borrowSourceInput">المصدر / الجهة</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold" id="borrowSourceInput" placeholder="مثلاً: سحبة من الشغل، سلفة من أحمد..." required="" type="text"/>
+</div>
+<div class="sm:col-span-2">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="borrowDateInput">التاريخ</label>
+<input class="w-full px-2.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold" id="borrowDateInput" required="" type="date"/>
+</div>
+<div class="sm:col-span-3">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="borrowNoteInput">ملاحظة (اختياري)</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-amber-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs" id="borrowNoteInput" placeholder="سبب السلفة..." type="text"/>
+</div>
+<div class="sm:col-span-2">
+<button class="w-full py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold shadow-sm transition-colors flex items-center justify-center gap-1.5 h-[38px]" type="submit">
+<i class="w-3.5 h-3.5" data-lucide="plus"></i>
+<span>تسجيل سلفة</span>
+</button>
+</div>
+</div>
+</form>
+<!-- قائمة السلف والسحوبات المسجلة -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5" id="borrowingListGrid"></div>
+</div>
+</section>
+<!-- 3. قسم الالتزامات الشهرية (Fixed Monthly Obligations) -->
+<section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5" data-mobile-screen="obligations">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+<i class="w-5 h-5" data-lucide="calendar-check-2"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="font-extrabold text-base text-slate-900 dark:text-white">الالتزامات الشهرية</h2>
+<span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-100/80 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300">
+</span>
+</div>
+</div>
+</div>
+<!-- ملخص الالتزامات الثابتة -->
+<div class="flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-50 dark:bg-slate-800/80 px-4 py-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
+<div class="flex items-center gap-1.5 text-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<strong class="font-extrabold text-slate-800 dark:text-white" id="fixedStatusCountText">مسدد 0 من 0</strong>
+</div>
+<span class="text-slate-300 dark:text-slate-600">|</span>
+<div class="flex items-center gap-1.5 text-xs">
+<span class="text-slate-500 dark:text-slate-400">محجوز (غير مسدد):</span>
+<strong class="font-extrabold text-amber-600 dark:text-amber-400" id="fixedRemainingTotalText">0 ج.م</strong>
+</div>
+<span class="text-slate-300 dark:text-slate-600">|</span>
+<div class="flex items-center gap-1.5 text-xs">
+<span class="text-slate-500 dark:text-slate-400">مدفوع فعلياً:</span>
+<strong class="font-extrabold text-emerald-600 dark:text-emerald-400" id="fixedPaidTotalText">0 ج.م</strong>
+</div>
+</div>
+</div>
+<!-- نموذج إضافة التزام شهري ثابت -->
+<form class="bg-slate-50/90 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/70 rounded-2xl p-3.5" onsubmit="addFixedCommitment(event)">
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+<div class="sm:col-span-4">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="fixedNameInput">اسم الالتزام الثابت</label>
+<input class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold" id="fixedNameInput" placeholder="مثلاً: إيجار، كهرباء، نت، قسط، جمعية..." required="" type="text"/>
+</div>
+<div class="sm:col-span-3">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="fixedCategoryInput">التصنيف</label>
+<select class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold" id="fixedCategoryInput">
+<option value="bills">فواتير وخدمات</option>
+<option value="installments">أقساط والتزامات</option>
+<option value="food">أكل وشرب</option>
+<option value="transport">بنزين ومواصلات</option>
+<option value="health">صحة وعلاج</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+<div class="sm:col-span-2">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="fixedExpectedInput">المبلغ التقديري / الأساسي</label>
+<div class="relative">
+<input class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-extrabold" id="fixedExpectedInput" min="1" placeholder="0" required="" step="any" type="number"/>
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+<div class="sm:col-span-1">
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1 truncate" for="fixedDueDayInput" title="يوم الاستحقاق">يوم</label>
+<input class="w-full px-2 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold text-center" id="fixedDueDayInput" max="31" min="1" placeholder="1-31" type="number"/>
+</div>
+<div class="sm:col-span-2">
+<button class="w-full py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-extrabold shadow-sm transition-colors flex items-center justify-center gap-1.5 h-[36px]" type="submit">
+<i class="w-3.5 h-3.5" data-lucide="plus"></i>
+<span>إضافة التزام</span>
+</button>
+</div>
+</div>
+</form>
+<!-- بطاقات الالتزامات الثابتة -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5" id="fixedCommitmentsGrid"></div>
+</section>
+<!-- 4. تسجيل الحركات اليومية + الرسوم البيانية وتحليل الاستهلاك -->
+<section class="mobile-mixed grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- نموذج حركة جديدة (5 أعمدة) -->
+<div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm h-fit" data-mobile-screen="activity">
+<div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+<div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+<i class="w-5 h-5" data-lucide="plus-circle"></i>
+</div>
+<div>
+<h2 class="font-extrabold text-base text-slate-900 dark:text-white">حركة جديدة</h2>
+</div>
+</div>
+<form class="space-y-4" id="transactionForm" onsubmit="addTransaction(event)">
+<!-- نوع الحركة -->
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">نوع الحركة</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="txType" onchange="handleTxTypeChange()" type="radio" value="expense"/>
+<div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-rose-500 peer-checked:bg-rose-50 dark:peer-checked:bg-rose-950/40 text-center transition-all h-full flex flex-col justify-center">
+<span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-rose-600">مصروف يومي</span>
+<span class="block text-[10px] text-slate-400 mt-0.5">يخصم من الكاش</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="txType" onchange="handleTxTypeChange()" type="radio" value="income"/>
+<div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 dark:peer-checked:bg-emerald-950/40 text-center transition-all h-full flex flex-col justify-center">
+<span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-emerald-600">بونص / دخل</span>
+<span class="block text-[10px] text-slate-400 mt-0.5">يزود الكاش فقط</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="txType" onchange="handleTxTypeChange()" type="radio" value="receivable"/>
+<div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-sky-500 peer-checked:bg-sky-50 dark:peer-checked:bg-sky-950/40 text-center transition-all h-full flex flex-col justify-center">
+<span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200 peer-checked:text-sky-600">سلفت حد بره</span>
+<span class="block text-[10px] text-slate-400 mt-0.5">ليا عند الناس</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="txType" onchange="handleTxTypeChange()" type="radio" value="payable"/>
+<div class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 peer-checked:border-amber-500 peer-checked:bg-amber-50 dark:peer-checked:bg-amber-950/40 text-center transition-all h-full flex flex-col justify-center">
+<span class="block text-xs font-extrabold text-slate-700 dark:text-slate-200">عليا للناس</span>
+<span class="block text-[10px] text-slate-400 mt-0.5">فلوس استلفتها</span>
+</div>
+</label>
+</div>
+</div>
+<!-- الوصف والمبلغ -->
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+<div class="sm:col-span-7">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txDescInput">الوصف / البيان</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="txDescInput" placeholder="مثلاً: غداء، بنزين، بونص تارجت..." required="" type="text"/>
+</div>
+<div class="sm:col-span-5">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txAmountInput">المبلغ</label>
+<div class="relative">
+<input class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-extrabold" id="txAmountInput" min="0.5" placeholder="0" required="" step="any" type="number"/>
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+</div>
+<!-- التصنيف واليوم/التاريخ -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txCategoryInput">التصنيف</label>
+<select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="txCategoryInput">
+<option value="food">أكل وشرب</option>
+<option value="transport">بنزين ومواصلات</option>
+<option value="shopping">تسوق ومشتريات</option>
+<option value="bills">فواتير وخدمات</option>
+<option value="health">صحة وعلاج</option>
+<option value="entertainment">ترفيه وخروجات</option>
+<option value="loans">سلف وبواقي</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-xs font-bold text-slate-600 dark:text-slate-300" for="txDateInput">التاريخ</label>
+<span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400" id="selectedDayNameBadge"></span>
+</div>
+<input class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="txDateInput" onchange="updateSelectedDayBadge()" required="" type="date"/>
+</div>
+</div>
+<!-- حقول إضافية عند اختيار "فلوس سلفتها لحد بره" -->
+<div class="hidden p-3.5 rounded-2xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200/80 dark:border-sky-800/60 space-y-3" id="receivableExtraFields">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1" for="txPersonNameInput">اسم الشخص / الجهة</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none" id="txPersonNameInput" placeholder="مثلاً: محمد علي" type="text"/>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1" for="txExpectedReturnInput">تاريخ الاسترداد المتوقع</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none" id="txExpectedReturnInput" type="date"/>
+</div>
+</div>
+<p class="text-[11px] text-sky-700 dark:text-sky-300">
                             تُخصم من الكاش في جيبك الآن، وعند الضغط على <strong>"تم الاسترداد"</strong> تعود لرصيدك فوراً.
                         </p>
-                    </div>
-
-                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md shadow-indigo-500/20 transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                        <span>إضافة الحركة للمحفظة</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- لوحة الرسوم البيانية وتحليل أكثر البنود استهلاكاً (7 أعمدة) -->
-            <div data-mobile-screen="analytics" class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-5">
-                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
-                            <i data-lucide="pie-chart" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-extrabold text-base text-slate-900 dark:text-white">تحليل المصاريف</h2>
-                            
-                        </div>
-                    </div>
-                    <span id="topCategoryBadge" class="text-xs font-bold px-3 py-1 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300">
+</div>
+<button class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-md shadow-indigo-500/20 transition-all flex items-center justify-center gap-2" type="submit">
+<i class="w-4 h-4" data-lucide="check-circle-2"></i>
+<span>إضافة الحركة للمحفظة</span>
+</button>
+</form>
+</div>
+<!-- لوحة الرسوم البيانية وتحليل أكثر البنود استهلاكاً (7 أعمدة) -->
+<div class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-5" data-mobile-screen="analytics">
+<div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+<i class="w-5 h-5" data-lucide="pie-chart"></i>
+</div>
+<div>
+<h2 class="font-extrabold text-base text-slate-900 dark:text-white">تحليل المصاريف</h2>
+</div>
+</div>
+<span class="text-xs font-bold px-3 py-1 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300" id="topCategoryBadge">
                         لا يوجد استهلاك مسجل بعد
                     </span>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-auto">
-                    <!-- الرسم البياني -->
-                    <div class="md:col-span-5 relative h-56 flex items-center justify-center">
-                        <canvas id="expensesChart"></canvas>
-                        <div id="emptyChartPlaceholder" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                            <i data-lucide="bar-chart-3" class="w-8 h-8 text-slate-300 dark:text-slate-600 mb-2"></i>
-                            <span class="text-xs text-slate-400">سجل مصاريفك اليومية أو سدد التزاماً ثابتاً لعرض الرسم البياني</span>
-                        </div>
-                    </div>
-
-                    <!-- ترتيب أكثر التصنيفات استهلاكاً -->
-                    <div class="md:col-span-7 space-y-3" id="topCategoriesList"></div>
-                </div>
-            </div>
-        </section>
-
-        
-        <section data-mobile-screen="home" class="mobile-home-actions hidden">
-            <div class="mobile-home-heading">اختصارات</div>
-            <div class="mobile-quick-grid">
-                <button type="button" onclick="openQuickEntry('expense')"><i data-lucide="minus-circle"></i><span>تسجيل مصروف</span></button>
-                <button type="button" onclick="openQuickEntry('borrowing')"><i data-lucide="hand-coins"></i><span>تسجيل سلفة</span></button>
-                <button type="button" onclick="switchMobileScreen('obligations')"><i data-lucide="calendar-check"></i><span>الالتزامات</span></button>
-                <button type="button" onclick="switchMobileScreen('analytics')"><i data-lucide="chart-pie"></i><span>تحليل مصاريفك</span></button>
-            </div>
-        </section>
-
-        <!-- 5. سجل الحركات والتصفية -->
-        <section data-mobile-screen="activity" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
-                <div>
-                    <h2 class="font-extrabold text-base text-slate-900 dark:text-white flex items-center gap-2">
-                        <i data-lucide="list-ordered" class="w-5 h-5 text-indigo-600 dark:text-indigo-400"></i>
-                        <span>سجل الحركات</span>
-                        <span id="filteredCountBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">0</span>
-                    </h2>
-                    <p id="filteredSummaryText" class="text-xs text-slate-500 dark:text-slate-400 mt-1"></p>
-                </div>
-
-                <!-- شريط الفلترة والبحث -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:flex items-center gap-2.5">
-                    <div class="relative">
-                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2"></i>
-                        <input type="text" id="filterSearchInput" oninput="renderTransactions()" placeholder="بحث بالوصف أو الاسم..."
-                            class="w-full sm:w-44 pr-8 pl-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-
-                    <div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2.5 py-1">
-                        <span class="text-[11px] font-bold text-slate-400">يوم:</span>
-                        <input type="date" id="filterDateInput" onchange="renderTransactions()" title="عرض حركات يوم محدد"
-                            class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 outline-none py-1">
-                        <button type="button" id="clearDateFilterBtn" onclick="clearDateFilter()" title="إلغاء فلتر اليوم" class="hidden text-rose-500 hover:text-rose-600 p-0.5">
-                            <i data-lucide="x" class="w-3.5 h-3.5"></i>
-                        </button>
-                    </div>
-
-                    <select id="filterTypeSelect" onchange="renderTransactions()" class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none">
-                        <option value="all">كل الأنواع</option>
-                        <option value="expense">مصاريف يومية</option>
-                        <option value="income">بونص ودخل إضافي</option>
-                        <option value="receivable">فلوس ليا بره</option>
-                    </select>
-
-                    <select id="filterCategorySelect" onchange="renderTransactions()" class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none">
-                        <option value="all">كل التصنيفات</option>
-                        <option value="food">أكل وشرب</option>
-                        <option value="transport">بنزين ومواصلات</option>
-                        <option value="shopping">تسوق ومشتريات</option>
-                        <option value="bills">فواتير وخدمات</option>
-                        <option value="health">صحة وعلاج</option>
-                        <option value="entertainment">ترفيه وخروجات</option>
-                        <option value="loans">سلف وبواقي</option>
-                        <option value="other">أخرى</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- قائمة المعاملات -->
-            <div id="transactionsListContainer" class="divide-y divide-slate-100 dark:divide-slate-800"></div>
-        </section>
-
-        <section data-mobile-screen="activity" id="debtsLedgerSection" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-            <div class="flex items-center justify-between gap-2">
-                <h2 class="font-extrabold text-base">حسابات الناس</h2>
-                <span class="text-[11px] text-slate-500">كل الشهور</span>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <div class="rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-900 p-3">
-                    <p class="text-xs font-bold text-sky-700 dark:text-sky-300">ليا عند الناس</p>
-                    <strong id="totalReceivablesAll" class="block text-lg font-black text-sky-800 dark:text-sky-200">0 ج.م</strong>
-                </div>
-                <div class="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 p-3">
-                    <p class="text-xs font-bold text-amber-700 dark:text-amber-300">عليا للناس</p>
-                    <strong id="totalPayablesAll" class="block text-lg font-black text-amber-800 dark:text-amber-200">0 ج.م</strong>
-                </div>
-            </div>
-            <div id="netDebtsPanel" class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 p-4 flex items-center justify-between gap-3">
-                <div><div class="text-sm font-extrabold">صافي الديون</div><div class="text-[11px] text-slate-500 dark:text-slate-400">ليا − عليا</div></div>
-                <div class="text-left"><strong id="netDebtsTotal" class="block text-xl font-black">0 ج.م</strong><span id="netDebtsStatus" class="block text-[11px] font-bold">متوازن</span></div>
-            </div>
-            <div class="flex gap-2">
-                <button type="button" id="ledgerTabReceivable" onclick="setLedgerType('receivable')" class="ledger-tab active">ليا عند الناس</button>
-                <button type="button" id="ledgerTabPayable" onclick="setLedgerType('payable')" class="ledger-tab">عليا للناس</button>
-            </div>
-            <div id="globalDebtList" class="space-y-2.5"></div>
-        </section>
-
-        <section data-mobile-screen="budget" id="monthlyBudgetSection" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
-            <div class="flex items-center justify-between gap-2">
-                <h2 class="font-extrabold text-base flex items-center gap-2"><i data-lucide="wallet-minimal" class="w-5 h-5 text-teal-600"></i> ميزانيتي الشهرية</h2>
-                <span id="budgetMonthLabel" class="text-xs font-bold text-slate-500"></span>
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-                <div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">المخصص</div><strong id="budgetAllocated" class="block text-sm font-black mt-1">0 ج.م</strong></div>
-                <div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">اتصرف</div><strong id="budgetSpent" class="block text-sm font-black mt-1">0 ج.م</strong></div>
-                <div id="budgetDifferenceBox" class="rounded-xl bg-teal-50 dark:bg-teal-950/40 p-3"><div id="budgetDifferenceLabel" class="budget-small">المتبقي</div><strong id="budgetDifference" class="block text-sm font-black mt-1">0 ج.م</strong></div>
-            </div>
-            <div class="space-y-2">
-                <form id="budgetForm" onsubmit="saveBudgetLimit(event)" class="grid grid-cols-2 gap-2">
-                    <div><label for="budgetCategory">البند</label><select id="budgetCategory" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></select></div>
-                    <div><label for="budgetLimit">ميزانية الشهر (ج.م)</label><input id="budgetLimit" required min="0" step="0.01" type="number" placeholder="مثلاً 2000" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
-                    <button type="submit" class="col-span-2 bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-2.5 text-sm font-bold">حفظ ميزانية البند</button>
-                </form>
-                <button type="button" onclick="copyPreviousBudget()" class="text-xs font-extrabold text-teal-700 dark:text-teal-400 underline underline-offset-4">نسخ ميزانية آخر شهر سابق</button>
-            </div>
-            <div id="budgetCategoriesList" class="space-y-3"></div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">المقارنة بالمصاريف اليومية والالتزامات المسددة فقط. السلف والديون مش ضمن الاستهلاك.</p>
-        </section>
-        <section data-mobile-screen="more" id="mobileMoreScreen" class="mobile-more-panel">
-            <h2 class="mobile-more-title">المزيد</h2>
-            <p class="mobile-more-subtitle">حساباتك وتقاريرك في مكان واحد</p>
-            <div class="mobile-more-list">
-                <button type="button" onclick="switchMobileScreen('salary')"><span class="more-list-icon"><i data-lucide="wallet-cards"></i></span><span class="more-list-text"><strong>الراتب والسلف</strong><small>الراتب والغياب والسحوبات</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
-                <button type="button" onclick="switchMobileScreen('obligations')"><span class="more-list-icon"><i data-lucide="calendar-check-2"></i></span><span class="more-list-text"><strong>الالتزامات</strong><small>الفواتير والأقساط ومواعيد السداد</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
-                <button type="button" onclick="switchMobileScreen('analytics')"><span class="more-list-icon"><i data-lucide="chart-no-axes-combined"></i></span><span class="more-list-text"><strong>التحليل</strong><small>توزيع المصاريف حسب التصنيف</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
-            </div>
-        </section>
-    </main>
-
-    <nav id="mobileBottomNav" aria-label="التنقل بين أقسام المحفظة" class="mobile-bottom-nav">
-        <button type="button" data-screen-target="home" class="mobile-nav-item active" aria-current="page" onclick="switchMobileScreen('home')"><i data-lucide="house"></i><span>الرئيسية</span></button>
-        <button type="button" data-screen-target="activity" class="mobile-nav-item" onclick="switchMobileScreen('activity')"><i data-lucide="arrow-left-right"></i><span>الحركات</span></button>
-        <button type="button" data-screen-target="budget" class="mobile-nav-item" onclick="switchMobileScreen('budget')"><i data-lucide="chart-pie"></i><span>ميزانيتي</span></button>
-        <button type="button" data-screen-target="more" class="mobile-nav-item" onclick="switchMobileScreen('more')"><i data-lucide="layout-grid"></i><span>المزيد</span></button>
-    </nav>
-    <button type="button" id="mobileQuickFab" class="mobile-fab" aria-label="إضافة حركة جديدة" title="إضافة حركة" onclick="openQuickEntry('expense')"><i data-lucide="plus"></i></button>
-
-
-    <!-- نافذة تسجيل سداد التزام ثابت (Pay Fixed Commitment Modal) -->
-    <div id="payFixedCommitmentModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                        <i data-lucide="check-circle" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-base text-slate-900 dark:text-white">تسجيل سداد التزام ثابت</h3>
-                        <p id="payFixedModalSubtitle" class="text-xs text-slate-500 dark:text-slate-400 font-bold"></p>
-                    </div>
-                </div>
-                <button type="button" onclick="closePayFixedModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <form onsubmit="confirmPayFixedCommitment(event)" class="space-y-4">
-                <input type="hidden" id="payFixedIdInput">
-
-                <div class="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 flex items-center justify-between text-xs">
-                    <span class="text-slate-500 dark:text-slate-400">المبلغ التقديري المحجوز مسبقاً:</span>
-                    <strong id="payFixedExpectedHint" class="font-black text-slate-800 dark:text-white">0 ج.م</strong>
-                </div>
-
-                <div>
-                    <label for="payFixedActualInput" class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">المبلغ الفعلي بالظبط اللي دفعته</label>
-                    <div class="relative">
-                        <input type="number" id="payFixedActualInput" required min="0" step="any" oninput="updatePayVariancePreview()"
-                            class="w-full pl-12 pr-4 py-3 rounded-xl bg-white dark:bg-slate-800 border-2 border-emerald-500 focus:outline-none text-lg font-black text-slate-900 dark:text-white">
-                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                    </div>
-                    <p id="payFixedVariancePreview" class="text-[11px] font-bold mt-1.5 text-slate-500"></p>
-                </div>
-
-                <div>
-                    <label for="payFixedDateInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">تاريخ السداد</label>
-                    <input type="date" id="payFixedDateInput" required
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-
-                <div class="flex items-center gap-2 pt-2">
-                    <button type="button" onclick="closePayFixedModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إلغاء</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-md">تأكيد السداد</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة تعديل التزام ثابت (Edit Fixed Commitment Modal) -->
-    <div id="editFixedCommitmentModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
-                        <i data-lucide="pencil" class="w-4 h-4"></i>
-                    </div>
-                    <h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل الالتزام الشهري الثابت</h3>
-                </div>
-                <button type="button" onclick="closeEditFixedModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <form onsubmit="saveEditedFixedCommitment(event)" class="space-y-4">
-                <input type="hidden" id="editFixedIdInput">
-
-                <div>
-                    <label for="editFixedNameInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">اسم الالتزام</label>
-                    <input type="text" id="editFixedNameInput" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-bold outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label for="editFixedCategoryInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">التصنيف</label>
-                        <select id="editFixedCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none">
-                            <option value="bills">فواتير وخدمات</option>
-                            <option value="installments">أقساط والتزامات</option>
-                            <option value="food">أكل وشرب</option>
-                            <option value="transport">بنزين ومواصلات</option>
-                            <option value="health">صحة وعلاج</option>
-                            <option value="other">أخرى</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="editFixedDueDayInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">يوم الاستحقاق (اختياري)</label>
-                        <input type="number" id="editFixedDueDayInput" min="1" max="31" placeholder="1-31" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="editFixedExpectedInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ التقديري / الأساسي</label>
-                    <div class="relative">
-                        <input type="number" id="editFixedExpectedInput" required min="1" step="any" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-extrabold outline-none focus:ring-2 focus:ring-purple-500">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                    </div>
-                </div>
-
-                <div id="editFixedPaidDetailsBox" class="hidden p-3.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 space-y-3">
-                    <span class="block text-xs font-extrabold text-emerald-700 dark:text-emerald-300">تفاصيل السداد المسجل:</span>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label for="editFixedActualInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ الفعلي المدفوع</label>
-                            <input type="number" id="editFixedActualInput" min="0" step="any" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 text-xs font-extrabold outline-none">
-                        </div>
-                        <div>
-                            <label for="editFixedPaidDateInput" class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">تاريخ السداد</label>
-                            <input type="date" id="editFixedPaidDateInput" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 text-xs font-bold outline-none">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2 pt-2">
-                    <button type="button" onclick="closeEditFixedModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إلغاء</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-extrabold shadow-md">حفظ التعديلات</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة تعديل سلفة على الراتب (Edit Borrowing Modal) -->
-    <div id="editBorrowingModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                        <i data-lucide="pencil" class="w-4 h-4"></i>
-                    </div>
-                    <h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل السلفة / السحبة</h3>
-                </div>
-                <button type="button" onclick="closeEditBorrowingModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <form onsubmit="saveEditedBorrowing(event)" class="space-y-4">
-                <input type="hidden" id="editBorrowIdInput">
-
-                <div>
-                    <label for="editBorrowAmountInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ</label>
-                    <div class="relative">
-                        <input type="number" id="editBorrowAmountInput" required min="1" step="any" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-sm font-extrabold">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="editBorrowSourceInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">المصدر / الجهة</label>
-                    <input type="text" id="editBorrowSourceInput" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold">
-                </div>
-
-                <div>
-                    <label for="editBorrowDateInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">التاريخ</label>
-                    <input type="date" id="editBorrowDateInput" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold">
-                </div>
-
-                <div>
-                    <label for="editBorrowNoteInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">ملاحظة</label>
-                    <input type="text" id="editBorrowNoteInput" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs">
-                </div>
-
-                <div class="flex items-center gap-2 pt-2">
-                    <button type="button" onclick="closeEditBorrowingModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إلغاء</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold shadow-md">حفظ التعديلات</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة تعديل حركة يومية (Edit Transaction Modal) -->
-    <div id="editTransactionModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                        <i data-lucide="pencil" class="w-4 h-4"></i>
-                    </div>
-                    <h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل بيانات الحركة اليومية</h3>
-                </div>
-                <button type="button" onclick="closeEditTransactionModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <form onsubmit="saveEditedTransaction(event)" class="space-y-4">
-                <input type="hidden" id="editTxIdInput">
-
-                <div>
-                    <label for="editTxTypeSelect" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">نوع الحركة</label>
-                    <select id="editTxTypeSelect" onchange="handleEditTxTypeChange()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-extrabold">
-                        <option value="expense">مصروف يومي فعلي (يخصم من الكاش)</option>
-                        <option value="income">بونص / دخل إضافي (+ للكاش)</option>
-                        <option value="receivable">فلوس سلفتها لحد بره (ليا عند الناس)</option>
-                    <option value="payable">عليا للناس</option></select>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                    <div class="sm:col-span-7">
-                        <label for="editTxDescInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">الوصف / البيان</label>
-                        <input type="text" id="editTxDescInput" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-                    </div>
-                    <div class="sm:col-span-5">
-                        <label for="editTxAmountInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">المبلغ</label>
-                        <div class="relative">
-                            <input type="number" id="editTxAmountInput" required min="0.5" step="any" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-extrabold">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label for="editTxCategoryInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">التصنيف</label>
-                        <select id="editTxCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold">
-                            <option value="food">أكل وشرب</option>
-                            <option value="transport">بنزين ومواصلات</option>
-                            <option value="shopping">تسوق ومشتريات</option>
-                            <option value="bills">فواتير وخدمات</option>
-                            <option value="health">صحة وعلاج</option>
-                            <option value="entertainment">ترفيه وخروجات</option>
-                            <option value="loans">سلف وبواقي</option>
-                            <option value="other">أخرى</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="editTxDateInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">التاريخ</label>
-                        <input type="date" id="editTxDateInput" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold">
-                    </div>
-                </div>
-
-                <div id="editReceivableExtraFields" class="hidden p-3.5 rounded-2xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200/80 dark:border-sky-800/60 space-y-3">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label for="editTxPersonNameInput" class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1">اسم الشخص / الجهة</label>
-                            <input type="text" id="editTxPersonNameInput" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none">
-                        </div>
-                        <div>
-                            <label for="editTxExpectedReturnInput" class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1">تاريخ الاسترداد المتوقع</label>
-                            <input type="date" id="editTxExpectedReturnInput" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none">
-                        </div>
-                    </div>
-                    <label class="inline-flex items-center gap-2 cursor-pointer select-none">
-                        <input type="checkbox" id="editTxRecoveredCheckbox" class="w-4 h-4 rounded text-sky-600">
-                        <span class="text-xs font-bold text-sky-800 dark:text-sky-200">تم استرداد المبلغ بالفعل</span>
-                    </label>
-                </div>
-
-                <div class="flex items-center gap-2 pt-2">
-                    <button type="button" onclick="closeEditTransactionModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إلغاء</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-md">حفظ التعديلات</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة فتح شهر جديد (New Month Modal) -->
-    <div id="newMonthModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                        <i data-lucide="calendar-plus" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-extrabold text-base text-slate-900 dark:text-white">فتح شهر جديد في المحفظة</h3>
-                </div>
-                <button type="button" onclick="closeNewMonthModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <form onsubmit="createNewMonth(event)" class="space-y-4">
-                <div>
-                    <label for="newMonthPicker" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">اختر الشهر والسنة</label>
-                    <input type="month" id="newMonthPicker" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-
-                <div class="space-y-2.5 bg-slate-50 dark:bg-slate-800/70 p-3.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
-                    <label class="flex items-start gap-2.5 cursor-pointer">
-                        <input type="checkbox" id="carryOverBalanceCheck" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600">
-                        <div>
-                            <span class="block text-xs font-bold text-slate-800 dark:text-slate-100">ترحيل الكاش المتبقي في الجيب كرصيد أول مدة</span>
-                            <span id="carryOverAmountHint" class="block text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">0 ج.م</span>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 cursor-pointer">
-                        <input type="checkbox" id="copyFixedCommitmentsCheck" checked class="mt-0.5 w-4 h-4 rounded text-purple-600">
-                        <div>
-                            <span class="block text-xs font-bold text-slate-800 dark:text-slate-100">ترحيل الالتزامات الشهرية الثابتة (بحالة غير مسدد)</span>
-                            <span id="carryOverFixedCountHint" class="block text-[11px] text-purple-600 dark:text-purple-400 font-bold">0 التزامات ثابتة</span>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 cursor-pointer">
-                        <input type="checkbox" id="copySalarySettingsCheck" checked class="mt-0.5 w-4 h-4 rounded text-indigo-600">
-                        <div>
-                            <span class="block text-xs font-bold text-slate-800 dark:text-slate-100">نسخ قيمة الراتب الأساسي (مع تصفير الغياب والسلف)</span>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 cursor-pointer">
-                        <input type="checkbox" id="copyReceivablesCheck" checked class="mt-0.5 w-4 h-4 rounded text-sky-600">
-                        <div>
-                            <span class="block text-xs font-bold text-slate-800 dark:text-slate-100">نقل الفلوس اللي ليا بره (غير المستردة)</span>
-                            <span class="block text-[11px] text-slate-400">تظل محفوظة أيضاً في أرشيف الشهر القديم</span>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="flex items-center gap-2 pt-2">
-                    <button type="button" onclick="closeNewMonthModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إلغاء</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-md">إنشاء وفتح الشهر</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة إعدادات المزامنة السحابية Firebase (Cloud Sync Modal) -->
-    <div id="cloudSyncModal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5">
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center">
-                        <i data-lucide="cloud-cog" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-base text-slate-900 dark:text-white">المزامنة السحابية (Firebase)</h3>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">مزامنة تلقائية بين الموبايل واللابتوب</p>
-                    </div>
-                </div>
-                <button type="button" onclick="closeCloudSyncModal()" class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <div id="cloudModalStatusBanner" class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
-                <span class="font-bold text-slate-600 dark:text-slate-300">حالة الاتصال الحالية:</span>
-                <strong id="cloudModalStatusLabel" class="font-extrabold text-emerald-600 dark:text-emerald-400">متصل بالسحابة</strong>
-            </div>
-
-            <form onsubmit="saveCloudConfig(event)" class="space-y-4">
-                <div>
-                    <label for="firebaseUrlInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">رابط قاعدة بيانات Firebase</label>
-                    <input type="url" id="firebaseUrlInput" required dir="ltr" placeholder="https://mahfazty-19681-default-rtdb.firebaseio.com"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono outline-none focus:ring-2 focus:ring-sky-500">
-                </div>
-
-                <div>
-                    <label for="workspaceKeyInput" class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">معرّف المحفظة (ليس كلمة مرور)</label>
-                    <input type="text" id="workspaceKeyInput" required dir="ltr" placeholder="Messous1"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-sky-500">
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-auto">
+<!-- الرسم البياني -->
+<div class="md:col-span-5 relative h-56 flex items-center justify-center">
+<canvas id="expensesChart"></canvas>
+<div class="hidden absolute inset-0 flex flex-col items-center justify-center text-center p-4" id="emptyChartPlaceholder">
+<i class="w-8 h-8 text-slate-300 dark:text-slate-600 mb-2" data-lucide="bar-chart-3"></i>
+<span class="text-xs text-slate-400">سجل مصاريفك اليومية أو سدد التزاماً ثابتاً لعرض الرسم البياني</span>
+</div>
+</div>
+<!-- ترتيب أكثر التصنيفات استهلاكاً -->
+<div class="md:col-span-7 space-y-3" id="topCategoriesList"></div>
+</div>
+</div>
+</section>
+<section class="mobile-home-actions hidden" data-mobile-screen="home">
+<div class="mobile-home-heading">اختصارات</div>
+<div class="mobile-quick-grid">
+<button onclick="openQuickEntry('expense')" type="button"><i data-lucide="minus-circle"></i><span>تسجيل مصروف</span></button>
+<button onclick="openQuickEntry('borrowing')" type="button"><i data-lucide="hand-coins"></i><span>تسجيل سلفة</span></button>
+<button onclick="switchMobileScreen('obligations')" type="button"><i data-lucide="calendar-check"></i><span>الالتزامات</span></button>
+<button onclick="switchMobileScreen('analytics')" type="button"><i data-lucide="chart-pie"></i><span>تحليل مصاريفك</span></button>
+</div>
+</section>
+<!-- 5. سجل الحركات والتصفية -->
+<section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4" data-mobile-screen="activity">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div>
+<h2 class="font-extrabold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<i class="w-5 h-5 text-indigo-600 dark:text-indigo-400" data-lucide="list-ordered"></i>
+<span>سجل الحركات</span>
+<span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" id="filteredCountBadge">0</span>
+</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="filteredSummaryText"></p>
+</div>
+<!-- شريط الفلترة والبحث -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:flex items-center gap-2.5">
+<div class="relative">
+<i class="w-3.5 h-3.5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2" data-lucide="search"></i>
+<input class="w-full sm:w-44 pr-8 pl-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs outline-none focus:ring-2 focus:ring-indigo-500" id="filterSearchInput" oninput="renderTransactions()" placeholder="بحث بالوصف أو الاسم..." type="text"/>
+</div>
+<div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2.5 py-1">
+<span class="text-[11px] font-bold text-slate-400">يوم:</span>
+<input class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 outline-none py-1" id="filterDateInput" onchange="renderTransactions()" title="عرض حركات يوم محدد" type="date"/>
+<button class="hidden text-rose-500 hover:text-rose-600 p-0.5" id="clearDateFilterBtn" onclick="clearDateFilter()" title="إلغاء فلتر اليوم" type="button">
+<i class="w-3.5 h-3.5" data-lucide="x"></i>
+</button>
+</div>
+<select class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none" id="filterTypeSelect" onchange="renderTransactions()">
+<option value="all">كل الأنواع</option>
+<option value="expense">مصاريف يومية</option>
+<option value="income">بونص ودخل إضافي</option>
+<option value="receivable">فلوس ليا بره</option>
+</select>
+<select class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none" id="filterCategorySelect" onchange="renderTransactions()">
+<option value="all">كل التصنيفات</option>
+<option value="food">أكل وشرب</option>
+<option value="transport">بنزين ومواصلات</option>
+<option value="shopping">تسوق ومشتريات</option>
+<option value="bills">فواتير وخدمات</option>
+<option value="health">صحة وعلاج</option>
+<option value="entertainment">ترفيه وخروجات</option>
+<option value="loans">سلف وبواقي</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+</div>
+<!-- قائمة المعاملات -->
+<div class="divide-y divide-slate-100 dark:divide-slate-800" id="transactionsListContainer"></div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4" data-mobile-screen="activity" id="debtsLedgerSection">
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-extrabold text-base">حسابات الناس</h2>
+<span class="text-[11px] text-slate-500">كل الشهور</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-900 p-3">
+<p class="text-xs font-bold text-sky-700 dark:text-sky-300">ليا عند الناس</p>
+<strong class="block text-lg font-black text-sky-800 dark:text-sky-200" id="totalReceivablesAll">0 ج.م</strong>
+</div>
+<div class="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 p-3">
+<p class="text-xs font-bold text-amber-700 dark:text-amber-300">عليا للناس</p>
+<strong class="block text-lg font-black text-amber-800 dark:text-amber-200" id="totalPayablesAll">0 ج.م</strong>
+</div>
+</div>
+<div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 p-4 flex items-center justify-between gap-3" id="netDebtsPanel">
+<div><div class="text-sm font-extrabold">صافي الديون</div><div class="text-[11px] text-slate-500 dark:text-slate-400">ليا − عليا</div></div>
+<div class="text-left"><strong class="block text-xl font-black" id="netDebtsTotal">0 ج.م</strong><span class="block text-[11px] font-bold" id="netDebtsStatus">متوازن</span></div>
+</div>
+<div class="flex gap-2">
+<button class="ledger-tab active" id="ledgerTabReceivable" onclick="setLedgerType('receivable')" type="button">ليا عند الناس</button>
+<button class="ledger-tab" id="ledgerTabPayable" onclick="setLedgerType('payable')" type="button">عليا للناس</button>
+</div>
+<div class="space-y-2.5" id="globalDebtList"></div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4" data-mobile-screen="budget" id="monthlyBudgetSection">
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-extrabold text-base flex items-center gap-2"><i class="w-5 h-5 text-teal-600" data-lucide="wallet-minimal"></i> ميزانيتي الشهرية</h2>
+<span class="text-xs font-bold text-slate-500" id="budgetMonthLabel"></span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">المخصص</div><strong class="block text-sm font-black mt-1" id="budgetAllocated">0 ج.م</strong></div>
+<div class="rounded-xl bg-slate-50 dark:bg-slate-800 p-3"><div class="budget-small">اتصرف</div><strong class="block text-sm font-black mt-1" id="budgetSpent">0 ج.م</strong></div>
+<div class="rounded-xl bg-teal-50 dark:bg-teal-950/40 p-3" id="budgetDifferenceBox"><div class="budget-small" id="budgetDifferenceLabel">المتبقي</div><strong class="block text-sm font-black mt-1" id="budgetDifference">0 ج.م</strong></div>
+</div>
+<div class="space-y-2">
+<form class="grid grid-cols-2 gap-2" id="budgetForm" onsubmit="saveBudgetLimit(event)">
+<div><label for="budgetCategory">البند</label><select class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" id="budgetCategory" required=""></select></div>
+<div><label for="budgetLimit">ميزانية الشهر (ج.م)</label><input class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm" id="budgetLimit" min="0" placeholder="مثلاً 2000" required="" step="0.01" type="number"/></div>
+<button class="col-span-2 bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-2.5 text-sm font-bold" type="submit">حفظ ميزانية البند</button>
+</form>
+<button class="text-xs font-extrabold text-teal-700 dark:text-teal-400 underline underline-offset-4" onclick="copyPreviousBudget()" type="button">نسخ ميزانية آخر شهر سابق</button>
+</div>
+<div class="space-y-3" id="budgetCategoriesList"></div>
+<p class="text-[11px] text-slate-500 dark:text-slate-400">المقارنة بالمصاريف اليومية والالتزامات المسددة فقط. السلف والديون مش ضمن الاستهلاك.</p>
+</section>
+<section class="mobile-more-panel" data-mobile-screen="more" id="mobileMoreScreen">
+<h2 class="mobile-more-title">المزيد</h2>
+<p class="mobile-more-subtitle">حساباتك وتقاريرك في مكان واحد</p>
+<div class="mobile-more-list">
+<button onclick="switchMobileScreen('salary')" type="button"><span class="more-list-icon"><i data-lucide="wallet-cards"></i></span><span class="more-list-text"><strong>الراتب والسلف</strong><small>الراتب والغياب والسحوبات</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+<button onclick="switchMobileScreen('obligations')" type="button"><span class="more-list-icon"><i data-lucide="calendar-check-2"></i></span><span class="more-list-text"><strong>الالتزامات</strong><small>الفواتير والأقساط ومواعيد السداد</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+<button onclick="switchMobileScreen('analytics')" type="button"><span class="more-list-icon"><i data-lucide="chart-no-axes-combined"></i></span><span class="more-list-text"><strong>التحليل</strong><small>توزيع المصاريف حسب التصنيف</small></span><i class="more-arrow" data-lucide="chevron-left"></i></button>
+<button onclick="openCloudSyncModal()" type="button"><span class="more-list-icon"><i data-lucide="cloud"></i></span><span class="more-list-text"><strong>المزامنة</strong></span><i class="more-arrow" data-lucide="chevron-left"></i></button><button onclick="exportJsonBackup()" type="button"><span class="more-list-icon"><i data-lucide="download"></i></span><span class="more-list-text"><strong>نسخة احتياطية</strong></span><i class="more-arrow" data-lucide="chevron-left"></i></button></div>
+</section>
+</main>
+<nav aria-label="التنقل بين أقسام المحفظة" class="mobile-bottom-nav" id="mobileBottomNav">
+<button aria-current="page" class="mobile-nav-item active" data-screen-target="home" onclick="switchMobileScreen('home')" type="button"><i data-lucide="house"></i><span>الرئيسية</span></button>
+<button class="mobile-nav-item" data-screen-target="activity" onclick="switchMobileScreen('activity')" type="button"><i data-lucide="arrow-left-right"></i><span>الحركات</span></button>
+<button class="mobile-nav-item" data-screen-target="budget" onclick="switchMobileScreen('budget')" type="button"><i data-lucide="chart-pie"></i><span>ميزانيتي</span></button>
+<button class="mobile-nav-item" data-screen-target="more" onclick="switchMobileScreen('more')" type="button"><i data-lucide="layout-grid"></i><span>المزيد</span></button>
+</nav>
+<button aria-label="إضافة حركة جديدة" class="mobile-fab" id="mobileQuickFab" onclick="openQuickEntry('expense')" title="إضافة حركة" type="button"><i data-lucide="plus"></i></button>
+<!-- نافذة تسجيل سداد التزام ثابت (Pay Fixed Commitment Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="payFixedCommitmentModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+<i class="w-5 h-5" data-lucide="check-circle"></i>
+</div>
+<div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">تسجيل سداد التزام ثابت</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-bold" id="payFixedModalSubtitle"></p>
+</div>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closePayFixedModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<form class="space-y-4" onsubmit="confirmPayFixedCommitment(event)">
+<input id="payFixedIdInput" type="hidden"/>
+<div class="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-2xl border border-slate-200/70 dark:border-slate-700/70 flex items-center justify-between text-xs">
+<span class="text-slate-500 dark:text-slate-400">المبلغ التقديري المحجوز مسبقاً:</span>
+<strong class="font-black text-slate-800 dark:text-white" id="payFixedExpectedHint">0 ج.م</strong>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5" for="payFixedActualInput">المبلغ الفعلي بالظبط اللي دفعته</label>
+<div class="relative">
+<input class="w-full pl-12 pr-4 py-3 rounded-xl bg-white dark:bg-slate-800 border-2 border-emerald-500 focus:outline-none text-lg font-black text-slate-900 dark:text-white" id="payFixedActualInput" min="0" oninput="updatePayVariancePreview()" required="" step="any" type="number"/>
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+<p class="text-[11px] font-bold mt-1.5 text-slate-500" id="payFixedVariancePreview"></p>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="payFixedDateInput">تاريخ السداد</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none focus:ring-2 focus:ring-emerald-500" id="payFixedDateInput" required="" type="date"/>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closePayFixedModal()" type="button">إلغاء</button>
+<button class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-md" type="submit">تأكيد السداد</button>
+</div>
+</form>
+</div>
+</div>
+<!-- نافذة تعديل التزام ثابت (Edit Fixed Commitment Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="editFixedCommitmentModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+<i class="w-4 h-4" data-lucide="pencil"></i>
+</div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل الالتزام الشهري الثابت</h3>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeEditFixedModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<form class="space-y-4" onsubmit="saveEditedFixedCommitment(event)">
+<input id="editFixedIdInput" type="hidden"/>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedNameInput">اسم الالتزام</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-bold outline-none focus:ring-2 focus:ring-purple-500" id="editFixedNameInput" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedCategoryInput">التصنيف</label>
+<select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none" id="editFixedCategoryInput">
+<option value="bills">فواتير وخدمات</option>
+<option value="installments">أقساط والتزامات</option>
+<option value="food">أكل وشرب</option>
+<option value="transport">بنزين ومواصلات</option>
+<option value="health">صحة وعلاج</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedDueDayInput">يوم الاستحقاق (اختياري)</label>
+<input class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold outline-none" id="editFixedDueDayInput" max="31" min="1" placeholder="1-31" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedExpectedInput">المبلغ التقديري / الأساسي</label>
+<div class="relative">
+<input class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-extrabold outline-none focus:ring-2 focus:ring-purple-500" id="editFixedExpectedInput" min="1" required="" step="any" type="number"/>
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+<div class="hidden p-3.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 space-y-3" id="editFixedPaidDetailsBox">
+<span class="block text-xs font-extrabold text-emerald-700 dark:text-emerald-300">تفاصيل السداد المسجل:</span>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedActualInput">المبلغ الفعلي المدفوع</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 text-xs font-extrabold outline-none" id="editFixedActualInput" min="0" step="any" type="number"/>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1" for="editFixedPaidDateInput">تاريخ السداد</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 text-xs font-bold outline-none" id="editFixedPaidDateInput" type="date"/>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closeEditFixedModal()" type="button">إلغاء</button>
+<button class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-extrabold shadow-md" type="submit">حفظ التعديلات</button>
+</div>
+</form>
+</div>
+</div>
+<!-- نافذة تعديل سلفة على الراتب (Edit Borrowing Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="editBorrowingModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+<i class="w-4 h-4" data-lucide="pencil"></i>
+</div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل السلفة / السحبة</h3>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeEditBorrowingModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<form class="space-y-4" onsubmit="saveEditedBorrowing(event)">
+<input id="editBorrowIdInput" type="hidden"/>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editBorrowAmountInput">المبلغ</label>
+<div class="relative">
+<input class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-sm font-extrabold" id="editBorrowAmountInput" min="1" required="" step="any" type="number"/>
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editBorrowSourceInput">المصدر / الجهة</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold" id="editBorrowSourceInput" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editBorrowDateInput">التاريخ</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs font-bold" id="editBorrowDateInput" required="" type="date"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editBorrowNoteInput">ملاحظة</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-amber-500 outline-none text-xs" id="editBorrowNoteInput" type="text"/>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closeEditBorrowingModal()" type="button">إلغاء</button>
+<button class="flex-1 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold shadow-md" type="submit">حفظ التعديلات</button>
+</div>
+</form>
+</div>
+</div>
+<!-- نافذة تعديل حركة يومية (Edit Transaction Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="editTransactionModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+<i class="w-4 h-4" data-lucide="pencil"></i>
+</div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">تعديل بيانات الحركة اليومية</h3>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeEditTransactionModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<form class="space-y-4" onsubmit="saveEditedTransaction(event)">
+<input id="editTxIdInput" type="hidden"/>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxTypeSelect">نوع الحركة</label>
+<select class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-extrabold" id="editTxTypeSelect" onchange="handleEditTxTypeChange()">
+<option value="expense">مصروف يومي فعلي (يخصم من الكاش)</option>
+<option value="income">بونص / دخل إضافي (+ للكاش)</option>
+<option value="receivable">فلوس سلفتها لحد بره (ليا عند الناس)</option>
+<option value="payable">عليا للناس</option></select>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+<div class="sm:col-span-7">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxDescInput">الوصف / البيان</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="editTxDescInput" required="" type="text"/>
+</div>
+<div class="sm:col-span-5">
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxAmountInput">المبلغ</label>
+<div class="relative">
+<input class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-extrabold" id="editTxAmountInput" min="0.5" required="" step="any" type="number"/>
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">ج.م</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxCategoryInput">التصنيف</label>
+<select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="editTxCategoryInput">
+<option value="food">أكل وشرب</option>
+<option value="transport">بنزين ومواصلات</option>
+<option value="shopping">تسوق ومشتريات</option>
+<option value="bills">فواتير وخدمات</option>
+<option value="health">صحة وعلاج</option>
+<option value="entertainment">ترفيه وخروجات</option>
+<option value="loans">سلف وبواقي</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxDateInput">التاريخ</label>
+<input class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="editTxDateInput" required="" type="date"/>
+</div>
+</div>
+<div class="hidden p-3.5 rounded-2xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200/80 dark:border-sky-800/60 space-y-3" id="editReceivableExtraFields">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<label class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1" for="editTxPersonNameInput">اسم الشخص / الجهة</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none" id="editTxPersonNameInput" type="text"/>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-sky-800 dark:text-sky-300 mb-1" for="editTxExpectedReturnInput">تاريخ الاسترداد المتوقع</label>
+<input class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-sky-200 dark:border-slate-700 text-xs outline-none" id="editTxExpectedReturnInput" type="date"/>
+</div>
+</div>
+<label class="inline-flex items-center gap-2 cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-sky-600" id="editTxRecoveredCheckbox" type="checkbox"/>
+<span class="text-xs font-bold text-sky-800 dark:text-sky-200">تم استرداد المبلغ بالفعل</span>
+</label>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closeEditTransactionModal()" type="button">إلغاء</button>
+<button class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-md" type="submit">حفظ التعديلات</button>
+</div>
+</form>
+</div>
+</div>
+<!-- نافذة فتح شهر جديد (New Month Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="newMonthModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+<i class="w-5 h-5" data-lucide="calendar-plus"></i>
+</div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">فتح شهر جديد في المحفظة</h3>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeNewMonthModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<form class="space-y-4" onsubmit="createNewMonth(event)">
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5" for="newMonthPicker">اختر الشهر والسنة</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500" id="newMonthPicker" required="" type="month"/>
+</div>
+<div class="space-y-2.5 bg-slate-50 dark:bg-slate-800/70 p-3.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/70">
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-indigo-600" id="carryOverBalanceCheck" type="checkbox"/>
+<div>
+<span class="block text-xs font-bold text-slate-800 dark:text-slate-100">ترحيل الكاش المتبقي في الجيب كرصيد أول مدة</span>
+<span class="block text-[11px] text-emerald-600 dark:text-emerald-400 font-bold" id="carryOverAmountHint">0 ج.م</span>
+</div>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-purple-600" id="copyFixedCommitmentsCheck" type="checkbox"/>
+<div>
+<span class="block text-xs font-bold text-slate-800 dark:text-slate-100">ترحيل الالتزامات الشهرية الثابتة (بحالة غير مسدد)</span>
+<span class="block text-[11px] text-purple-600 dark:text-purple-400 font-bold" id="carryOverFixedCountHint">0 التزامات ثابتة</span>
+</div>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-indigo-600" id="copySalarySettingsCheck" type="checkbox"/>
+<div>
+<span class="block text-xs font-bold text-slate-800 dark:text-slate-100">نسخ قيمة الراتب الأساسي (مع تصفير الغياب والسلف)</span>
+</div>
+</label>
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-sky-600" id="copyReceivablesCheck" type="checkbox"/>
+<div>
+<span class="block text-xs font-bold text-slate-800 dark:text-slate-100">نقل الفلوس اللي ليا بره (غير المستردة)</span>
+<span class="block text-[11px] text-slate-400">تظل محفوظة أيضاً في أرشيف الشهر القديم</span>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closeNewMonthModal()" type="button">إلغاء</button>
+<button class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-md" type="submit">إنشاء وفتح الشهر</button>
+</div>
+</form>
+</div>
+</div>
+<!-- نافذة إعدادات المزامنة السحابية Firebase (Cloud Sync Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4" id="cloudSyncModal">
+<div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5">
+<div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+<i class="w-5 h-5" data-lucide="cloud-cog"></i>
+</div>
+<div>
+<h3 class="font-extrabold text-base text-slate-900 dark:text-white">المزامنة السحابية (Firebase)</h3>
+<p class="text-[11px] text-slate-500 dark:text-slate-400">مزامنة تلقائية بين الموبايل واللابتوب</p>
+</div>
+</div>
+<button class="p-1.5 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeCloudSyncModal()" type="button">
+<i class="w-4 h-4" data-lucide="x"></i>
+</button>
+</div>
+<div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs" id="cloudModalStatusBanner">
+<span class="font-bold text-slate-600 dark:text-slate-300">حالة الاتصال الحالية:</span>
+<strong class="font-extrabold text-emerald-600 dark:text-emerald-400" id="cloudModalStatusLabel">متصل بالسحابة</strong>
+</div>
+<form class="space-y-4" onsubmit="saveCloudConfig(event)">
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="firebaseUrlInput">رابط قاعدة بيانات Firebase</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono outline-none focus:ring-2 focus:ring-sky-500" dir="ltr" id="firebaseUrlInput" placeholder="https://mahfazty-19681-default-rtdb.firebaseio.com" required="" type="url"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="workspaceKeyInput">معرّف المحفظة (ليس كلمة مرور)</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-sky-500" dir="ltr" id="workspaceKeyInput" placeholder="Messous1" required="" type="text"/>
+<p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                         استخدم نفس المعرّف على الجهازين. تنبيه: المعرّف وحده لا يحمي بياناتك؛ لازم تضبط صلاحيات Firebase Authentication وDatabase Rules.
                     </p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button type="button" onclick="manualSyncNow()" class="py-2.5 px-3 rounded-xl bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/60 dark:hover:bg-sky-900/70 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors">
-                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                        <span>مزامنة الآن</span>
-                    </button>
-                    <button type="button" onclick="forcePushLocalToCloud()" class="py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/60 dark:hover:bg-amber-900/70 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors">
-                        <i data-lucide="cloud-upload" class="w-3.5 h-3.5"></i>
-                        <span>رفع بياناتي للسحابة</span>
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <button type="button" onclick="closeCloudSyncModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold">إغلاق</button>
-                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-extrabold shadow-md">حفظ الإعدادات</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="py-2.5 px-3 rounded-xl bg-sky-50 hover:bg-sky-100 dark:bg-sky-950/60 dark:hover:bg-sky-900/70 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors" onclick="manualSyncNow()" type="button">
+<i class="w-3.5 h-3.5" data-lucide="refresh-cw"></i>
+<span>مزامنة الآن</span>
+</button>
+<button class="py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/60 dark:hover:bg-amber-900/70 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-colors" onclick="forcePushLocalToCloud()" type="button">
+<i class="w-3.5 h-3.5" data-lucide="cloud-upload"></i>
+<span>رفع بياناتي للسحابة</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+<button class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold" onclick="closeCloudSyncModal()" type="button">إغلاق</button>
+<button class="flex-1 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-extrabold shadow-md" type="submit">حفظ الإعدادات</button>
+</div>
+</form>
+</div>
+</div>
+<script>
         // ==========================================
         // 1. الثوابت وإعدادات التصنيفات والمزامنة السحابية
         // ==========================================
@@ -3420,6 +3453,19 @@ html.dark .ledger-tab.active{background:#443360!important;border-color:#6f5aa9!i
             document.getElementById('budgetMonthLabel').textContent=formatMonthLabel(rootState.activeMonth);
             document.getElementById('budgetAllocated').textContent=formatCurrency(allocated)+' ج.م';
             document.getElementById('budgetSpent').textContent=formatCurrency(spentAll)+' ج.م';
+            // عرض ملخص الميزانية في الرئيسية فقط؛ بدون تعديل الحسابات أو التخزين.
+            const homeBudgetPct=document.getElementById('homeBudgetPercent');
+            if(homeBudgetPct){
+                const ratio=allocated>0?Math.round(spentConfigured/allocated*100):0;
+                homeBudgetPct.textContent=allocated>0?ratio+'%':'—';
+                const bar=document.getElementById('homeBudgetBar');
+                bar.style.width=(allocated>0?Math.min(100,ratio):0)+'%';
+                bar.style.background=ratio>100?'#C75E63':'#8B76B3';
+                const track=bar.parentElement;track.setAttribute('aria-valuenow',String(Math.max(0,Math.min(100,ratio))));
+                document.getElementById('homeBudgetSpentLabel').textContent='المصروف '+formatCurrency(spentConfigured)+' ج.م';
+                document.getElementById('homeBudgetLeftLabel').textContent=allocated>0?(diff>=0?'متبقي '+formatCurrency(diff)+' ج.م':'زيادة '+formatCurrency(-diff)+' ج.م'):'حدد ميزانية شهرية';
+            }
+
             document.getElementById('budgetDifferenceLabel').textContent=diff<0?'تجاوزت المخصص':'المتبقي من المخصص';
             document.getElementById('budgetDifference').textContent=formatCurrency(Math.abs(diff))+' ج.م';
             document.getElementById('budgetDifferenceBox').className='rounded-xl p-3 '+(diff<0?'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300':'bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300');
@@ -3507,6 +3553,35 @@ html.dark .ledger-tab.active{background:#443360!important;border-color:#6f5aa9!i
             switchMobileScreen('home');
             if(window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
         });
+
+        // Visual-only summary — reads the already rendered activity list, never changes financial state.
+        function syncHomeRecent(){
+            const source=document.getElementById('transactionsListContainer');
+            const target=document.getElementById('homeRecentList');
+            if(!source||!target)return;
+            const items=Array.from(source.children).slice(0,4);
+            if(!items.length||source.textContent.includes('لا توجد معاملات يومية مطابقة')){
+                target.innerHTML='<div class="recent-empty">مفيش حركات لسه</div>';return;
+            }
+            target.replaceChildren(...items.map(el=>{
+                const text=el.innerText||el.textContent||'';
+                const title=el.querySelector('.font-extrabold,.font-bold')?.textContent?.trim() || text.trim().slice(0,45);
+                const date=(text.match(/20\d{2}-\d{2}-\d{2}/)||[])[0]||'';
+                const amount=el.querySelector('[class*="text-rose"],[class*="text-emerald"]')?.textContent?.trim()||'';
+                const line=document.createElement('div');line.className='recent-item';
+                const meta=document.createElement('div');meta.style.minWidth='0';
+                const a=document.createElement('div');a.className='recent-title';a.textContent=title;
+                const b=document.createElement('div');b.className='recent-date';b.textContent=date;
+                meta.append(a,b);
+                const amt=document.createElement('div');amt.className='recent-amount';amt.textContent=amount;
+                line.append(meta,amt);return line;
+            }));
+        }
+        window.addEventListener('DOMContentLoaded',()=>{
+            const source=document.getElementById('transactionsListContainer');
+            if(source){const observer=new MutationObserver(()=>syncHomeRecent());observer.observe(source,{childList:true});syncHomeRecent();}
+        });
+
     </script>
 </body>
 </html>
