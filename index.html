@@ -364,6 +364,7 @@ html.dark #homeRecentSection .recent-item{border-color:#393143}
 
 
 @media(max-width:767px){#homeRecentSection.mobile-screen-active{display:block!important}#homeRecentSection{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}#homeRecentList{border:1px solid #eeebf2}}
+@media(max-width:767px){body:has(input:focus,textarea:focus) .mobile-fab,body.wallet-keyboard-open .mobile-fab{display:none!important}}
 </style>
 </meta></meta><style>
 /* Approved Minimal Fintech × Lavender design. Cosmetic layer, no data migrations. */
@@ -893,7 +894,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <h2 class="font-extrabold text-base text-slate-900 dark:text-white">حركة جديدة</h2>
 </div>
 </div>
-<form class="space-y-4" id="transactionForm" onsubmit="addTransaction(event)">
+<form class="space-y-4" autocomplete="off" id="transactionForm" onsubmit="addTransaction(event)">
 <!-- نوع الحركة -->
 <div>
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5">نوع الحركة</label>
@@ -932,7 +933,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
 <div class="sm:col-span-7">
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txDescInput">الوصف / البيان</label>
-<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="txDescInput" placeholder="مثلاً: غداء، بنزين، بونص تارجت..." required="" type="text"/>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="txDescInput" name="wallet_memo_txDescInput" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="مثلاً: غداء، بنزين، بونص تارجت..." required="" type="text"/>
 </div>
 <div class="sm:col-span-5">
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txAmountInput">المبلغ</label>
@@ -946,7 +947,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="txCategoryInput">التصنيف</label>
-<select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="txCategoryInput">
+<div class="flex items-center gap-2"><select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="txCategoryInput">
 <option value="food">أكل وشرب</option>
 <option value="transport">بنزين ومواصلات</option>
 <option value="shopping">تسوق ومشتريات</option>
@@ -955,7 +956,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <option value="entertainment">ترفيه وخروجات</option>
 <option value="loans">سلف وبواقي</option>
 <option value="other">أخرى</option>
-</select>
+</select><button type="button" class="shrink-0 rounded-xl border border-purple-300 dark:border-purple-600 px-3 py-2 font-bold text-purple-600 dark:text-purple-300" onclick="addWalletCategory('txCategoryInput')">+ تصنيف</button></div>
 </div>
 <div>
 <div class="flex items-center justify-between mb-1">
@@ -1319,7 +1320,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
 <div class="sm:col-span-7">
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxDescInput">الوصف / البيان</label>
-<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="editTxDescInput" required="" type="text"/>
+<input class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-sm" id="editTxDescInput" name="wallet_memo_editTxDescInput" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" required="" type="text"/>
 </div>
 <div class="sm:col-span-5">
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxAmountInput">المبلغ</label>
@@ -1332,7 +1333,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <div>
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxCategoryInput">التصنيف</label>
-<select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="editTxCategoryInput">
+<div class="flex items-center gap-2"><select class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none text-xs font-bold" id="editTxCategoryInput">
 <option value="food">أكل وشرب</option>
 <option value="transport">بنزين ومواصلات</option>
 <option value="shopping">تسوق ومشتريات</option>
@@ -1341,7 +1342,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 <option value="entertainment">ترفيه وخروجات</option>
 <option value="loans">سلف وبواقي</option>
 <option value="other">أخرى</option>
-</select>
+</select><button type="button" class="shrink-0 rounded-xl border border-purple-300 dark:border-purple-600 px-3 py-2 font-bold text-purple-600 dark:text-purple-300" onclick="addWalletCategory('editTxCategoryInput')">+ تصنيف</button></div>
 </div>
 <div>
 <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1" for="editTxDateInput">التاريخ</label>
@@ -1711,7 +1712,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 
         function hasMeaningfulData(stateObj) {
             if (!stateObj || !stateObj.months) return false;
-            return Object.values(stateObj.months).some(m =>
+            return Object.keys(stateObj.customCategories || {}).length > 0 || Object.values(stateObj.months).some(m =>
                 (parseFloat(m.openingBalance) || 0) !== 0 ||
                 (parseFloat(m.monthlySalary) || 0) !== 0 ||
                 (Array.isArray(m.borrowings) && m.borrowings.length > 0) ||
@@ -2633,7 +2634,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
                 catSelect.value = 'loans';
             } else {
                 extraBox.classList.add('hidden');
-                if (catSelect.value === 'loans') {
+                if (catSelect.value === 'loans' || (selectedType === 'income' && catSelect.value === 'food')) {
                     catSelect.value = selectedType === 'income' ? 'other' : 'food';
                 }
             }
@@ -2933,6 +2934,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
         }
 
         function updateDashboard() {
+            refreshWalletCategories();
             const mData = getActiveMonthData();
 
             const monthlySalary = parseFloat(mData.monthlySalary) || 0;
@@ -3151,7 +3153,7 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
             emptyPlaceholder.classList.add('hidden');
             const [topKey, topVal] = entries[0];
             const topPct = Math.round((topVal / totalActualConsumption) * 100);
-            topBadge.textContent = `الأعلى صرفاً: ${CATEGORIES[topKey].label} (${topPct}%)`;
+            topBadge.textContent = `الأعلى صرفاً: ${(CATEGORIES[topKey] || CATEGORIES.other).label} (${topPct}%)`;
 
             listEl.innerHTML = entries.slice(0, 5).map(([key, val]) => {
                 const cat = CATEGORIES[key] || CATEGORIES.other;
@@ -3517,6 +3519,47 @@ html.dark .mobile-bottom-nav{background:#2D2D39!important;border-color:#484550!i
 
         // ميزانية شهرية مستقلة لكل شهر وتصنيف، محفوظة مع نفس حالة Firebase.
         const BUDGET_CATEGORIES = ['food','transport','shopping','bills','installments','health','entertainment','other'];
+        const BUILTIN_CATEGORY_KEYS = Object.keys(CATEGORIES);
+        const BASE_BUDGET_KEYS = [...BUDGET_CATEGORIES];
+        function refreshWalletCategories() {
+            for (const k of Object.keys(CATEGORIES)) if (!BUILTIN_CATEGORY_KEYS.includes(k)) delete CATEGORIES[k];
+            const custom = rootState.customCategories || {};
+            const entries = Object.entries(custom).filter(([k,v]) => /^custom_[a-z0-9_]+$/.test(k) && v && typeof v.label === 'string' && v.label.trim());
+            for (const [k,v] of entries) CATEGORIES[k] = {label:v.label.trim().slice(0,60),color:'#8572b8',bg:CATEGORIES.other.bg};
+            BUDGET_CATEGORIES.splice(0,BUDGET_CATEGORIES.length,...BASE_BUDGET_KEYS,...entries.filter(([k,v])=>v.type!=='income').map(([k])=>k));
+            for(const id of ['txCategoryInput','editTxCategoryInput','filterCategorySelect','fixedCategoryInput','editFixedCategoryInput','budgetCategory']){
+                const el=document.getElementById(id); if(!el)continue;
+                const previous=el.value;
+                const fixed=id==='fixedCategoryInput'||id==='editFixedCategoryInput'||id==='budgetCategory';
+                const keys=fixed?BUDGET_CATEGORIES:Object.keys(CATEGORIES);
+                const desired=(id==='filterCategorySelect'?['all']:[]).concat(keys);
+                if(JSON.stringify(Array.from(el.options,o=>[o.value,o.textContent]))!==JSON.stringify(desired.map(k=>[k,k==='all'?'كل التصنيفات':CATEGORIES[k].label]))){
+                    el.replaceChildren(...desired.map(k=>new Option(k==='all'?'كل التصنيفات':CATEGORIES[k].label,k)));
+                    if(desired.includes(previous))el.value=previous;
+                }
+            }
+        }
+        function addWalletCategory(selectId) {
+            const raw=window.prompt('اسم التصنيف الجديد');
+            if(raw===null)return;
+            const label=raw.trim();
+            if(!label||label.length>60||/[<>&"'\x60]/.test(label)){showToast('اكتب اسم تصنيف صالح من 1 إلى 60 حرف','error');return;}
+            const type=selectId==='editTxCategoryInput'?document.getElementById('editTxTypeSelect').value:document.querySelector('input[name="txType"]:checked').value;
+            if(type==='receivable'||type==='payable'){showToast('السلف والديون لها تصنيف مستقل','error');return;}
+            const existing=Object.keys(CATEGORIES).find(k=>CATEGORIES[k].label.trim()===label);
+            if(existing){document.getElementById(selectId).value=existing;return;}
+            const key=newEntryId('custom');
+            if(!rootState.customCategories||typeof rootState.customCategories!=='object'||Array.isArray(rootState.customCategories))rootState.customCategories={};
+            rootState.customCategories[key]={label,type:type==='income'?'income':'expense'};
+            saveState();
+            updateDashboard();
+            document.getElementById(selectId).value=key;
+            showToast('تم إضافة التصنيف');
+        }
+        if(window.visualViewport){
+            const updateKeyboard=()=>document.body.classList.toggle('wallet-keyboard-open',window.innerHeight-window.visualViewport.height>150);
+            window.visualViewport.addEventListener('resize',updateKeyboard);
+        }
         function budgetActuals(m) {
             const totals = {};
             BUDGET_CATEGORIES.forEach(k => totals[k]=0);
