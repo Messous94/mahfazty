@@ -1,4 +1,4 @@
-const CACHE = 'mahfazet-messi-v8';
+const CACHE = 'mahfazet-messi-v9';
 const SHELL = ['./', './index.html', './manifest.json', './wallet.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
